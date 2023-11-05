@@ -126,6 +126,8 @@ public class Menu extends javax.swing.JFrame {
 
     private void btnRegistrarMaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarMaterialActionPerformed
         // TODO add your handling code here:
+        RegistroMaterial vistRegistro = new RegistroMaterial();
+        vistRegistro.setVisible(true);
     }//GEN-LAST:event_btnRegistrarMaterialActionPerformed
 
     /**

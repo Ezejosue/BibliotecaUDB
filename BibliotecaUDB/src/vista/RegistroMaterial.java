@@ -68,9 +68,19 @@ public class RegistroMaterial extends javax.swing.JFrame {
 
         btnRevista.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         btnRevista.setText("Revista");
+        btnRevista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRevistaActionPerformed(evt);
+            }
+        });
 
         btnTesis.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         btnTesis.setText("Tesis");
+        btnTesis.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTesisActionPerformed(evt);
+            }
+        });
 
         btnObras.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         btnObras.setText("Obras");
@@ -180,9 +190,20 @@ public class RegistroMaterial extends javax.swing.JFrame {
 
     private void btnLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLibroActionPerformed
 
-        Revista p2 = new Revista();
-       ShowPanel (p2);
+       Libro panelLibro = new Libro();
+       ShowPanel (panelLibro);
     }//GEN-LAST:event_btnLibroActionPerformed
+
+    private void btnRevistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRevistaActionPerformed
+        // TODO add your handling code here:
+       Revista panelLibro = new Revista();
+       ShowPanel (panelLibro);
+    }//GEN-LAST:event_btnRevistaActionPerformed
+
+    private void btnTesisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTesisActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_btnTesisActionPerformed
 //metodo para 
     private void ShowPanel(JPanel p){
         

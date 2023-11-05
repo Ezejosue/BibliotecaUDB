@@ -157,6 +157,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Revista"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRevistaActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnTesis">
           <Properties>
@@ -165,6 +168,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Tesis"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTesisActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnObras">
           <Properties>

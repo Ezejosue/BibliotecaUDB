@@ -33,38 +33,37 @@ public class Login extends javax.swing.JFrame {
     private void initComponents() {
 
         contenedor = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        lblClave = new javax.swing.JLabel();
+        btnIniciarsesion = new javax.swing.JButton();
+        lblCorreo = new javax.swing.JLabel();
         txtCorreo = new javax.swing.JTextField();
         txtClave = new javax.swing.JPasswordField();
         pnl_login_banner = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         lbl_icon_login = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        btnBuscarLibro = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login");
         setName("Login"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(1000, 700));
 
         contenedor.setBackground(new java.awt.Color(204, 204, 255));
         contenedor.setPreferredSize(new java.awt.Dimension(1000, 700));
 
-        jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jLabel2.setText("Contraseña:");
+        lblClave.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        lblClave.setText("Contraseña:");
 
-        jButton1.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jButton1.setText("Iniciar sesión");
-        jButton1.setName("btnIniciar"); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnIniciarsesion.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        btnIniciarsesion.setText("Iniciar sesión");
+        btnIniciarsesion.setName("btnIniciar"); // NOI18N
+        btnIniciarsesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnIniciarsesionActionPerformed(evt);
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jLabel1.setText("Correo:");
+        lblCorreo.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        lblCorreo.setText("Correo:");
 
         txtCorreo.setName("txtCorreo"); // NOI18N
 
@@ -86,8 +85,8 @@ public class Login extends javax.swing.JFrame {
         lbl_icon_login.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icon_login.png"))); // NOI18N
         lbl_icon_login.setText("jLabel4");
 
-        jButton2.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jButton2.setText("Buscar Libro");
+        btnBuscarLibro.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        btnBuscarLibro.setText("Buscar Libro");
 
         javax.swing.GroupLayout contenedorLayout = new javax.swing.GroupLayout(contenedor);
         contenedor.setLayout(contenedorLayout);
@@ -103,15 +102,15 @@ public class Login extends javax.swing.JFrame {
                     .addGroup(contenedorLayout.createSequentialGroup()
                         .addGap(65, 65, 65)
                         .addGroup(contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE))
+                            .addComponent(lblCorreo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblClave, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtClave, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)))
+                                .addComponent(btnIniciarsesion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnBuscarLibro, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         contenedorLayout.setVerticalGroup(
@@ -121,24 +120,24 @@ public class Login extends javax.swing.JFrame {
                 .addComponent(lbl_icon_login)
                 .addGap(74, 74, 74)
                 .addGroup(contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCorreo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtClave, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblClave, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(60, 60, 60)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnIniciarsesion, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnBuscarLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(contenedorLayout.createSequentialGroup()
                 .addComponent(pnl_login_banner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jLabel2.getAccessibleContext().setAccessibleName("lblClave");
-        jLabel1.getAccessibleContext().setAccessibleName("lblCorreo");
+        lblClave.getAccessibleContext().setAccessibleName("lblClave");
+        lblCorreo.getAccessibleContext().setAccessibleName("lblCorreo");
         txtClave.getAccessibleContext().setAccessibleName("txtClave");
 
         getContentPane().add(contenedor, java.awt.BorderLayout.PAGE_END);
@@ -161,10 +160,10 @@ public class Login extends javax.swing.JFrame {
     }
 
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnIniciarsesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarsesionActionPerformed
         // TODO add your handling code here:
         iniciarSesion();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnIniciarsesionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -202,12 +201,12 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBuscarLibro;
+    private javax.swing.JButton btnIniciarsesion;
     private javax.swing.JPanel contenedor;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel lblClave;
+    private javax.swing.JLabel lblCorreo;
     private javax.swing.JLabel lbl_icon_login;
     private javax.swing.JPanel pnl_login_banner;
     private javax.swing.JPasswordField txtClave;

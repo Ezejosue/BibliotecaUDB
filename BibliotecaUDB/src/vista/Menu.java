@@ -29,12 +29,12 @@ public class Menu extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        btn_agregar = new javax.swing.JButton();
-        btn_registrar = new javax.swing.JButton();
-        btn_buscar = new javax.swing.JButton();
-        btn_prestamo = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        lblMenu = new javax.swing.JLabel();
+        btnRegistrarMaterial = new javax.swing.JButton();
+        btnRegistarUsuario = new javax.swing.JButton();
+        btnBuscarLibro = new javax.swing.JButton();
+        btnRealizarPrestamo = new javax.swing.JButton();
+        btnSalir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1000, 700));
@@ -44,28 +44,28 @@ public class Menu extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 13)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/biblioteca.png"))); // NOI18N
 
-        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
-        jLabel2.setText("Menú");
+        lblMenu.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
+        lblMenu.setText("Menú");
 
-        btn_agregar.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        btn_agregar.setText("Registrar material");
-        btn_agregar.addActionListener(new java.awt.event.ActionListener() {
+        btnRegistrarMaterial.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        btnRegistrarMaterial.setText("Registrar material");
+        btnRegistrarMaterial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_agregarActionPerformed(evt);
+                btnRegistrarMaterialActionPerformed(evt);
             }
         });
 
-        btn_registrar.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        btn_registrar.setText("Registrar Usuario");
+        btnRegistarUsuario.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        btnRegistarUsuario.setText("Registrar Usuario");
 
-        btn_buscar.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        btn_buscar.setText("Buscar Libro ");
+        btnBuscarLibro.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        btnBuscarLibro.setText("Buscar Libro ");
 
-        btn_prestamo.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        btn_prestamo.setText("Realizar Préstamo");
+        btnRealizarPrestamo.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        btnRealizarPrestamo.setText("Realizar Préstamo");
 
-        jButton1.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jButton1.setText("Salir ");
+        btnSalir.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        btnSalir.setText("Salir ");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -77,16 +77,16 @@ public class Menu extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 256, Short.MAX_VALUE)
-                        .addComponent(jLabel2)
+                        .addComponent(lblMenu)
                         .addGap(313, 313, 313))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(180, 180, 180)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btn_prestamo, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
-                            .addComponent(btn_buscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btn_registrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btn_agregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(btnSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnRealizarPrestamo, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
+                            .addComponent(btnBuscarLibro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnRegistarUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnRegistrarMaterial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -94,21 +94,21 @@ public class Menu extends javax.swing.JFrame {
             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(81, 81, 81)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btn_agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnRegistrarMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(48, 48, 48)
-                .addComponent(btn_registrar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnRegistarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(49, 49, 49)
-                .addComponent(btn_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnBuscarLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(52, 52, 52)
-                .addComponent(btn_prestamo, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnRealizarPrestamo, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(86, Short.MAX_VALUE))
         );
 
-        jLabel2.getAccessibleContext().setAccessibleDescription("");
+        lblMenu.getAccessibleContext().setAccessibleDescription("");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -124,9 +124,9 @@ public class Menu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregarActionPerformed
+    private void btnRegistrarMaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarMaterialActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btn_agregarActionPerformed
+    }//GEN-LAST:event_btnRegistrarMaterialActionPerformed
 
     /**
      * @param args the command line arguments
@@ -164,13 +164,13 @@ public class Menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_agregar;
-    private javax.swing.JButton btn_buscar;
-    private javax.swing.JButton btn_prestamo;
-    private javax.swing.JButton btn_registrar;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnBuscarLibro;
+    private javax.swing.JButton btnRealizarPrestamo;
+    private javax.swing.JButton btnRegistarUsuario;
+    private javax.swing.JButton btnRegistrarMaterial;
+    private javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblMenu;
     // End of variables declaration//GEN-END:variables
 }

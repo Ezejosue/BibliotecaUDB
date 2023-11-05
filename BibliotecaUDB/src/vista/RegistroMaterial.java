@@ -35,11 +35,11 @@ public class RegistroMaterial extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        btnCD = new javax.swing.JButton();
+        btnCd = new javax.swing.JButton();
         btnLibro = new javax.swing.JButton();
         btnRevista = new javax.swing.JButton();
         btnTesis = new javax.swing.JButton();
-        btnObra = new javax.swing.JButton();
+        btnObras = new javax.swing.JButton();
         lblBannerRegistro = new javax.swing.JLabel();
         contentMaterial = new javax.swing.JPanel();
 
@@ -47,13 +47,13 @@ public class RegistroMaterial extends javax.swing.JFrame {
         setResizable(false);
         setSize(new java.awt.Dimension(1000, 700));
 
-        jPanel1.setBackground(new java.awt.Color(51, 204, 255));
+        jPanel1.setBackground(new java.awt.Color(51, 51, 51));
 
-        btnCD.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        btnCD.setText("CD´s");
-        btnCD.addActionListener(new java.awt.event.ActionListener() {
+        btnCd.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        btnCd.setText("CD´s");
+        btnCd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCDActionPerformed(evt);
+                btnCdActionPerformed(evt);
             }
         });
 
@@ -72,11 +72,11 @@ public class RegistroMaterial extends javax.swing.JFrame {
         btnTesis.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         btnTesis.setText("Tesis");
 
-        btnObra.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        btnObra.setText("Obras");
-        btnObra.addActionListener(new java.awt.event.ActionListener() {
+        btnObras.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        btnObras.setText("Obras");
+        btnObras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnObraActionPerformed(evt);
+                btnObrasActionPerformed(evt);
             }
         });
 
@@ -88,7 +88,7 @@ public class RegistroMaterial extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnRevista, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
-                    .addComponent(btnCD, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnCd, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
@@ -103,7 +103,7 @@ public class RegistroMaterial extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(btnObra, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
+                    .addComponent(btnObras, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
                     .addContainerGap()))
         );
         jPanel1Layout.setVerticalGroup(
@@ -112,7 +112,7 @@ public class RegistroMaterial extends javax.swing.JFrame {
                 .addContainerGap(208, Short.MAX_VALUE)
                 .addComponent(btnRevista, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(162, 162, 162)
-                .addComponent(btnCD, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnCd, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(248, 248, 248))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
@@ -127,13 +127,13 @@ public class RegistroMaterial extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                     .addContainerGap(347, Short.MAX_VALUE)
-                    .addComponent(btnObra, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnObras, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(312, 312, 312)))
         );
 
         lblBannerRegistro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/banner1.png"))); // NOI18N
 
-        contentMaterial.setBackground(new java.awt.Color(51, 204, 255));
+        contentMaterial.setBackground(new java.awt.Color(204, 204, 204));
 
         javax.swing.GroupLayout contentMaterialLayout = new javax.swing.GroupLayout(contentMaterial);
         contentMaterial.setLayout(contentMaterialLayout);
@@ -170,13 +170,13 @@ public class RegistroMaterial extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCDActionPerformed
+    private void btnCdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCdActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnCDActionPerformed
+    }//GEN-LAST:event_btnCdActionPerformed
 
-    private void btnObraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObraActionPerformed
+    private void btnObrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrasActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnObraActionPerformed
+    }//GEN-LAST:event_btnObrasActionPerformed
 
     private void btnLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLibroActionPerformed
 
@@ -236,9 +236,9 @@ public class RegistroMaterial extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCD;
+    private javax.swing.JButton btnCd;
     private javax.swing.JButton btnLibro;
-    private javax.swing.JButton btnObra;
+    private javax.swing.JButton btnObras;
     private javax.swing.JButton btnRevista;
     private javax.swing.JButton btnTesis;
     private javax.swing.JPanel contentMaterial;

@@ -52,17 +52,17 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <EmptySpace pref="256" max="32767" attributes="0"/>
-                          <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblMenu" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="313" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="180" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jButton1" max="32767" attributes="0"/>
-                              <Component id="btn_prestamo" pref="282" max="32767" attributes="0"/>
-                              <Component id="btn_buscar" max="32767" attributes="0"/>
-                              <Component id="btn_registrar" max="32767" attributes="0"/>
-                              <Component id="btn_agregar" max="32767" attributes="0"/>
+                              <Component id="btnSalir" max="32767" attributes="0"/>
+                              <Component id="btnRealizarPrestamo" pref="282" max="32767" attributes="0"/>
+                              <Component id="btnBuscarLibro" max="32767" attributes="0"/>
+                              <Component id="btnRegistarUsuario" max="32767" attributes="0"/>
+                              <Component id="btnRegistrarMaterial" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
@@ -75,17 +75,17 @@
               <Component id="jLabel1" alignment="0" pref="0" max="32767" attributes="0"/>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
-                  <Component id="jLabel2" min="-2" pref="51" max="-2" attributes="0"/>
+                  <Component id="lblMenu" min="-2" pref="51" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="btn_agregar" min="-2" pref="60" max="-2" attributes="0"/>
+                  <Component id="btnRegistrarMaterial" min="-2" pref="60" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
-                  <Component id="btn_registrar" min="-2" pref="60" max="-2" attributes="0"/>
+                  <Component id="btnRegistarUsuario" min="-2" pref="60" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
-                  <Component id="btn_buscar" min="-2" pref="60" max="-2" attributes="0"/>
+                  <Component id="btnBuscarLibro" min="-2" pref="60" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
-                  <Component id="btn_prestamo" min="-2" pref="60" max="-2" attributes="0"/>
+                  <Component id="btnRealizarPrestamo" min="-2" pref="60" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-                  <Component id="jButton1" min="-2" pref="60" max="-2" attributes="0"/>
+                  <Component id="btnSalir" min="-2" pref="60" max="-2" attributes="0"/>
                   <EmptySpace pref="86" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -102,7 +102,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel2">
+        <Component class="javax.swing.JLabel" name="lblMenu">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Times New Roman" size="36" style="1"/>
@@ -113,7 +113,7 @@
             <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value=""/>
           </AccessibilityProperties>
         </Component>
-        <Component class="javax.swing.JButton" name="btn_agregar">
+        <Component class="javax.swing.JButton" name="btnRegistrarMaterial">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Times New Roman" size="18" style="0"/>
@@ -121,10 +121,10 @@
             <Property name="text" type="java.lang.String" value="Registrar material"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_agregarActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRegistrarMaterialActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btn_registrar">
+        <Component class="javax.swing.JButton" name="btnRegistarUsuario">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Times New Roman" size="18" style="0"/>
@@ -132,7 +132,7 @@
             <Property name="text" type="java.lang.String" value="Registrar Usuario"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="btn_buscar">
+        <Component class="javax.swing.JButton" name="btnBuscarLibro">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Times New Roman" size="18" style="0"/>
@@ -140,7 +140,7 @@
             <Property name="text" type="java.lang.String" value="Buscar Libro "/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="btn_prestamo">
+        <Component class="javax.swing.JButton" name="btnRealizarPrestamo">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Times New Roman" size="18" style="0"/>
@@ -148,7 +148,7 @@
             <Property name="text" type="java.lang.String" value="Realizar Pr&#xe9;stamo"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton1">
+        <Component class="javax.swing.JButton" name="btnSalir">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Times New Roman" size="18" style="0"/>

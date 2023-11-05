@@ -53,7 +53,7 @@
     <Container class="javax.swing.JPanel" name="jPanel1">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="cc" red="33" type="rgb"/>
+          <Color blue="33" green="33" red="33" type="rgb"/>
         </Property>
       </Properties>
 
@@ -64,7 +64,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="btnRevista" pref="156" max="32767" attributes="0"/>
-                      <Component id="btnCD" alignment="1" max="32767" attributes="0"/>
+                      <Component id="btnCd" alignment="1" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -85,7 +85,7 @@
               <Group type="103" rootIndex="3" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnObra" pref="156" max="32767" attributes="0"/>
+                      <Component id="btnObras" pref="156" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -97,7 +97,7 @@
                   <EmptySpace pref="208" max="32767" attributes="0"/>
                   <Component id="btnRevista" min="-2" pref="41" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="162" max="-2" attributes="0"/>
-                  <Component id="btnCD" min="-2" pref="41" max="-2" attributes="0"/>
+                  <Component id="btnCd" min="-2" pref="41" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="248" max="-2" attributes="0"/>
               </Group>
               <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
@@ -117,7 +117,7 @@
               <Group type="103" rootIndex="3" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace pref="347" max="32767" attributes="0"/>
-                      <Component id="btnObra" min="-2" pref="41" max="-2" attributes="0"/>
+                      <Component id="btnObras" min="-2" pref="41" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="312" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -125,7 +125,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="btnCD">
+        <Component class="javax.swing.JButton" name="btnCd">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Times New Roman" size="18" style="0"/>
@@ -133,7 +133,7 @@
             <Property name="text" type="java.lang.String" value="CD&#xb4;s"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCDActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCdActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnLibro">
@@ -166,7 +166,7 @@
             <Property name="text" type="java.lang.String" value="Tesis"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="btnObra">
+        <Component class="javax.swing.JButton" name="btnObras">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Times New Roman" size="18" style="0"/>
@@ -174,7 +174,7 @@
             <Property name="text" type="java.lang.String" value="Obras"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnObraActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnObrasActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
@@ -189,7 +189,7 @@
     <Container class="javax.swing.JPanel" name="contentMaterial">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="cc" red="33" type="rgb"/>
+          <Color blue="cc" green="cc" red="cc" type="rgb"/>
         </Property>
       </Properties>
 

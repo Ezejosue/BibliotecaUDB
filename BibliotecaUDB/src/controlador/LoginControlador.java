@@ -7,7 +7,8 @@ package controlador;
 
 import modelo.Usuario;
 import modelo.UsuarioModelo;
-import vista.Login;
+import vista.vistaLogin;
+import vista.vistaMenu;
 
 /**
  *
@@ -15,10 +16,10 @@ import vista.Login;
  */
 public class LoginControlador {
 
-    private Login vista;
+    private vistaLogin vista;
     private UsuarioModelo modelo;
 
-    public LoginControlador(Login vista, UsuarioModelo modelo) {
+    public LoginControlador(vistaLogin vista, UsuarioModelo modelo) {
         this.vista = vista;
         this.modelo = modelo;
         this.vista.setControlador(this);
@@ -27,7 +28,11 @@ public class LoginControlador {
     public void iniciarSesion(String correo, String contrasena) {
         Usuario usuario = modelo.obtenerUsuarioPorCredenciales(correo, contrasena);
         if (usuario != null) {
-            vista.mostrarMensaje("Inicio de sesión exitoso");
+          //  vista.mostrarMensaje("Inicio de sesión exitoso");
+            vistaMenu vistaMenu = new vistaMenu();
+            vistaMenu.setVisible(true);
+            vista.setVisible(false);
+            
         } else {
             vista.mostrarMensaje("Correo o contraseña incorrectos");
         }

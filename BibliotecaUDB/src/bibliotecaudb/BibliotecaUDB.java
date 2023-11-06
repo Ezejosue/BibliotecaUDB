@@ -7,7 +7,7 @@ package bibliotecaudb;
 
 import controlador.LoginControlador;
 import modelo.UsuarioModelo;
-import vista.Login;
+import vista.vistaLogin;
 
 /**
  *
@@ -21,7 +21,7 @@ public class BibliotecaUDB {
     public static void main(String[] args) {
         // TODO code application logic 
         UsuarioModelo modelo = new UsuarioModelo();
-        Login loginVista = new Login();
+        vistaLogin loginVista = new vistaLogin();
         LoginControlador controlador = new LoginControlador(loginVista, modelo);
         loginVista.setVisible(true);
 

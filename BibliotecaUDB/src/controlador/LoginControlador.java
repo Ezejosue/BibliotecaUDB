@@ -11,7 +11,7 @@ import vista.Login;
 
 /**
  *
- * @author PC
+ * @author Josue
  */
 public class LoginControlador {
 

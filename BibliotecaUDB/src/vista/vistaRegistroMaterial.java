@@ -12,15 +12,15 @@ import javax.swing.JPanel;
  *
  * @author Sofía
  */
-public class RegistroMaterial extends javax.swing.JFrame {
+public class vistaRegistroMaterial extends javax.swing.JFrame {
 
     /**
      * Creates new form RegistroMaterial
      */
-    public RegistroMaterial() {
+    public vistaRegistroMaterial() {
         initComponents();
         
-        Libro p1 = new Libro();
+        panelLibro p1 = new panelLibro();
        ShowPanel (p1);
         
     }
@@ -40,6 +40,7 @@ public class RegistroMaterial extends javax.swing.JFrame {
         btnRevista = new javax.swing.JButton();
         btnTesis = new javax.swing.JButton();
         btnObras = new javax.swing.JButton();
+        btnSalir = new javax.swing.JButton();
         lblBannerRegistro = new javax.swing.JLabel();
         contentMaterial = new javax.swing.JPanel();
 
@@ -90,6 +91,14 @@ public class RegistroMaterial extends javax.swing.JFrame {
             }
         });
 
+        btnSalir.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        btnSalir.setText("Salir");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -98,7 +107,8 @@ public class RegistroMaterial extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnRevista, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
-                    .addComponent(btnCd, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnCd, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnSalir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
@@ -123,7 +133,9 @@ public class RegistroMaterial extends javax.swing.JFrame {
                 .addComponent(btnRevista, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(162, 162, 162)
                 .addComponent(btnCd, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(248, 248, 248))
+                .addGap(18, 18, 18)
+                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(189, 189, 189))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(142, 142, 142)
@@ -181,29 +193,42 @@ public class RegistroMaterial extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCdActionPerformed
-        // TODO add your handling code here:
+      panelCds panelCds = new panelCds();
+       ShowPanel (panelCds);
+       
     }//GEN-LAST:event_btnCdActionPerformed
 
     private void btnObrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrasActionPerformed
-        // TODO add your handling code here:
+         panelObra panelObra = new panelObra();
+       ShowPanel (panelObra);
+       
     }//GEN-LAST:event_btnObrasActionPerformed
 
     private void btnLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLibroActionPerformed
 
-       Libro panelLibro = new Libro();
+       panelLibro panelLibro = new panelLibro();
        ShowPanel (panelLibro);
+        
     }//GEN-LAST:event_btnLibroActionPerformed
 
     private void btnRevistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRevistaActionPerformed
         // TODO add your handling code here:
-       Revista panelLibro = new Revista();
+       panelRevista panelLibro = new panelRevista();
        ShowPanel (panelLibro);
+        
+      
     }//GEN-LAST:event_btnRevistaActionPerformed
 
     private void btnTesisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTesisActionPerformed
-        // TODO add your handling code here:
+        panelTesis panelTesis = new panelTesis();
+       ShowPanel (panelTesis);
+       
         
     }//GEN-LAST:event_btnTesisActionPerformed
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+      System.exit(0);
+    }//GEN-LAST:event_btnSalirActionPerformed
 //metodo para 
     private void ShowPanel(JPanel p){
         
@@ -238,20 +263,21 @@ public class RegistroMaterial extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RegistroMaterial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(vistaRegistroMaterial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RegistroMaterial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(vistaRegistroMaterial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RegistroMaterial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(vistaRegistroMaterial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RegistroMaterial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(vistaRegistroMaterial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RegistroMaterial().setVisible(true);
+                new vistaRegistroMaterial().setVisible(true);
             }
         });
     }
@@ -261,6 +287,7 @@ public class RegistroMaterial extends javax.swing.JFrame {
     private javax.swing.JButton btnLibro;
     private javax.swing.JButton btnObras;
     private javax.swing.JButton btnRevista;
+    private javax.swing.JButton btnSalir;
     private javax.swing.JButton btnTesis;
     private javax.swing.JPanel contentMaterial;
     private javax.swing.JPanel jPanel1;

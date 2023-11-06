@@ -8,7 +8,7 @@ package controlador;
 import modelo.Usuario;
 import modelo.UsuarioModelo;
 import vista.vistaLogin;
-import vista.Menu;
+import vista.vistaMenu;
 
 /**
  *
@@ -28,8 +28,8 @@ public class LoginControlador {
     public void iniciarSesion(String correo, String contrasena) {
         Usuario usuario = modelo.obtenerUsuarioPorCredenciales(correo, contrasena);
         if (usuario != null) {
-            vista.mostrarMensaje("Inicio de sesión exitoso");
-            Menu vistaMenu = new Menu();
+          //  vista.mostrarMensaje("Inicio de sesión exitoso");
+            vistaMenu vistaMenu = new vistaMenu();
             vistaMenu.setVisible(true);
             vista.setVisible(false);
             

@@ -6,6 +6,7 @@
 package vista;
 
 import controlador.LoginControlador;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -67,7 +68,11 @@ public class vistaLogin extends javax.swing.JFrame {
 
         txtCorreo.setName("txtCorreo"); // NOI18N
 
-        txtClave.setText("txtClave");
+        txtClave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtClaveActionPerformed(evt);
+            }
+        });
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/biblio.png"))); // NOI18N
 
@@ -87,6 +92,11 @@ public class vistaLogin extends javax.swing.JFrame {
 
         btnBuscarLibro.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         btnBuscarLibro.setText("Buscar Libro");
+        btnBuscarLibro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarLibroActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout contenedorLayout = new javax.swing.GroupLayout(contenedor);
         contenedor.setLayout(contenedorLayout);
@@ -95,12 +105,8 @@ public class vistaLogin extends javax.swing.JFrame {
             .addGroup(contenedorLayout.createSequentialGroup()
                 .addComponent(pnl_login_banner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contenedorLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 206, Short.MAX_VALUE)
-                        .addComponent(lbl_icon_login, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(154, 154, 154))
                     .addGroup(contenedorLayout.createSequentialGroup()
-                        .addGap(65, 65, 65)
+                        .addGap(29, 29, 29)
                         .addGroup(contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(lblCorreo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lblClave, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE))
@@ -111,17 +117,21 @@ public class vistaLogin extends javax.swing.JFrame {
                             .addGroup(contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(btnIniciarsesion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnBuscarLibro, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(109, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contenedorLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lbl_icon_login, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(158, 158, 158))))
         );
         contenedorLayout.setVerticalGroup(
             contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(contenedorLayout.createSequentialGroup()
-                .addGap(66, 66, 66)
+                .addGap(60, 60, 60)
                 .addComponent(lbl_icon_login)
-                .addGap(74, 74, 74)
+                .addGap(80, 80, 80)
                 .addGroup(contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCorreo))
+                    .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(contenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtClave, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -165,6 +175,18 @@ public class vistaLogin extends javax.swing.JFrame {
         iniciarSesion();
     }//GEN-LAST:event_btnIniciarsesionActionPerformed
 
+    private void txtClaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtClaveActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtClaveActionPerformed
+
+    private void btnBuscarLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarLibroActionPerformed
+        vistaBuscarLibro  vistaBuscarLibro = new vistaBuscarLibro();
+       ShowPanel ( vistaBuscarLibro);
+       
+       
+     
+    }//GEN-LAST:event_btnBuscarLibroActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -195,6 +217,7 @@ public class vistaLogin extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new vistaLogin().setVisible(true);
             }
@@ -213,4 +236,15 @@ public class vistaLogin extends javax.swing.JFrame {
     private javax.swing.JPasswordField txtClave;
     private javax.swing.JTextField txtCorreo;
     // End of variables declaration//GEN-END:variables
+
+    private void ShowPanel(vistaBuscarLibro vistaBuscarLibro) {
+      dispose();
+      vistaBuscarLibro frame = new vistaBuscarLibro ();
+      
+      frame.setTitle ("BUSCAR LIBRO");
+      frame.setSize(1100,800);
+      frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+      frame.setVisible(true);
+      
+    }
 }

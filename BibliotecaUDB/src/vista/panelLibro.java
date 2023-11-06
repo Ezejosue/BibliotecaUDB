@@ -6,21 +6,22 @@
 package vista;
 
 import java.awt.Dimension;
+import javax.swing.JFrame;
 
 /**
  *
  * @author Sofía
  */
-public class Libro extends javax.swing.JPanel {
+public class panelLibro extends javax.swing.JPanel {
 
     /**
      * Creates new form Libro
      */
-    public Libro() {
+    public panelLibro() {
         initComponents();
     }
    public static void main (String args []){
-       Libro panelLibro = new Libro();
+       panelLibro panelLibro = new panelLibro();
        panelLibro.setPreferredSize(new Dimension(878, 578)); 
    }
     /**
@@ -39,7 +40,6 @@ public class Libro extends javax.swing.JPanel {
         txtEjemplar = new javax.swing.JTextField();
         lblIsbn = new javax.swing.JLabel();
         txtEditorial = new javax.swing.JTextField();
-        lblIdEditorial = new javax.swing.JLabel();
         txtEdicion = new javax.swing.JTextField();
         btnGuardar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
@@ -49,12 +49,15 @@ public class Libro extends javax.swing.JPanel {
         lblUbicacion = new javax.swing.JLabel();
         txtTitulo = new javax.swing.JTextField();
         lblAutor = new javax.swing.JLabel();
-        txtUbicacion = new javax.swing.JTextField();
         lblCantidad = new javax.swing.JLabel();
         txtCantidad = new javax.swing.JTextField();
+        btnMenu = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        lblEditorial = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(204, 204, 204));
         setMaximumSize(new java.awt.Dimension(878, 588));
+        setMinimumSize(new java.awt.Dimension(870, 570));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblTituloLibro.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
@@ -92,11 +95,7 @@ public class Libro extends javax.swing.JPanel {
                 txtEditorialActionPerformed(evt);
             }
         });
-        add(txtEditorial, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 390, 170, -1));
-
-        lblIdEditorial.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        lblIdEditorial.setText("ID Editorial");
-        add(lblIdEditorial, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 379, 100, 40));
+        add(txtEditorial, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 380, 170, -1));
 
         txtEdicion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -107,11 +106,21 @@ public class Libro extends javax.swing.JPanel {
 
         btnGuardar.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         btnGuardar.setText("Guardar ");
-        add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 440, 100, -1));
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
+        add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 450, 100, -1));
 
         btnSalir.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         btnSalir.setText("Salir");
-        add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 440, 100, -1));
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
+        add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 450, 100, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/libro.png"))); // NOI18N
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 80, 207, 247));
@@ -129,7 +138,7 @@ public class Libro extends javax.swing.JPanel {
 
         lblUbicacion.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         lblUbicacion.setText("Ubicacion: ");
-        add(lblUbicacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 244, 100, 40));
+        add(lblUbicacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 100, 40));
 
         txtTitulo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -142,13 +151,6 @@ public class Libro extends javax.swing.JPanel {
         lblAutor.setText("Autor:");
         add(lblAutor, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 141, 100, 40));
 
-        txtUbicacion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtUbicacionActionPerformed(evt);
-            }
-        });
-        add(txtUbicacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 260, 170, -1));
-
         lblCantidad.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         lblCantidad.setText("Cantidad ");
         add(lblCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 320, 100, 40));
@@ -159,6 +161,22 @@ public class Libro extends javax.swing.JPanel {
             }
         });
         add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 330, 170, -1));
+
+        btnMenu.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        btnMenu.setText("Menu");
+        btnMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMenuActionPerformed(evt);
+            }
+        });
+        add(btnMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 450, 100, -1));
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "UDB Soyapango", "UDB Antiguo Cuscatlan" }));
+        add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 260, 170, -1));
+
+        lblEditorial.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        lblEditorial.setText("ID Editorial");
+        add(lblEditorial, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 380, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtIsbnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIsbnActionPerformed
@@ -168,10 +186,6 @@ public class Libro extends javax.swing.JPanel {
     private void txtEjemplarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEjemplarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtEjemplarActionPerformed
-
-    private void txtEditorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEditorialActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtEditorialActionPerformed
 
     private void txtEdicionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEdicionActionPerformed
         // TODO add your handling code here:
@@ -185,23 +199,40 @@ public class Libro extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTituloActionPerformed
 
-    private void txtUbicacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUbicacionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtUbicacionActionPerformed
-
     private void txtCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCantidadActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCantidadActionPerformed
 
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
+        vistaMenu vistaMenu = new vistaMenu();
+        showpanel(vistaMenu);
+        
+    
+    }//GEN-LAST:event_btnMenuActionPerformed
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void txtEditorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEditorialActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtEditorialActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnMenu;
     private javax.swing.JButton btnSalir;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblAutor;
     private javax.swing.JLabel lblCantidad;
     private javax.swing.JLabel lblEdicion;
-    private javax.swing.JLabel lblIdEditorial;
+    private javax.swing.JLabel lblEditorial;
     private javax.swing.JLabel lblIsbn;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JLabel lblTituloLibro;
@@ -214,7 +245,6 @@ public class Libro extends javax.swing.JPanel {
     private javax.swing.JTextField txtEjemplar;
     private javax.swing.JTextField txtIsbn;
     private javax.swing.JTextField txtTitulo;
-    private javax.swing.JTextField txtUbicacion;
     // End of variables declaration//GEN-END:variables
 
     void setSize() {
@@ -223,5 +253,15 @@ public class Libro extends javax.swing.JPanel {
 
     void setLocation() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void showpanel(vistaMenu vistaMenu) {
+     
+      vistaMenu frame3 = new vistaMenu ();
+      
+      frame3.setTitle ("BUSCAR LIBRO");
+      frame3.setSize(1100,800);
+      frame3.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+      frame3.setVisible(true);
     }
 }

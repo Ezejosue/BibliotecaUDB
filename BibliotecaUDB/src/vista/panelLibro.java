@@ -6,7 +6,9 @@
 package vista;
 
 import java.awt.Dimension;
+import java.awt.Window;
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -209,9 +211,9 @@ public class panelLibro extends javax.swing.JPanel {
 
     private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
         vistaMenu vistaMenu = new vistaMenu();
-        showpanel(vistaMenu);
-        
-    
+        vistaMenu.setVisible(true);
+        Window window = SwingUtilities.windowForComponent(this);
+        window.dispose();  
     }//GEN-LAST:event_btnMenuActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed

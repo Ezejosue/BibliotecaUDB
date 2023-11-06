@@ -166,6 +166,7 @@ public class vistaPrestamo extends javax.swing.JFrame {
         // TODO add your handling code here:
         vistaMenu vistaMenu = new vistaMenu();
         showpanel(vistaMenu);
+        this.dispose();
     }//GEN-LAST:event_btnMenuActionPerformed
 
     /**

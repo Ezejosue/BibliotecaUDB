@@ -5,6 +5,9 @@
  */
 package vista;
 
+import java.awt.Window;
+import javax.swing.SwingUtilities;
+
 /**
  *
  * @author Sofía
@@ -87,6 +90,11 @@ public class panelTesis extends javax.swing.JPanel {
 
         btnMenu.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         btnMenu.setText("Menu");
+        btnMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMenuActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -175,6 +183,13 @@ public class panelTesis extends javax.swing.JPanel {
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
       System.exit(0);
     }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
+         vistaMenu vistaMenu = new vistaMenu();
+        vistaMenu.setVisible(true);
+        Window window = SwingUtilities.windowForComponent(this);
+        window.dispose();
+    }//GEN-LAST:event_btnMenuActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

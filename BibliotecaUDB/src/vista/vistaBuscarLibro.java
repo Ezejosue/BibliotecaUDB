@@ -186,6 +186,7 @@ public class vistaBuscarLibro extends javax.swing.JFrame {
     private void btnRegresarInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarInicioActionPerformed
        vistaLogin vistaLogin = new vistaLogin();
        Showpanel (vistaLogin);
+       this.dispose();
     }//GEN-LAST:event_btnRegresarInicioActionPerformed
 
     private void btnRealizarPrestamoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizarPrestamoActionPerformed

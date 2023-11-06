@@ -5,7 +5,9 @@
  */
 package vista;
 
+import java.awt.Window;
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -194,9 +196,10 @@ public class panelCds extends javax.swing.JPanel {
 
     private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
         // TODO add your handling code here:
-          vistaMenu vistaMenu = new vistaMenu();
-          showpanel(vistaMenu);
-           this.dispose();
+        vistaMenu vistaMenu = new vistaMenu();
+        vistaMenu.setVisible(true);
+        Window window = SwingUtilities.windowForComponent(this);
+        window.dispose();           
     }//GEN-LAST:event_btnMenuActionPerformed
 
 

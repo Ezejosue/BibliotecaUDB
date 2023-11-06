@@ -103,7 +103,4 @@ public class Tesis extends Ejemplar {
     public String toString() {
         return "Tesis{" + "universidad=" + universidad + ", anio=" + anio + '}';
     }
-    
-    
-
 }

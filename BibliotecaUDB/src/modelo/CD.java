@@ -99,4 +99,8 @@ public class CD extends Ejemplar {
         this.prestados = prestados;
     }
 
+    @Override
+    public String toString() {
+        return "CD{" + "duracion=" + duracion + ", idGenero=" + idGenero + '}';
+    }
 }

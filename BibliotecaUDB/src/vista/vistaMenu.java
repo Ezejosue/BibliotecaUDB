@@ -71,7 +71,7 @@ public class vistaMenu extends javax.swing.JFrame {
         });
 
         btnBuscarLibro.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        btnBuscarLibro.setText("Buscar Libro ");
+        btnBuscarLibro.setText("Buscar Material");
         btnBuscarLibro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarLibroActionPerformed(evt);

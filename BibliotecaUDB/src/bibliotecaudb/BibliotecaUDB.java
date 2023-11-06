@@ -8,10 +8,11 @@ package bibliotecaudb;
 import controlador.LoginControlador;
 import modelo.UsuarioModelo;
 import vista.vistaLogin;
+import vista.vistaMenu;
 
 /**
  *
- * @author PC
+ * @author Josue
  */
 public class BibliotecaUDB {
 
@@ -22,7 +23,8 @@ public class BibliotecaUDB {
         // TODO code application logic 
         UsuarioModelo modelo = new UsuarioModelo();
         vistaLogin loginVista = new vistaLogin();
-        LoginControlador controlador = new LoginControlador(loginVista, modelo);
+        vistaMenu vistamenu = new vistaMenu();
+        LoginControlador controlador = new LoginControlador(loginVista, modelo, vistamenu);
         loginVista.setVisible(true);
 
     }

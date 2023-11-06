@@ -13,7 +13,7 @@ import util.conexionDB;
 
 /**
  *
- * @author PC
+ * @author Josue
  */
 public class UsuarioModelo {
 

@@ -156,7 +156,7 @@ public class vistaMenu extends javax.swing.JFrame {
 
     private void btnRegistrarMaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarMaterialActionPerformed
         // TODO add your handling code here:
-        
+
         vistaRegistroMaterial vistRegistro = new vistaRegistroMaterial();
         vistRegistro.setVisible(true);
         this.dispose();
@@ -165,31 +165,51 @@ public class vistaMenu extends javax.swing.JFrame {
     private void btnRegistarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistarUsuarioActionPerformed
         vistaRgistroUsuario vistaUsuario = new vistaRgistroUsuario();
         vistaUsuario.setVisible(true);
-         this.dispose();
-       
+        this.dispose();
+
     }//GEN-LAST:event_btnRegistarUsuarioActionPerformed
 
     private void btnBuscarLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarLibroActionPerformed
-         vistaBuscarLibro vistaUsuario = new vistaBuscarLibro();
+        vistaBuscarLibro vistaUsuario = new vistaBuscarLibro();
         vistaUsuario.setVisible(true);
-         this.dispose();
+        this.dispose();
     }//GEN-LAST:event_btnBuscarLibroActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-       System.exit(0);
-        
+        System.exit(0);
+
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void cerrar(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_cerrar
-       
+
     }//GEN-LAST:event_cerrar
-    
+
     private void btnRealizarPrestamoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizarPrestamoActionPerformed
-       vistaPrestamo vistaPrestamo = new vistaPrestamo();
-       vistaPrestamo.setVisible(true);
-       this.dispose(); // TODO add your handling code here:
+        vistaPrestamo vistaPrestamo = new vistaPrestamo();
+        vistaPrestamo.setVisible(true);
+        this.dispose(); // TODO add your handling code here:
     }//GEN-LAST:event_btnRealizarPrestamoActionPerformed
-    
+
+    public void configurarMenuParaUsuario(String tipoUsuario) {
+        if ("Administrador".equals(tipoUsuario)) {
+            btnRegistrarMaterial.setVisible(true);
+            btnRegistarUsuario.setVisible(true);
+            btnBuscarLibro.setVisible(true);
+            btnRealizarPrestamo.setVisible(true);
+        } else if ("Profesor".equals(tipoUsuario)) {
+            btnRegistrarMaterial.setVisible(false);
+            btnRegistarUsuario.setVisible(false);
+            btnBuscarLibro.setVisible(true);
+            btnRealizarPrestamo.setVisible(true);
+        } else if ("Alumno".equals(tipoUsuario)) {
+            btnRegistrarMaterial.setVisible(false);
+            btnRegistarUsuario.setVisible(false);
+            btnBuscarLibro.setVisible(true);
+            btnRealizarPrestamo.setVisible(true);
+        }
+
+    }
+
     /**
      * @param args the command line arguments
      */

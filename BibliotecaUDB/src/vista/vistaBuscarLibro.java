@@ -78,7 +78,7 @@ public class vistaBuscarLibro extends javax.swing.JFrame {
         cmbMaterial.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Libro", "Revista", "Tesis", "Obra", "Cd´s" }));
 
         btnRegresarInicio.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        btnRegresarInicio.setText("Regresar Al Inicio");
+        btnRegresarInicio.setText("Menú");
         btnRegresarInicio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegresarInicioActionPerformed(evt);
@@ -184,8 +184,8 @@ public class vistaBuscarLibro extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegresarInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarInicioActionPerformed
-       vistaLogin vistaLogin = new vistaLogin();
-       Showpanel (vistaLogin);
+       vistaMenu Menu = new vistaMenu();
+       Menu.setVisible(true);
        this.dispose();
     }//GEN-LAST:event_btnRegresarInicioActionPerformed
 

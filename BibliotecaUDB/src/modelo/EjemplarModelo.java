@@ -74,4 +74,5 @@ public class EjemplarModelo extends AbstractTableModel {
     public void limpiarDatos() {
         ejemplares.clear();
     }
+
 }

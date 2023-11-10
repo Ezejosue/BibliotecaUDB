@@ -13,6 +13,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
+import javax.swing.table.TableRowSorter;
 import modelo.EjemplarModelo;
 
 /**
@@ -26,6 +27,7 @@ public class vistaBuscarLibro extends javax.swing.JFrame {
      */
     public vistaBuscarLibro() {
         initComponents();
+        
     }
 
     /**
@@ -199,6 +201,15 @@ public class vistaBuscarLibro extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void configurarTabla() {
+        EjemplarModelo modelo = (EjemplarModelo) jTable1.getModel();
+        jTable1.setModel(modelo);
+
+        TableRowSorter<EjemplarModelo> sorter = new TableRowSorter<>(modelo);
+        jTable1.setRowSorter(sorter);
+
+    }
+
     public void ajustarAnchoColumnas() {
         jTable1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         int minWidth = 100; // Establece un ancho mínimo para las columnas
@@ -257,6 +268,7 @@ public class vistaBuscarLibro extends javax.swing.JFrame {
         } else {
             jTable1.setModel(modeloTabla);
             ajustarAnchoColumnas();
+            configurarTabla();
         }
         //jTable1.setModel(modeloTabla);
     }//GEN-LAST:event_btnBuscarActionPerformed

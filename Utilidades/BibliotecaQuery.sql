@@ -95,3 +95,80 @@ CREATE TABLE IF NOT EXISTS configuraciones (
 
 -- Insertar configuraciones iniciales
 INSERT INTO configuraciones (clave, valor) VALUES ('mora_diaria', '0.50'), ('max_prestamos', '3');
+
+-- Insertar registros en la tabla de usuarios
+INSERT INTO usuarios (nombre, correo, contrasena, tipo_usuario, mora)
+VALUES
+    ('Administrador 1', 'admin1@example.com', 'admin123', 'Administrador', 0),
+    ('Profesor 1', 'profesor1@example.com', 'prof123', 'Profesor', 0),
+    ('Alumno 1', 'alumno1@example.com', 'alum123', 'Alumno', 0);
+    
+    INSERT INTO generos (nombre) VALUES
+    ('Ficción'),
+    ('No ficción'),
+    ('Ciencia ficción'),
+    ('Romance'),
+    ('Misterio'),
+    ('Fantasía');
+    
+INSERT INTO editoriales (nombre) VALUES
+    ('Editorial A'),
+    ('Editorial B'),
+    ('Editorial C'),
+    ('Editorial D');
+    
+    INSERT INTO ejemplares (id, titulo, autor, tipo, ubicacion, cantidad, prestados) VALUES
+    ('1', 'Libro 1', 'Autor 1', 'Libro', 'Estantería 1', 5, 2),
+    ('2', 'Revista 1', 'Autor 2', 'Revista', 'Estantería 2', 10, 0),
+    ('3', 'CD 1', 'Artista 1', 'CD', 'Estantería 3', 15, 5),
+    ('4', 'Tesis 1', 'Autor 3', 'Tesis', 'Estantería 4', 3, 1);
+    
+    -- Insertar datos en la tabla de libros
+INSERT INTO libros (id_ejemplar, isbn, id_editorial, edicion) VALUES
+    ('1', 'ISBN123456', 1, 1),
+    ('2', 'ISBN789101', 2, 2);
+
+-- Insertar datos en la tabla de revistas
+INSERT INTO revistas (id_ejemplar, issn, numero, volumen) VALUES
+    ('2', 'ISSN12345', 3, 1);
+
+-- Insertar datos en la tabla de CDs
+INSERT INTO cds (id_ejemplar, duracion, id_genero) VALUES
+    ('3', 60, 3);
+
+-- Insertar datos en la tabla de tesis
+INSERT INTO tesis (id_ejemplar, universidad, anio) VALUES
+    ('4', 'Universidad X', 2020);
+
+
+-- Insertar datos en la tabla de editoriales
+INSERT INTO editoriales (nombre) VALUES
+    ('Editorial XYZ'),
+    ('Editorial ABC'),
+    ('Editorial 123'),
+    ('Editorial de Ciencia'),
+    ('Editorial Romántica');
+
+-- Insertar datos en la tabla de ejemplares
+INSERT INTO ejemplares (id, titulo, autor, tipo, ubicacion, cantidad, prestados) VALUES
+    ('1001', 'Cien años de soledad', 'Gabriel García Márquez', 'Libro', 'Estantería A', 10, 3),
+    ('1002', 'National Geographic - Enero 2023', 'Varios autores', 'Revista', 'Estantería B', 20, 2),
+    ('1003', 'The Dark Side of the Moon', 'Pink Floyd', 'CD', 'Estantería C', 5, 1),
+    ('1004', 'Historia de la Antigua Roma', 'Mary Beard', 'Libro', 'Estantería D', 15, 5);
+
+-- Insertar datos en la tabla de libros
+INSERT INTO libros (id_ejemplar, isbn, id_editorial, edicion) VALUES
+    ('1001', 'ISBN789107', 1, 1),
+    ('1004', 'ISBN789108', 2, 2);
+
+-- Insertar datos en la tabla de revistas
+INSERT INTO revistas (id_ejemplar, issn, numero, volumen) VALUES
+    ('1002', '07474662', 1, 25);
+
+-- Insertar datos en la tabla de CDs
+INSERT INTO cds (id_ejemplar, duracion, id_genero) VALUES
+    ('1003', 43, 6);
+
+-- Insertar datos en la tabla de tesis
+INSERT INTO tesis (id_ejemplar, universidad, anio) VALUES
+    ('1004', 'Universidad de Roma', 2018);

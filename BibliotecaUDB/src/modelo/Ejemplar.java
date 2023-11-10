@@ -90,7 +90,9 @@ public abstract class Ejemplar {
 
     @Override
     public String toString() {
-        return "Ejemplar{" + "id=" + id + ", titulo=" + titulo + ", autor=" + autor + ", ubicacion=" + ubicacion + ", cantidad=" + cantidad + ", prestados=" + prestados + '}';
+        return "Ejemplar{" + "id=" + id + ", titulo=" + titulo + ", autor=" + autor + ", tipo=" + tipo + ", ubicacion=" + ubicacion + ", cantidad=" + cantidad + ", prestados=" + prestados + '}';
     }
+
+  
 
 }

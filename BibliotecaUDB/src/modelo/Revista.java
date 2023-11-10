@@ -110,6 +110,16 @@ public class Revista extends Ejemplar {
     }
 
     @Override
+    public String getTipo() {
+        return tipo;
+    }
+
+    @Override
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    @Override
     public String toString() {
         return "Revista{" + "issn=" + issn + ", numero=" + numero + ", volumen=" + volumen + '}';
     }

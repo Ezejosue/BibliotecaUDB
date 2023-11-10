@@ -100,6 +100,16 @@ public class Tesis extends Ejemplar {
     }
 
     @Override
+    public String getTipo() {
+        return tipo;
+    }
+
+    @Override
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    @Override
     public String toString() {
         return "Tesis{" + "universidad=" + universidad + ", anio=" + anio + '}';
     }

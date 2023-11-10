@@ -100,6 +100,16 @@ public class CD extends Ejemplar {
     }
 
     @Override
+    public String getTipo() {
+        return tipo;
+    }
+
+    @Override
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    @Override
     public String toString() {
         return "CD{" + "duracion=" + duracion + ", idGenero=" + idGenero + '}';
     }

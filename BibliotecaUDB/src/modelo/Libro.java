@@ -18,8 +18,8 @@ public class Libro extends Ejemplar {
     public Libro() {
     }
 
-    public Libro(String isbn, int idEditorial, int edicion, String id, String titulo, String autor, String ubicacion, int cantidad, int prestados) {
-        super(id, titulo, autor, ubicacion, cantidad, prestados);
+    public Libro(String isbn, int idEditorial, int edicion, String id, String titulo, String autor, String tipo, String ubicacion, int cantidad, int prestados) {
+        super(id, titulo, autor, tipo, ubicacion, cantidad, prestados);
         this.isbn = isbn;
         this.idEditorial = idEditorial;
         this.edicion = edicion;

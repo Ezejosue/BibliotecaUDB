@@ -18,8 +18,8 @@ public class Revista extends Ejemplar {
     public Revista() {
     }
 
-    public Revista(String issn, int numero, int volumen, String id, String titulo, String autor, String ubicacion, int cantidad, int prestados) {
-        super(id, titulo, autor, ubicacion, cantidad, prestados);
+    public Revista(String issn, int numero, int volumen, String id, String titulo, String autor, String tipo, String ubicacion, int cantidad, int prestados) {
+        super(id, titulo, autor, tipo, ubicacion, cantidad, prestados);
         this.issn = issn;
         this.numero = numero;
         this.volumen = volumen;

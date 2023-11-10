@@ -17,8 +17,8 @@ public class CD extends Ejemplar {
     public CD() {
     }
 
-    public CD(int duracion, int idGenero, String id, String titulo, String autor, String ubicacion, int cantidad, int prestados) {
-        super(id, titulo, autor, ubicacion, cantidad, prestados);
+    public CD(int duracion, int idGenero, String id, String titulo, String autor, String tipo, String ubicacion, int cantidad, int prestados) {
+        super(id, titulo, autor, tipo, ubicacion, cantidad, prestados);
         this.duracion = duracion;
         this.idGenero = idGenero;
     }

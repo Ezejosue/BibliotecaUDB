@@ -49,5 +49,23 @@ public class UsuarioModelo {
             conexionDB.close(conn);
         }
     }
+    
+    public boolean ingresarUsuario(Usuario usuario){
+        conn = conexionDB.getConnection();
+        try {
+            String sql = "INSERT INTO `usuarios`  (`nombre`, `correo`, `contrasena`, `tipo_usuario`) VALUES (?, ?, ?, ?)";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, usuario.getNombre());
+            ps.setString(2, usuario.getCorreo());
+            ps.setString(3, usuario.getContrasena());
+            ps.setString(4, usuario.getTipoUsuario());
+            ps.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }finally{
+            conexionDB.close(conn);
+        }
+    }
 
 }

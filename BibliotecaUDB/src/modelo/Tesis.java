@@ -17,8 +17,8 @@ public class Tesis extends Ejemplar {
     public Tesis() {
     }
 
-    public Tesis(String universidad, int anio, String id, String titulo, String autor, String ubicacion, int cantidad, int prestados) {
-        super(id, titulo, autor, ubicacion, cantidad, prestados);
+    public Tesis(String universidad, int anio, String id, String titulo, String autor, String tipo, String ubicacion, int cantidad, int prestados) {
+        super(id, titulo, autor, tipo, ubicacion, cantidad, prestados);
         this.universidad = universidad;
         this.anio = anio;
     }
@@ -97,6 +97,16 @@ public class Tesis extends Ejemplar {
     @Override
     public void setPrestados(int prestados) {
         this.prestados = prestados;
+    }
+
+    @Override
+    public String getTipo() {
+        return tipo;
+    }
+
+    @Override
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
     @Override

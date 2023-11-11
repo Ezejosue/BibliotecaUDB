@@ -14,6 +14,7 @@ public abstract class Ejemplar {
     protected String id;
     protected String titulo;
     protected String autor;
+    protected String tipo;
     protected String ubicacion;
     protected int cantidad;
     protected int prestados;
@@ -21,10 +22,11 @@ public abstract class Ejemplar {
     public Ejemplar() {
     }
 
-    public Ejemplar(String id, String titulo, String autor, String ubicacion, int cantidad, int prestados) {
+    public Ejemplar(String id, String titulo, String autor, String tipo, String ubicacion, int cantidad, int prestados) {
         this.id = id;
         this.titulo = titulo;
         this.autor = autor;
+        this.tipo = tipo;
         this.ubicacion = ubicacion;
         this.cantidad = cantidad;
         this.prestados = prestados;
@@ -53,6 +55,14 @@ public abstract class Ejemplar {
     public void setAutor(String autor) {
         this.autor = autor;
     }
+    
+     public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
 
     public String getUbicacion() {
         return ubicacion;
@@ -80,9 +90,9 @@ public abstract class Ejemplar {
 
     @Override
     public String toString() {
-        return "Ejemplar{" + "id=" + id + ", titulo=" + titulo + ", autor=" + autor + ", ubicacion=" + ubicacion + ", cantidad=" + cantidad + ", prestados=" + prestados + '}';
+        return "Ejemplar{" + "id=" + id + ", titulo=" + titulo + ", autor=" + autor + ", tipo=" + tipo + ", ubicacion=" + ubicacion + ", cantidad=" + cantidad + ", prestados=" + prestados + '}';
     }
-    
-    
+
+  
 
 }

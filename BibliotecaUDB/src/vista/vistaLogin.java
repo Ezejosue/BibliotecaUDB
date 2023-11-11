@@ -91,7 +91,7 @@ public class vistaLogin extends javax.swing.JFrame {
         lbl_icon_login.setText("jLabel4");
 
         btnBuscarLibro.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        btnBuscarLibro.setText("Buscar Libro");
+        btnBuscarLibro.setText("Buscar Material");
         btnBuscarLibro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarLibroActionPerformed(evt);
@@ -180,11 +180,10 @@ public class vistaLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_txtClaveActionPerformed
 
     private void btnBuscarLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarLibroActionPerformed
-        vistaBuscarLibro  vistaBuscarLibro = new vistaBuscarLibro();
-       ShowPanel ( vistaBuscarLibro);
-       
-       
-     
+        vistaBuscarLibro vistaBuscarLibro = new vistaBuscarLibro();
+        ShowPanel(vistaBuscarLibro);
+
+
     }//GEN-LAST:event_btnBuscarLibroActionPerformed
 
     /**
@@ -238,13 +237,13 @@ public class vistaLogin extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void ShowPanel(vistaBuscarLibro vistaBuscarLibro) {
-      dispose();
-      vistaBuscarLibro frame = new vistaBuscarLibro ();
-      
-      frame.setTitle ("BUSCAR LIBRO");
-      frame.setSize(1100,800);
-      frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-      frame.setVisible(true);
-      
+        dispose();
+        vistaBuscarLibro frame = new vistaBuscarLibro();
+
+        frame.setTitle("BUSCAR LIBRO");
+        frame.setSize(1600, 1000);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setVisible(true);
+
     }
 }

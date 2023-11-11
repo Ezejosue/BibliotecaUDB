@@ -23,15 +23,12 @@ public class vistaRgistroUsuario extends javax.swing.JFrame {
         initComponents();
     }
 
-    public void setControlador(usuarioControlador controlador) {
-        this.controlador = controlador;
-    }
-
     public void mostrarMensaje(String mensaje) {
         JOptionPane.showMessageDialog(this, mensaje);
     }
 
     private void agregarUsuario() {
+
         Usuario usuario = new Usuario();
         usuario.setNombre(txtNombre.getText());
         usuario.setCorreo(txtCorreo.getText());
@@ -42,10 +39,15 @@ public class vistaRgistroUsuario extends javax.swing.JFrame {
             usuario.setTipoUsuario("Alumno");
         } else if (rbtProfesor.isSelected()) {
             usuario.setTipoUsuario("Profesor");
-        }else {
+        } else {
             usuario.setTipoUsuario("");
         }
-            controlador.RegistrarUsuario(usuario);
+
+        controlador.RegistrarUsuario(usuario);
+    }
+
+    public void setControlador(usuarioControlador controlador) {
+        this.controlador = controlador;
     }
 
     @SuppressWarnings("unchecked")

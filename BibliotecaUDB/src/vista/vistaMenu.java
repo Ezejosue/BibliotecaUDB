@@ -5,7 +5,9 @@
  */
 package vista;
 
+import controlador.usuarioControlador;
 import javax.swing.JOptionPane;
+import modelo.UsuarioModelo;
 
 /**
  *
@@ -164,6 +166,8 @@ public class vistaMenu extends javax.swing.JFrame {
 
     private void btnRegistarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistarUsuarioActionPerformed
         vistaRgistroUsuario vistaUsuario = new vistaRgistroUsuario();
+        UsuarioModelo modelo = new UsuarioModelo();
+        usuarioControlador controlador = new usuarioControlador(vistaUsuario, modelo, new vistaMenu());
         vistaUsuario.setVisible(true);
         this.dispose();
 

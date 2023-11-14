@@ -7,6 +7,7 @@ package controlador;
 
 import modelo.Usuario;
 import modelo.UsuarioModelo;
+import vista.vistaGUsuarios;
 import vista.vistaRgistroUsuario;
 import vista.vistaMenu;
 
@@ -16,9 +17,9 @@ import vista.vistaMenu;
  */
 public class usuarioControlador {
 
-    private vistaRgistroUsuario vistaRUsuario;
-    private UsuarioModelo modelo;
-    private vistaMenu vistamenu;
+    private final vistaRgistroUsuario vistaRUsuario;
+    private final UsuarioModelo modelo;
+    private final vistaMenu vistamenu;
 
     public usuarioControlador(vistaRgistroUsuario vista, UsuarioModelo modelo, vistaMenu vistamenu) {
         this.vistaRUsuario = vista;
@@ -28,7 +29,6 @@ public class usuarioControlador {
     }
 
     public void RegistrarUsuario(Usuario usuario) {
-        System.out.println("INGRESO AL METODO");
         if (usuario != null) {
             if (!usuario.getNombre().equals("") && !usuario.getCorreo().equals("") && !usuario.getContrasena().equals("") && !usuario.getTipoUsuario().equals("")) {
                 boolean isGuardado = modelo.ingresarUsuario(usuario);
@@ -45,4 +45,6 @@ public class usuarioControlador {
         }
     }
 
+    
+    
 }

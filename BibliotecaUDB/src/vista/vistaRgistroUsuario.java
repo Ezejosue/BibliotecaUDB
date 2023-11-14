@@ -40,7 +40,7 @@ public class vistaRgistroUsuario extends javax.swing.JFrame {
         } else if (rbtProfesor.isSelected()) {
             usuario.setTipoUsuario("Profesor");
         } else {
-            usuario.setTipoUsuario("");
+            usuario.setTipoUsuario("Rol no seleccionado");
         }
 
         controlador.RegistrarUsuario(usuario);

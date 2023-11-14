@@ -168,10 +168,11 @@ public class vistaMenu extends javax.swing.JFrame {
     private void btnGestionarUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestionarUsuariosActionPerformed
         vistaGUsuarios vistaGusuario = new vistaGUsuarios();
         UsuarioModelo modelo = new UsuarioModelo();
-        gestionarUsuarios controlador = new gestionarUsuarios(vistaGusuario, modelo, new vistaMenu());
+        gestionarUsuarios controlador = new gestionarUsuarios(vistaGusuario, modelo, this);
+        vistaGusuario.setControlador(controlador);
         vistaGusuario.setVisible(true);
         this.dispose();
-        
+
     }//GEN-LAST:event_btnGestionarUsuariosActionPerformed
 
     private void btnBuscarLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarLibroActionPerformed

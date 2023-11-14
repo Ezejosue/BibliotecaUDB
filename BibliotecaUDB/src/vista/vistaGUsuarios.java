@@ -19,17 +19,26 @@ public class vistaGUsuarios extends javax.swing.JFrame {
     private gestionarUsuarios controlador;
 
     public vistaGUsuarios() {
-        todosLosUsuarios();
+
         initComponents();
-        
+
+        // Crea una instancia del modelo y del controlador
+        UsuarioModelo modelo = new UsuarioModelo();
+        gestionarUsuarios controlador = new gestionarUsuarios(this, modelo, null);
+
+        // Establece el controlador
+        this.setControlador(controlador);
+
+        // Ahora que el controlador está establecido, puedes cargar los datos
+        todosLosUsuarios();
+
     }
+
+  
+    
+    
 
     private void EditarUuarios() {
-
-    }
-
-    private void todosLosUsuarios() {
-        tbUsuarios.setModel(controlador.MostrarTodosLosUsuarios());
 
     }
 
@@ -153,6 +162,11 @@ public class vistaGUsuarios extends javax.swing.JFrame {
         this.dispose();
 
     }//GEN-LAST:event_jAgregarActionPerformed
+
+    private void todosLosUsuarios() {
+        tbUsuarios.setModel(controlador.MostrarTodosLosUsuarios());
+
+    }
 
     private void jCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCancelarActionPerformed
 

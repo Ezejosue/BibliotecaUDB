@@ -99,6 +99,7 @@ public class vistaPrestamo extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         lblEjemplar1 = new javax.swing.JLabel();
         txtTitulo = new javax.swing.JTextField();
+        tbnLimpiar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(204, 204, 204));
@@ -177,6 +178,14 @@ public class vistaPrestamo extends javax.swing.JFrame {
             }
         });
 
+        tbnLimpiar.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        tbnLimpiar.setText("Limpiar");
+        tbnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tbnLimpiarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -192,8 +201,10 @@ public class vistaPrestamo extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnBuscar)
                                 .addGap(18, 18, 18)
+                                .addComponent(tbnLimpiar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnMenu)
-                                .addGap(47, 47, 47)
+                                .addGap(16, 16, 16)
                                 .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -210,7 +221,7 @@ public class vistaPrestamo extends javax.swing.JFrame {
                                 .addGap(33, 33, 33)
                                 .addComponent(jdtPrestamo, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(129, Short.MAX_VALUE))
+                        .addContainerGap(89, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lblPrestamo, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -249,8 +260,9 @@ public class vistaPrestamo extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalir)
                     .addComponent(btnGuardar)
-                    .addComponent(btnMenu)
-                    .addComponent(btnBuscar))
+                    .addComponent(btnBuscar)
+                    .addComponent(tbnLimpiar)
+                    .addComponent(btnMenu))
                 .addGap(19, 19, 19))
         );
 
@@ -298,11 +310,23 @@ public class vistaPrestamo extends javax.swing.JFrame {
         Date fechaPrestamo = jdtPrestamo.getDate();
         Prestamo prestamo = new Prestamo(0, idUsuario, idEjemplar, fechaPrestamo);
         PrestamoControlador.procesarPrestamo(prestamo);
+        limpiarTabla();
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void txtTituloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTituloActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTituloActionPerformed
+
+    private void tbnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbnLimpiarActionPerformed
+        // TODO add your handling code here:
+        limpiarTabla();
+    }//GEN-LAST:event_tbnLimpiarActionPerformed
+
+    private void limpiarTabla() {
+        EjemplarModelo modelo = (EjemplarModelo) jTable1.getModel();
+        modelo.limpiarDatos();
+        modelo.fireTableDataChanged();
+    }
 
     /**
      * @param args the command line arguments
@@ -355,6 +379,7 @@ public class vistaPrestamo extends javax.swing.JFrame {
     private javax.swing.JLabel lblFechadePrestamo;
     private javax.swing.JLabel lblIdUsuario;
     private javax.swing.JLabel lblPrestamo;
+    private javax.swing.JButton tbnLimpiar;
     private javax.swing.JTextField txtIdEjemplar;
     private javax.swing.JTextField txtIdUsuario;
     private javax.swing.JTextField txtTitulo;

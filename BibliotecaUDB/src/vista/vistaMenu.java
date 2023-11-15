@@ -5,7 +5,9 @@
  */
 package vista;
 
+import controlador.DevolucionControlador;
 import javax.swing.JOptionPane;
+import modelo.Devolucion;
 import util.UsuarioActual;
 
 /**
@@ -193,6 +195,8 @@ public class vistaMenu extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnSalirActionPerformed
 
+    
+    
     private void cerrar(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_cerrar
 
     }//GEN-LAST:event_cerrar
@@ -208,7 +212,9 @@ public class vistaMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
         int idUsuarioLog = UsuarioActual.getInstancia().getIdUsuario();
         String tipoUsuario = UsuarioActual.getInstancia().getTipoUsuario();
+        DevolucionControlador controlador = new DevolucionControlador();
         vistaDevolucion vista = new vistaDevolucion(tipoUsuario, idUsuarioLog);
+        vista.setControlador(controlador);
         vista.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnDevolucionEjemplarActionPerformed

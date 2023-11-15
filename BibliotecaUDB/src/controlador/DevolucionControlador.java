@@ -16,12 +16,25 @@ import modelo.Devolucion;
 import modelo.DevolucionModelo;
 import modelo.Prestamo;
 import util.conexionDB;
+import vista.vistaDevolucion;
 
 /**
  *
  * @author Josue
  */
 public class DevolucionControlador {
+
+    vistaDevolucion vista;
+    DevolucionModelo modelo;
+
+    public DevolucionControlador() {
+    }
+
+    public DevolucionControlador(vistaDevolucion vista, DevolucionModelo modelo) {
+        this.vista = vista;
+        this.modelo = modelo;
+        this.vista.setControlador(this);
+    }
 
     public static void procesarDevolucion(Devolucion devolucion) {
         try {

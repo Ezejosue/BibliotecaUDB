@@ -28,6 +28,8 @@ public class vistaDevolucion extends javax.swing.JFrame {
     /**
      * Creates new form vistaDevolucion
      */
+    private DevolucionControlador controlador;
+
     private vistaDevolucion() {
         initComponents();
 
@@ -36,6 +38,10 @@ public class vistaDevolucion extends javax.swing.JFrame {
     public vistaDevolucion(String userType, int idUser) {
         initComponents();
         validarUsuario(userType, idUser);
+    }
+
+    public void setControlador(DevolucionControlador controlador) {
+        this.controlador = controlador;
     }
 
     /**
@@ -204,7 +210,7 @@ public class vistaDevolucion extends javax.swing.JFrame {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
-        int idUsuario = Integer.parseInt(txtUsuario.getText()); // Asegúrate de manejar posibles excepciones aquí
+        int idUsuario = Integer.parseInt(txtUsuario.getText());
         List<Prestamo> prestamos = DevolucionControlador.obtenerPrestamosPendientes(idUsuario);
         PrestamoTableModel model = new PrestamoTableModel(prestamos);
 
@@ -223,10 +229,7 @@ public class vistaDevolucion extends javax.swing.JFrame {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
-        PrestamoTableModel modelo = (PrestamoTableModel) tblReservados.getModel();
-        modelo.limpiarDatos();
-        modelo.fireTableDataChanged();
-        cmbIDPrestamo.removeAllItems();
+
         try {
             Devolucion devolucion = new Devolucion();
             Object selectedItem = cmbIDPrestamo.getSelectedItem();
@@ -241,6 +244,11 @@ public class vistaDevolucion extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al procesar la devolución: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
+
+        PrestamoTableModel modelo = (PrestamoTableModel) tblReservados.getModel();
+        modelo.limpiarDatos();
+        modelo.fireTableDataChanged();
+        cmbIDPrestamo.removeAllItems();
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed

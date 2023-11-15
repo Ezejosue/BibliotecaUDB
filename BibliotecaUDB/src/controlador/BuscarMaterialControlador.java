@@ -74,6 +74,56 @@ public class BuscarMaterialControlador {
         return new EjemplarModelo(resultados);
     }
 
+    public EjemplarModelo mostrarEjemplares(String id, String titulo) {
+        List<Ejemplar> resultados = new ArrayList<>();
+        Connection conexion = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            conexion = conexionDB.getConnection();
+            String sql = "SELECT * FROM ejemplares WHERE id LIKE ? AND titulo LIKE ? ";
+            ps = conexion.prepareStatement(sql);
+            ps.setString(1, "%" + id + "%");
+            ps.setString(2, "%" + titulo + "%");
+
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Ejemplar ejemplar = new Ejemplar() {
+                };
+                ejemplar.setId(rs.getString("id"));
+                ejemplar.setTitulo(rs.getString("titulo"));
+                ejemplar.setAutor(rs.getString("autor"));
+                ejemplar.setUbicacion(rs.getString("ubicacion"));
+                ejemplar.setCantidad(rs.getInt("cantidad"));
+                ejemplar.setPrestados(rs.getInt("prestados"));
+                resultados.add(ejemplar);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Manejo de la excepción
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (conexion != null) {
+                    conexion.close();
+                    System.out.println("Conexión cerrada");
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+                // Manejo de la excepción
+            }
+        }
+
+        return new EjemplarModelo(resultados);
+    }
+
     public void limpiarTabla(EjemplarModelo modelo) {
         modelo.limpiar();
     }

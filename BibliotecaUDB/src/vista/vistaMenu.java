@@ -6,6 +6,7 @@
 package vista;
 
 import javax.swing.JOptionPane;
+import util.UsuarioActual;
 
 /**
  *
@@ -37,6 +38,7 @@ public class vistaMenu extends javax.swing.JFrame {
         btnBuscarLibro = new javax.swing.JButton();
         btnRealizarPrestamo = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
+        btnDevolucionEjemplar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1000, 700));
@@ -94,6 +96,14 @@ public class vistaMenu extends javax.swing.JFrame {
             }
         });
 
+        btnDevolucionEjemplar.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        btnDevolucionEjemplar.setText("Devolver Material");
+        btnDevolucionEjemplar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDevolucionEjemplarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -108,7 +118,8 @@ public class vistaMenu extends javax.swing.JFrame {
                             .addComponent(btnRealizarPrestamo, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
                             .addComponent(btnBuscarLibro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnRegistarUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnRegistrarMaterial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(btnRegistrarMaterial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnDevolucionEjemplar, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(244, 244, 244)
                         .addComponent(lblMenu)))
@@ -127,12 +138,14 @@ public class vistaMenu extends javax.swing.JFrame {
                 .addComponent(btnBuscarLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(52, 52, 52)
                 .addComponent(btnRealizarPrestamo, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(52, 52, 52)
+                .addComponent(btnDevolucionEjemplar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41)
                 .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 651, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 39, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         lblMenu.getAccessibleContext().setAccessibleDescription("");
@@ -185,10 +198,20 @@ public class vistaMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_cerrar
 
     private void btnRealizarPrestamoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizarPrestamoActionPerformed
-        vistaPrestamo vistaPrestamo = new vistaPrestamo();
+        int idUsuario = UsuarioActual.getInstancia().getIdUsuario();
+        vistaPrestamo vistaPrestamo = new vistaPrestamo(idUsuario);
         vistaPrestamo.setVisible(true);
-        this.dispose(); // TODO add your handling code here:
+        this.dispose(); 
     }//GEN-LAST:event_btnRealizarPrestamoActionPerformed
+
+    private void btnDevolucionEjemplarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDevolucionEjemplarActionPerformed
+        // TODO add your handling code here:
+        int idUsuarioLog = UsuarioActual.getInstancia().getIdUsuario();
+        String tipoUsuario = UsuarioActual.getInstancia().getTipoUsuario();
+        vistaDevolucion vista = new vistaDevolucion(tipoUsuario, idUsuarioLog);
+        vista.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnDevolucionEjemplarActionPerformed
 
     public void configurarMenuParaUsuario(String tipoUsuario) {
         if ("Administrador".equals(tipoUsuario)) {
@@ -248,6 +271,7 @@ public class vistaMenu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscarLibro;
+    private javax.swing.JButton btnDevolucionEjemplar;
     private javax.swing.JButton btnRealizarPrestamo;
     private javax.swing.JButton btnRegistarUsuario;
     private javax.swing.JButton btnRegistrarMaterial;

@@ -22,6 +22,15 @@ public class Prestamo {
     public Prestamo() {
     }
 
+    public Prestamo(int id, int idUsuario, String idEjemplar, Date fechaPrestamo) {
+        this.id = id;
+        this.idUsuario = idUsuario;
+        this.idEjemplar = idEjemplar;
+        this.fechaPrestamo = fechaPrestamo;
+    }
+
+    
+    
     public Prestamo(int id, int idUsuario, String idEjemplar, Date fechaPrestamo, Date fechaDevolucion) {
         this.id = id;
         this.idUsuario = idUsuario;

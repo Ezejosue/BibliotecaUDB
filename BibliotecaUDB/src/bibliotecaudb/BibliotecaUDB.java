@@ -25,8 +25,9 @@ public class BibliotecaUDB {
         vistaLogin loginVista = new vistaLogin();
         vistaMenu vistamenu = new vistaMenu();
         LoginControlador controlador = new LoginControlador(loginVista, modelo, vistamenu);
+        loginVista.setControlador(controlador);
         loginVista.setVisible(true);
-
+        
     }
-
+    
 }

@@ -167,6 +167,7 @@ public class vistaLogin extends javax.swing.JFrame {
         String correo = txtCorreo.getText();
         String contrasena = new String(txtClave.getPassword());
         controlador.iniciarSesion(correo, contrasena);
+        
     }
 
 

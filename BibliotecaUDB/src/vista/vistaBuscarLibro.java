@@ -6,6 +6,7 @@
 package vista;
 
 import controlador.BuscarMaterialControlador;
+import controlador.LoginControlador;
 import java.awt.Component;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -15,6 +16,8 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableRowSorter;
 import modelo.EjemplarModelo;
+import modelo.UsuarioModelo;
+import util.UsuarioActual;
 
 /**
  *
@@ -22,12 +25,14 @@ import modelo.EjemplarModelo;
  */
 public class vistaBuscarLibro extends javax.swing.JFrame {
 
+    int idUsuario = UsuarioActual.getInstancia().getIdUsuario();
+
     /**
      * Creates new form BuscarLibro
      */
     public vistaBuscarLibro() {
         initComponents();
-        
+        configurarBotones();
     }
 
     /**
@@ -54,6 +59,7 @@ public class vistaBuscarLibro extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         btnBuscar = new javax.swing.JButton();
         btnLimpiar = new javax.swing.JButton();
+        btnRegresarMenu = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -76,7 +82,7 @@ public class vistaBuscarLibro extends javax.swing.JFrame {
         cmbMaterial.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Libro", "Revista", "Tesis", "Obra", "Cd´s" }));
 
         btnRegresarInicio.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        btnRegresarInicio.setText("Menú");
+        btnRegresarInicio.setText("Login");
         btnRegresarInicio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegresarInicioActionPerformed(evt);
@@ -129,6 +135,14 @@ public class vistaBuscarLibro extends javax.swing.JFrame {
             }
         });
 
+        btnRegresarMenu.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        btnRegresarMenu.setText("Menú");
+        btnRegresarMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegresarMenuActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -148,24 +162,29 @@ public class vistaBuscarLibro extends javax.swing.JFrame {
                             .addComponent(txtTitulo, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cmbMaterial, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 632, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 632, Short.MAX_VALUE)
+                        .addGap(25, 25, 25))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(424, 424, 424)
-                        .addComponent(lblBuscarMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnRealizarPrestamo)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(181, 181, 181)
-                                .addComponent(btnBuscar)))
-                        .addGap(18, 18, 18)
-                        .addComponent(btnLimpiar)
-                        .addGap(11, 11, 11)
-                        .addComponent(btnRegresarInicio)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(25, 25, 25))
+                                .addGap(424, 424, 424)
+                                .addComponent(lblBuscarMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnRealizarPrestamo)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(181, 181, 181)
+                                        .addComponent(btnBuscar)))
+                                .addGap(18, 18, 18)
+                                .addComponent(btnLimpiar)
+                                .addGap(11, 11, 11)
+                                .addComponent(btnRegresarInicio)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnRegresarMenu)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -194,7 +213,8 @@ public class vistaBuscarLibro extends javax.swing.JFrame {
                     .addComponent(btnBuscar)
                     .addComponent(btnRegresarInicio)
                     .addComponent(btnSalir)
-                    .addComponent(btnLimpiar))
+                    .addComponent(btnLimpiar)
+                    .addComponent(btnRegresarMenu))
                 .addGap(185, 185, 185))
         );
 
@@ -237,14 +257,21 @@ public class vistaBuscarLibro extends javax.swing.JFrame {
     }
 
     private void btnRegresarInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarInicioActionPerformed
-        vistaMenu Menu = new vistaMenu();
-        Menu.setVisible(true);
+        vistaLogin vista = new vistaLogin();
+        UsuarioModelo modelo = new UsuarioModelo();
+        vistaMenu menuvista = new vistaMenu();
+        LoginControlador controlador = new LoginControlador(vista, modelo, menuvista);
+        vista.setControlador(controlador);
+        vista.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnRegresarInicioActionPerformed
 
     private void btnRealizarPrestamoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizarPrestamoActionPerformed
-        vistaPrestamo vistaPrestamo = new vistaPrestamo();
-        Showpanel(vistaPrestamo);
+
+        int idUsuario = UsuarioActual.getInstancia().getIdUsuario();
+        vistaPrestamo vistaPrestamo = new vistaPrestamo(idUsuario);
+        vistaPrestamo.setVisible(true);
+        this.dispose();
 
 
     }//GEN-LAST:event_btnRealizarPrestamoActionPerformed
@@ -270,7 +297,7 @@ public class vistaBuscarLibro extends javax.swing.JFrame {
             ajustarAnchoColumnas();
             configurarTabla();
         }
-        //jTable1.setModel(modeloTabla);
+        
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
@@ -279,6 +306,19 @@ public class vistaBuscarLibro extends javax.swing.JFrame {
         modelo.limpiarDatos();
         modelo.fireTableDataChanged();
     }//GEN-LAST:event_btnLimpiarActionPerformed
+
+    private void btnRegresarMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarMenuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRegresarMenuActionPerformed
+
+    private void configurarBotones() {
+        if (idUsuario == 0) {
+            btnRealizarPrestamo.setVisible(false);
+            btnRegresarMenu.setVisible(false);
+        } else {
+            btnRegresarInicio.setVisible(false);
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -321,6 +361,7 @@ public class vistaBuscarLibro extends javax.swing.JFrame {
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnRealizarPrestamo;
     private javax.swing.JButton btnRegresarInicio;
+    private javax.swing.JButton btnRegresarMenu;
     private javax.swing.JButton btnSalir;
     private javax.swing.JComboBox<String> cmbMaterial;
     private javax.swing.JLabel jLabel1;
@@ -345,7 +386,7 @@ public class vistaBuscarLibro extends javax.swing.JFrame {
 
     private void Showpanel(vistaPrestamo vistaPrestamo) {
         dispose();
-        vistaPrestamo frame2 = new vistaPrestamo();
+        vistaPrestamo frame2 = new vistaPrestamo(idUsuario);
 
         frame2.setSize(1100, 800);
         frame2.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

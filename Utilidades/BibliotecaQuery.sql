@@ -93,5 +93,50 @@ CREATE TABLE IF NOT EXISTS configuraciones (
     valor VARCHAR(255) NOT NULL
 );
 
--- Insertar configuraciones iniciales
-INSERT INTO configuraciones (clave, valor) VALUES ('mora_diaria', '0.50'), ('max_prestamos', '3');
+
+-- Crear la tabla de devoluciones
+CREATE TABLE IF NOT EXISTS devoluciones (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_prestamo INT,
+    fecha_devolucion DATE NOT NULL,
+    estado_devolucion ENUM('En tiempo', 'Atrasado') NOT NULL,
+    comentarios VARCHAR(255),
+    FOREIGN KEY (id_prestamo) REFERENCES prestamos(id)
+);
+
+SELECT * FROM ejemplares
+
+
+
+-- Trigger para aumentar en uno los prestamos de los ejemplares
+DELIMITER $$
+
+CREATE TRIGGER incrementar_prestados
+AFTER INSERT ON prestamos
+FOR EACH ROW
+BEGIN
+    UPDATE ejemplares
+    SET prestados = prestados + 1
+    WHERE id = NEW.id_ejemplar;
+END$$
+
+DELIMITER ;
+
+
+-- Trigger para decrementar en uno los prestamos de los ejemplares
+DELIMITER $$
+
+CREATE TRIGGER actualizar_prestados
+AFTER INSERT ON devoluciones
+FOR EACH ROW
+BEGIN
+    UPDATE prestamos
+    SET fecha_devolucion = NEW.fecha_devolucion
+    WHERE id = NEW.id_prestamo;
+
+    UPDATE ejemplares
+    SET prestados = prestados - 1
+    WHERE id = (SELECT id_ejemplar FROM prestamos WHERE id = NEW.id_prestamo);
+END$$
+
+DELIMITER ;

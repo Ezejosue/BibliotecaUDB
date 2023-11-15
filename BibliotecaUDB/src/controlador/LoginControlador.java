@@ -7,6 +7,7 @@ package controlador;
 
 import modelo.Usuario;
 import modelo.UsuarioModelo;
+import util.UsuarioActual;
 import vista.vistaLogin;
 import vista.vistaMenu;
 
@@ -32,6 +33,7 @@ public class LoginControlador {
         if (usuario != null) {
             //  vista.mostrarMensaje("Inicio de sesión exitoso");
             vistamenu.configurarMenuParaUsuario(usuario.getTipoUsuario());
+            UsuarioActual.getInstancia().setIdUsuario(usuario.getId());
             vistamenu.setVisible(true);
             vista.setVisible(false);
 

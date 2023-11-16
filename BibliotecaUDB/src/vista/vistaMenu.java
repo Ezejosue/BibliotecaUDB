@@ -6,6 +6,7 @@
 package vista;
 
 import controlador.DevolucionControlador;
+import controlador.PrestamoControlador;
 import javax.swing.JOptionPane;
 import modelo.Devolucion;
 import util.UsuarioActual;
@@ -203,7 +204,9 @@ public class vistaMenu extends javax.swing.JFrame {
 
     private void btnRealizarPrestamoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizarPrestamoActionPerformed
         int idUsuario = UsuarioActual.getInstancia().getIdUsuario();
+        PrestamoControlador controlador = new PrestamoControlador();
         vistaPrestamo vistaPrestamo = new vistaPrestamo(idUsuario);
+        vistaPrestamo.setControlador(controlador);
         vistaPrestamo.setVisible(true);
         this.dispose(); 
     }//GEN-LAST:event_btnRealizarPrestamoActionPerformed

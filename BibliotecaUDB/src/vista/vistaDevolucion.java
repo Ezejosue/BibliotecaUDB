@@ -272,9 +272,12 @@ public class vistaDevolucion extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void validarUsuario(String tipoUsuario, int idUsuario) {
+         System.out.println(tipoUsuario);
         if (!"Administrador".equals(tipoUsuario)) {
             txtUsuario.setText(String.valueOf(idUsuario));
             txtUsuario.setEditable(false);
+            
+            System.out.println(tipoUsuario);
         }
     }
 

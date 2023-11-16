@@ -54,7 +54,9 @@ public class DevolucionControlador {
 
         try {
             conexion = conexionDB.getConnection();
-            String sql = "SELECT * FROM prestamos WHERE id_usuario = ? AND fecha_devolucion IS NULL";
+            String sql = "SELECT prestamos.*, ejemplares.titulo FROM prestamos\n"
+                    + "JOIN ejemplares ON prestamos.id_ejemplar = ejemplares.id\n"
+                    + "WHERE prestamos.id_usuario = ? AND prestamos.fecha_devolucion IS NULL";
             ps = conexion.prepareStatement(sql);
             ps.setInt(1, idUsuario);
             rs = ps.executeQuery();
@@ -64,6 +66,7 @@ public class DevolucionControlador {
                 prestamo.setId(rs.getInt("id"));
                 prestamo.setIdUsuario(rs.getInt("id_usuario"));
                 prestamo.setIdEjemplar(rs.getString("id_ejemplar"));
+                prestamo.setTitulo(rs.getString("titulo"));
                 prestamo.setFechaPrestamo(rs.getDate("fecha_prestamo"));
                 prestamo.setFechaDevolucion(rs.getDate("fecha_devolucion"));
                 prestamos.add(prestamo);

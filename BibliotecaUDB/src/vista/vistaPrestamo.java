@@ -17,7 +17,6 @@ import javax.swing.table.TableColumn;
 import javax.swing.table.TableRowSorter;
 import modelo.EjemplarModelo;
 import modelo.Prestamo;
-import util.UsuarioActual;
 
 /**
  *
@@ -28,6 +27,8 @@ public class vistaPrestamo extends javax.swing.JFrame {
     /**
      * Creates new form Prestamo
      */
+    private PrestamoControlador prestamoControlador;
+
     private vistaPrestamo() {
         initComponents();
 
@@ -37,6 +38,10 @@ public class vistaPrestamo extends javax.swing.JFrame {
         initComponents();
         txtIdUsuario.setText(String.valueOf(IdUsuario));
         txtIdUsuario.setEditable(false);
+    }
+
+    public void setControlador(PrestamoControlador controlador) {
+        prestamoControlador = controlador;
     }
 
     private void configurarTabla() {
@@ -167,6 +172,11 @@ public class vistaPrestamo extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         lblEjemplar1.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
@@ -220,8 +230,8 @@ public class vistaPrestamo extends javax.swing.JFrame {
                                 .addComponent(lblFechadePrestamo, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(33, 33, 33)
                                 .addComponent(jdtPrestamo, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(89, Short.MAX_VALUE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 562, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(19, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lblPrestamo, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -322,6 +332,24 @@ public class vistaPrestamo extends javax.swing.JFrame {
         limpiarTabla();
     }//GEN-LAST:event_tbnLimpiarActionPerformed
 
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        if (evt.getClickCount() == 2) {
+            JTable target = (JTable) evt.getSource();
+            int row = target.getSelectedRow();
+            
+              if(row >= 0) {
+                // Suponiendo que la columna 0 tiene el ID del ejemplar y la columna 1 tiene el título
+                String idEjemplar = target.getModel().getValueAt(row, 0).toString();
+                String titulo = target.getModel().getValueAt(row, 1).toString();
+
+                // Suponiendo que txtIdEjemplar y txtTitulo son tus JTextField
+                txtIdEjemplar.setText(idEjemplar);
+                txtTitulo.setText(titulo);
+            }
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
+
     private void limpiarTabla() {
         EjemplarModelo modelo = (EjemplarModelo) jTable1.getModel();
         modelo.limpiarDatos();
@@ -389,7 +417,7 @@ public class vistaPrestamo extends javax.swing.JFrame {
         vistaMenu frame6 = new vistaMenu();
 
         frame6.setTitle("BUSCAR LIBRO");
-        frame6.setSize(1100, 800);
+        frame6.setSize(1100, 1100);
         frame6.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame6.setVisible(true);
     }

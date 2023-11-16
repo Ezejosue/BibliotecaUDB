@@ -15,12 +15,25 @@ import javax.swing.JOptionPane;
 import modelo.Prestamo;
 import modelo.PrestamoModelo;
 import util.conexionDB;
+import vista.vistaPrestamo;
 
 /**
  *
  * @author PC
  */
 public class PrestamoControlador {
+
+    private PrestamoModelo modelo;
+    private vistaPrestamo vista;
+
+    public PrestamoControlador() {
+    }
+
+    public PrestamoControlador(PrestamoModelo modelo, vistaPrestamo vista) {
+        this.modelo = modelo;
+        this.vista = vista;
+        this.vista.setControlador(this);
+    }
 
     public static void procesarPrestamo(Prestamo prestamo) {
         try {
@@ -40,5 +53,4 @@ public class PrestamoControlador {
         }
     }
 
-   
 }

@@ -16,6 +16,7 @@ public class Prestamo {
     private int id;
     private int idUsuario;
     private String idEjemplar;
+    private String Titulo;
     private Date fechaPrestamo;
     private Date fechaDevolucion;
 
@@ -78,6 +79,16 @@ public class Prestamo {
     public void setFechaDevolucion(Date fechaDevolucion) {
         this.fechaDevolucion = fechaDevolucion;
     }
+
+    public String getTitulo() {
+        return Titulo;
+    }
+
+    public void setTitulo(String Titulo) {
+        this.Titulo = Titulo;
+    }
+    
+    
 
     @Override
     public String toString() {

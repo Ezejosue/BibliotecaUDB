@@ -34,6 +34,7 @@ public class LoginControlador {
             //  vista.mostrarMensaje("Inicio de sesión exitoso");
             vistamenu.configurarMenuParaUsuario(usuario.getTipoUsuario());
             UsuarioActual.getInstancia().setIdUsuario(usuario.getId());
+            UsuarioActual.getInstancia().setTipoUsuario(usuario.getTipoUsuario());
             vistamenu.setVisible(true);
             vista.setVisible(false);
 

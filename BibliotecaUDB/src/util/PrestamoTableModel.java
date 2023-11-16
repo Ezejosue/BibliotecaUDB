@@ -16,7 +16,7 @@ import modelo.Prestamo;
 public class PrestamoTableModel extends AbstractTableModel {
 
     private final List<Prestamo> prestamos;
-    private final String[] columnNames = {"ID", "ID Usuario", "ID Ejemplar", "Fecha Préstamo", "Fecha Devolución"};
+    private final String[] columnNames = {"ID", "ID Usuario", "ID Ejemplar", "Título", "Fecha Préstamo", "Fecha Devolución"};
 
     public PrestamoTableModel(List<Prestamo> prestamos) {
         this.prestamos = prestamos;
@@ -43,8 +43,10 @@ public class PrestamoTableModel extends AbstractTableModel {
             case 2:
                 return prestamo.getIdEjemplar();
             case 3:
-                return prestamo.getFechaPrestamo();
+                return prestamo.getTitulo();
             case 4:
+                return prestamo.getFechaPrestamo();
+            case 5:
                 return prestamo.getFechaDevolucion();
             default:
                 return null;
@@ -59,8 +61,8 @@ public class PrestamoTableModel extends AbstractTableModel {
     public void limpiarDatos() {
         prestamos.clear();
     }
-    
-     public void limpiar() {
+
+    public void limpiar() {
         prestamos.clear();
         fireTableDataChanged();
     }

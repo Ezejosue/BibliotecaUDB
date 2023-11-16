@@ -104,7 +104,26 @@ CREATE TABLE IF NOT EXISTS devoluciones (
     FOREIGN KEY (id_prestamo) REFERENCES prestamos(id)
 );
 
-SELECT * FROM ejemplares
+CREATE TABLE IF NOT EXISTS pagos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT,
+    monto DECIMAL(10, 2) NOT NULL,
+    fecha_pago DATE NOT NULL,
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id)
+);
+	
+ALTER TABLE pagos
+ADD COLUMN id_ejemplar VARCHAR(50),
+ADD CONSTRAINT fk_ejemplares
+FOREIGN KEY (id_ejemplar) REFERENCES ejemplares(id);
+
+SELECT * FROM devoluciones;	
+SELECT * FROM prestamos;
+SELECT * FROM ejemplares;	
+SELECT * FROM usuarios;	
+SELECT * FROM configuraciones;
+
+INSERT INTO configuraciones(clave, valor) VALUES ("Mora", "0.50");
 
 
 
@@ -140,3 +159,30 @@ BEGIN
 END$$
 
 DELIMITER ;
+
+
+DELIMITER $$
+
+CREATE TRIGGER verificar_mora_despues_devolucion
+AFTER INSERT ON devoluciones
+FOR EACH ROW
+BEGIN
+    DECLARE dias_prestamo INT;
+    
+    -- Calcular la cantidad de días entre la fecha de préstamo y la fecha de devolución
+    SELECT DATEDIFF(NEW.fecha_devolucion, prestamos.fecha_prestamo)
+    INTO dias_prestamo
+    FROM prestamos
+    WHERE prestamos.id = NEW.id_prestamo;
+
+    -- Si la cantidad de días es mayor a 7, se actualiza la mora
+    IF dias_prestamo > 7 THEN
+        UPDATE usuarios
+        SET mora = mora + 0.50
+        WHERE id = (SELECT id_usuario FROM prestamos WHERE id = NEW.id_prestamo);
+    END IF;
+END$$
+
+DELIMITER ;
+
+DROP TRIGGER IF EXISTS verificar_mora_despues_devolucion;

@@ -33,4 +33,38 @@ public class PrestamoModelo {
         }
     }
 
+    public Prestamo obtenerPrestamoPorId(int idPrestamo) throws SQLException {
+        Connection conexion = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Prestamo prestamo = null;
+
+        try {
+            conexion = conexionDB.getConnection();
+            String sql = "SELECT * FROM prestamos WHERE id = ?";
+            ps = conexion.prepareStatement(sql);
+            ps.setInt(1, idPrestamo);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                prestamo = new Prestamo();
+                prestamo.setFechaPrestamo(rs.getDate("fecha_prestamo"));
+            }
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (conexion != null) {
+                conexion.close();
+            }
+        }
+
+        return prestamo;
+    }
+
 }

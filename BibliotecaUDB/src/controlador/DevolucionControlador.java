@@ -5,16 +5,20 @@
  */
 package controlador;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import javax.swing.JOptionPane;
 import modelo.Devolucion;
 import modelo.DevolucionModelo;
 import modelo.Prestamo;
+import modelo.PrestamoModelo;
 import util.conexionDB;
 import vista.vistaDevolucion;
 
@@ -36,9 +40,36 @@ public class DevolucionControlador {
         this.vista.setControlador(this);
     }
 
-    public static void procesarDevolucion(Devolucion devolucion) {
+    public static void procesarDevolucion(Devolucion devolucion, Date fechaPrestamo, int idUsuario, int idEjemplar) {
+        DevolucionModelo devolucionModelo = new DevolucionModelo();
+        Date fechaDevolucion = devolucion.getFechaDevolucion();
+        long diferenciaEnMilis = fechaDevolucion.getTime() - fechaPrestamo.getTime();
+        long diasDiferencia = TimeUnit.DAYS.convert(diferenciaEnMilis, TimeUnit.MILLISECONDS);
+        if (diasDiferencia > 7) {
+            try {
+                BigDecimal valorMultaPorDia = DevolucionModelo.obtenerValorMulta();
+                BigDecimal diasExcedidos = new BigDecimal(diasDiferencia - 7);
+                BigDecimal multaTotal = valorMultaPorDia.multiply(diasExcedidos);
+
+                int respuesta = JOptionPane.showConfirmDialog(null, "La devolución está atrasada por " + diasExcedidos + " días. La multa total es: " + multaTotal + ". ¿Desea realizar el pago ahora?", "Multa por Atraso", JOptionPane.YES_NO_OPTION);
+
+                if (respuesta == JOptionPane.YES_OPTION) {
+
+                    devolucionModelo.registrarPago(idUsuario, multaTotal);
+
+                    JOptionPane.showMessageDialog(null, "Pago realizado con éxito. Deuda actualizada a cero.");
+                } else {
+                    devolucionModelo.registrarMorosidad(idUsuario, multaTotal);
+                    JOptionPane.showMessageDialog(null, "La deuda ha sido registrada. Por favor, realice el pago lo antes posible.");
+                }
+
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, "Error al procesar la multa: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+
+            }
+        }
+
         try {
-            DevolucionModelo devolucionModelo = new DevolucionModelo();
             devolucionModelo.guardarDevolucion(devolucion);
             JOptionPane.showMessageDialog(null, "Devolución procesada con éxito.");
         } catch (Exception e) {
@@ -94,5 +125,7 @@ public class DevolucionControlador {
 
         return prestamos;
     }
+
+   
 
 }

@@ -5,8 +5,12 @@
  */
 package vista;
 
+import com.toedter.calendar.JTextFieldDateEditor;
 import controlador.DevolucionControlador;
 import java.awt.Component;
+import java.math.BigDecimal;
+import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -14,6 +18,7 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableRowSorter;
 import modelo.Devolucion;
+import modelo.DevolucionModelo;
 import modelo.Prestamo;
 import modelo.PrestamoModelo;
 import util.PrestamoTableModel;
@@ -32,16 +37,32 @@ public class vistaDevolucion extends javax.swing.JFrame {
 
     private vistaDevolucion() {
         initComponents();
+//        jdtPrestamo.setDate(new Date());
+//        ((JTextFieldDateEditor) jdtPrestamo.getDateEditor()).setEditable(false);
 
     }
 
     public vistaDevolucion(String userType, int idUser) {
         initComponents();
         validarUsuario(userType, idUser);
+        btnPagar.setVisible(false);
+        actualizarEstadoBoton(idUser);
     }
 
     public void setControlador(DevolucionControlador controlador) {
         this.controlador = controlador;
+    }
+
+    public void actualizarEstadoBoton(int idUser) {
+
+        try {
+            DevolucionModelo modelo = new DevolucionModelo();
+            BigDecimal mora = modelo.obtenerMoraUsuario(idUser);
+            boolean tieneMora = mora.compareTo(BigDecimal.ZERO) > 0;
+            btnPagar.setVisible(tieneMora);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al procesar la devolución: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     /**
@@ -72,6 +93,7 @@ public class vistaDevolucion extends javax.swing.JFrame {
         btnSalir = new javax.swing.JButton();
         btnMenu = new javax.swing.JButton();
         btnLimpiar = new javax.swing.JButton();
+        btnPagar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -87,6 +109,12 @@ public class vistaDevolucion extends javax.swing.JFrame {
         jblID.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jblID.setText("ID de usuario:");
         getContentPane().add(jblID, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 131, -1, -1));
+
+        jdtPrestamo.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jdtPrestamoPropertyChange(evt);
+            }
+        });
         getContentPane().add(jdtPrestamo, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 210, 192, -1));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -152,7 +180,7 @@ public class vistaDevolucion extends javax.swing.JFrame {
                 btnSalirActionPerformed(evt);
             }
         });
-        getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 530, 90, 40));
+        getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 530, 90, 40));
 
         btnMenu.setText("Menu");
         btnMenu.addActionListener(new java.awt.event.ActionListener() {
@@ -160,7 +188,7 @@ public class vistaDevolucion extends javax.swing.JFrame {
                 btnMenuActionPerformed(evt);
             }
         });
-        getContentPane().add(btnMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 530, 90, 40));
+        getContentPane().add(btnMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 530, 90, 40));
 
         btnLimpiar.setText("Limpiar");
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -169,6 +197,14 @@ public class vistaDevolucion extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 530, 90, 40));
+
+        btnPagar.setText("Pagar");
+        btnPagar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPagarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnPagar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 530, 90, 40));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -225,6 +261,20 @@ public class vistaDevolucion extends javax.swing.JFrame {
         ajustarAnchoColumnas();
         configurarTabla();
 
+        DevolucionModelo modelo = new DevolucionModelo();
+
+        try {
+            BigDecimal morosidad = modelo.obtenerMoraUsuario(idUsuario);
+            if (morosidad.compareTo(BigDecimal.ZERO) > 0) {
+                btnPagar.setEnabled(true);
+            } else {
+                btnPagar.setEnabled(false);
+            }
+        } catch (SQLException e) {
+            System.out.println("Ocurrio un error" + e);
+        };
+
+
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
@@ -239,8 +289,11 @@ public class vistaDevolucion extends javax.swing.JFrame {
             devolucion.setFechaDevolucion(jdtPrestamo.getDate());
             devolucion.setEstadoDevolucion(cmbEstado.getSelectedItem().toString());
             devolucion.setComentarios(txtaComentarios.getText());
+            PrestamoModelo prestamo = new PrestamoModelo();
+            Prestamo prestamoFecha = prestamo.obtenerPrestamoPorId(idPrestamo);
+            Date fechaPrestamo = prestamoFecha.getFechaPrestamo();
 
-            DevolucionControlador.procesarDevolucion(devolucion);
+            DevolucionControlador.procesarDevolucion(devolucion, fechaPrestamo, Integer.parseInt(txtUsuario.getText()), idPrestamo);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al procesar la devolución: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -271,14 +324,47 @@ public class vistaDevolucion extends javax.swing.JFrame {
         cmbIDPrestamo.removeAllItems();
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
+    private void jdtPrestamoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jdtPrestamoPropertyChange
+        // TODO add your handling code here:
+//        if ("date".equals(evt.getPropertyName())) {
+//            Date selectedDate = (Date) evt.getNewValue();
+//            if (selectedDate != null) {
+//                Date today = new Date();
+//                // Comprueba si la fecha seleccionada es hoy, si no, vuelve a establecer la fecha de hoy.
+//                if (selectedDate.compareTo(today) != 0) {
+//                    jdtPrestamo.setDate(today);
+//
+//                }
+//            }
+//        }
+    }//GEN-LAST:event_jdtPrestamoPropertyChange
+
+    private void btnPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagarActionPerformed
+        // TODO add your handling code here:
+        try {
+            int idUsuario = Integer.parseInt(txtUsuario.getText());
+            DevolucionModelo modelo = new DevolucionModelo();
+
+            BigDecimal mora = modelo.obtenerMoraUsuario(idUsuario);
+            if (mora.compareTo(BigDecimal.ZERO) > 0) {
+                modelo.registrarPago(idUsuario, mora);
+                JOptionPane.showMessageDialog(null, "Pago realizado con éxito. Deuda actualizada a cero.");
+                actualizarEstadoBoton(idUsuario); // Actualiza el estado del botón después del pago
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al realizar el pago: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnPagarActionPerformed
+
     private void validarUsuario(String tipoUsuario, int idUsuario) {
-         System.out.println(tipoUsuario);
+        System.out.println(tipoUsuario);
         if (!"Administrador".equals(tipoUsuario)) {
             txtUsuario.setText(String.valueOf(idUsuario));
             txtUsuario.setEditable(false);
-            
-            System.out.println(tipoUsuario);
+
         }
+
+        txtUsuario.setText(String.valueOf(idUsuario));
     }
 
     /**
@@ -321,6 +407,7 @@ public class vistaDevolucion extends javax.swing.JFrame {
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnMenu;
+    private javax.swing.JButton btnPagar;
     private javax.swing.JButton btnSalir;
     private javax.swing.JComboBox<String> cmbEstado;
     private javax.swing.JComboBox<String> cmbIDPrestamo;

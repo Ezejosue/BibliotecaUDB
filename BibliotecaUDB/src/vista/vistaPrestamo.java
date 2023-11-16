@@ -5,6 +5,7 @@
  */
 package vista;
 
+import com.toedter.calendar.JTextFieldDateEditor;
 import controlador.BuscarMaterialControlador;
 import controlador.PrestamoControlador;
 import java.awt.Component;
@@ -31,17 +32,28 @@ public class vistaPrestamo extends javax.swing.JFrame {
 
     private vistaPrestamo() {
         initComponents();
+        jdtPrestamo.setDate(new Date());
+        ((JTextFieldDateEditor) jdtPrestamo.getDateEditor()).setEditable(false);
 
     }
 
-    public vistaPrestamo(int IdUsuario) {
+    public vistaPrestamo(int IdUsuario, String tipoUsuario) {
         initComponents();
-        txtIdUsuario.setText(String.valueOf(IdUsuario));
-        txtIdUsuario.setEditable(false);
+        configurarPermiso(IdUsuario, tipoUsuario);
+
     }
 
     public void setControlador(PrestamoControlador controlador) {
         prestamoControlador = controlador;
+    }
+
+    private void configurarPermiso(int idUser, String typeOfUser) {
+        if (!"Administrador".equals(typeOfUser)) {
+            txtIdUsuario.setText(String.valueOf(idUser));
+            txtIdUsuario.setEditable(false);
+        }
+        
+         txtIdUsuario.setText(String.valueOf(idUser));
     }
 
     private void configurarTabla() {
@@ -125,6 +137,12 @@ public class vistaPrestamo extends javax.swing.JFrame {
 
         lblEjemplar.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         lblEjemplar.setText("Id Ejemplar:");
+
+        jdtPrestamo.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jdtPrestamoPropertyChange(evt);
+            }
+        });
 
         lblFechadePrestamo.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         lblFechadePrestamo.setText("Fecha de Préstamo");
@@ -337,8 +355,8 @@ public class vistaPrestamo extends javax.swing.JFrame {
         if (evt.getClickCount() == 2) {
             JTable target = (JTable) evt.getSource();
             int row = target.getSelectedRow();
-            
-              if(row >= 0) {
+
+            if (row >= 0) {
                 // Suponiendo que la columna 0 tiene el ID del ejemplar y la columna 1 tiene el título
                 String idEjemplar = target.getModel().getValueAt(row, 0).toString();
                 String titulo = target.getModel().getValueAt(row, 1).toString();
@@ -349,6 +367,21 @@ public class vistaPrestamo extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jdtPrestamoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jdtPrestamoPropertyChange
+        // TODO add your handling code here:
+        if ("date".equals(evt.getPropertyName())) {
+            Date selectedDate = (Date) evt.getNewValue();
+            if (selectedDate != null) {
+                Date today = new Date();
+                // Comprueba si la fecha seleccionada es hoy, si no, vuelve a establecer la fecha de hoy.
+                if (selectedDate.compareTo(today) != 0) {
+                    jdtPrestamo.setDate(today);
+
+                }
+            }
+        }
+    }//GEN-LAST:event_jdtPrestamoPropertyChange
 
     private void limpiarTabla() {
         EjemplarModelo modelo = (EjemplarModelo) jTable1.getModel();

@@ -26,6 +26,7 @@ import util.UsuarioActual;
 public class vistaBuscarLibro extends javax.swing.JFrame {
 
     int idUsuario = UsuarioActual.getInstancia().getIdUsuario();
+    String tipoUsuario = UsuarioActual.getInstancia().getTipoUsuario();
 
     /**
      * Creates new form BuscarLibro
@@ -268,8 +269,7 @@ public class vistaBuscarLibro extends javax.swing.JFrame {
 
     private void btnRealizarPrestamoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizarPrestamoActionPerformed
 
-        int idUsuario = UsuarioActual.getInstancia().getIdUsuario();
-        vistaPrestamo vistaPrestamo = new vistaPrestamo(idUsuario);
+        vistaPrestamo vistaPrestamo = new vistaPrestamo(idUsuario, tipoUsuario);
         vistaPrestamo.setVisible(true);
         this.dispose();
 
@@ -297,7 +297,7 @@ public class vistaBuscarLibro extends javax.swing.JFrame {
             ajustarAnchoColumnas();
             configurarTabla();
         }
-        
+
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
@@ -386,8 +386,7 @@ public class vistaBuscarLibro extends javax.swing.JFrame {
 
     private void Showpanel(vistaPrestamo vistaPrestamo) {
         dispose();
-        vistaPrestamo frame2 = new vistaPrestamo(idUsuario);
-
+        vistaPrestamo frame2 = new vistaPrestamo(idUsuario, tipoUsuario);
         frame2.setSize(1100, 800);
         frame2.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame2.setVisible(true);

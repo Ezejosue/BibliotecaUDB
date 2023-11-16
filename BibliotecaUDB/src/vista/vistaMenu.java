@@ -204,8 +204,9 @@ public class vistaMenu extends javax.swing.JFrame {
 
     private void btnRealizarPrestamoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizarPrestamoActionPerformed
         int idUsuario = UsuarioActual.getInstancia().getIdUsuario();
+        String tipoUsuario = UsuarioActual.getInstancia().getTipoUsuario();
         PrestamoControlador controlador = new PrestamoControlador();
-        vistaPrestamo vistaPrestamo = new vistaPrestamo(idUsuario);
+        vistaPrestamo vistaPrestamo = new vistaPrestamo(idUsuario, tipoUsuario);
         vistaPrestamo.setControlador(controlador);
         vistaPrestamo.setVisible(true);
         this.dispose(); 

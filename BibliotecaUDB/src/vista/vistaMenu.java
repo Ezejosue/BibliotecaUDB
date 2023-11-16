@@ -5,7 +5,9 @@
  */
 package vista;
 
+import controlador.GeneroControlador;
 import javax.swing.JOptionPane;
+import modelo.GeneroModelo;
 
 /**
  *
@@ -37,6 +39,8 @@ public class vistaMenu extends javax.swing.JFrame {
         btnBuscarLibro = new javax.swing.JButton();
         btnRealizarPrestamo = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
+        btnBuscarGenero = new javax.swing.JButton();
+        btnBuscarEditorial = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1000, 700));
@@ -94,6 +98,22 @@ public class vistaMenu extends javax.swing.JFrame {
             }
         });
 
+        btnBuscarGenero.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        btnBuscarGenero.setText("Buscar Genero");
+        btnBuscarGenero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarGeneroActionPerformed(evt);
+            }
+        });
+
+        btnBuscarEditorial.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        btnBuscarEditorial.setText("Buscar Editorial ");
+        btnBuscarEditorial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarEditorialActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -108,11 +128,13 @@ public class vistaMenu extends javax.swing.JFrame {
                             .addComponent(btnRealizarPrestamo, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
                             .addComponent(btnBuscarLibro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnRegistarUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnRegistrarMaterial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(btnRegistrarMaterial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnBuscarGenero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnBuscarEditorial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(244, 244, 244)
                         .addComponent(lblMenu)))
-                .addContainerGap(193, Short.MAX_VALUE))
+                .addContainerGap(161, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -127,12 +149,14 @@ public class vistaMenu extends javax.swing.JFrame {
                 .addComponent(btnBuscarLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(52, 52, 52)
                 .addComponent(btnRealizarPrestamo, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addComponent(btnBuscarGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(btnBuscarEditorial, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
                 .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 651, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 39, Short.MAX_VALUE))
+                .addGap(56, 56, 56))
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         lblMenu.getAccessibleContext().setAccessibleDescription("");
@@ -142,7 +166,7 @@ public class vistaMenu extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(44, 44, 44)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -189,6 +213,21 @@ public class vistaMenu extends javax.swing.JFrame {
         vistaPrestamo.setVisible(true);
         this.dispose(); // TODO add your handling code here:
     }//GEN-LAST:event_btnRealizarPrestamoActionPerformed
+
+    private void btnBuscarGeneroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarGeneroActionPerformed
+        vistaGenero vistaGenero = new vistaGenero();
+        vistaGenero.setVisible(true);
+        vistaGenero.setLocationRelativeTo(null);
+        this.dispose();
+        
+    }//GEN-LAST:event_btnBuscarGeneroActionPerformed
+
+    private void btnBuscarEditorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarEditorialActionPerformed
+        vistaEditoriales vistaEditorial = new vistaEditoriales();
+        vistaEditorial.setVisible(true);
+        vistaEditorial.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_btnBuscarEditorialActionPerformed
 
     public void configurarMenuParaUsuario(String tipoUsuario) {
         if ("Administrador".equals(tipoUsuario)) {
@@ -247,6 +286,8 @@ public class vistaMenu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBuscarEditorial;
+    private javax.swing.JButton btnBuscarGenero;
     private javax.swing.JButton btnBuscarLibro;
     private javax.swing.JButton btnRealizarPrestamo;
     private javax.swing.JButton btnRegistarUsuario;

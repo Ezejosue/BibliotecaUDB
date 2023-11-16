@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import util.conexionDB;
+import java.sql.ResultSet;
+import java.util.ArrayList; 
 
 /**
  *
@@ -16,17 +18,18 @@ import util.conexionDB;
  */
 public class GeneroModelo {
     private static Connection conn;
+    private static Statement stmt;
+    private static ResultSet rs;
+    private static PreparedStatement pstmt;
     private String Genero;
 
     public GeneroModelo(String Genero) {
         this.Genero = Genero;
-    }
+    }   
 
     public GeneroModelo() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-    
 
     public String getGenero() {
         return Genero;
@@ -38,9 +41,10 @@ public class GeneroModelo {
     
     
     public boolean IngresoGenero (GeneroModelo modelo){
-         conn = conexionDB.getConnection();
          
-         try {
+        conn = conexionDB.getConnection();
+         
+        try {
             String sql = "INSERT INTO 'generos' ('nombre') Values (?) " ;
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1,modelo.getGenero() );

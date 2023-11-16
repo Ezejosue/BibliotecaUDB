@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import modelo.GeneroModelo;
 import controlador.GeneroControlador;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -48,7 +49,7 @@ public class vistaGenero extends javax.swing.JFrame {
         txtGenero = new javax.swing.JTextField();
         lblTituloGenero = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblGenero = new javax.swing.JTable();
         btnBuscar = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
@@ -70,7 +71,7 @@ public class vistaGenero extends javax.swing.JFrame {
         lblTituloGenero.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         lblTituloGenero.setText("GENERO");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblGenero.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -81,7 +82,7 @@ public class vistaGenero extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblGenero);
 
         btnBuscar.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         btnBuscar.setText("Buscar");
@@ -99,6 +100,11 @@ public class vistaGenero extends javax.swing.JFrame {
 
         btnLimpiar.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         btnLimpiar.setText("Limpiar");
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
 
         jButton5.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jButton5.setText("Mostrar");
@@ -211,6 +217,11 @@ public class vistaGenero extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnGuardarActionPerformed
 
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        txtGenero.setText("");
+        DefaultTableModel modeloTabla = (DefaultTableModel)tblGenero.getModel(); 
+    }//GEN-LAST:event_btnLimpiarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -256,10 +267,10 @@ public class vistaGenero extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblGenero;
     private javax.swing.JLabel lblImagenGenero;
     private javax.swing.JLabel lblTituloGenero;
+    private javax.swing.JTable tblGenero;
     private javax.swing.JTextField txtGenero;
     // End of variables declaration//GEN-END:variables
 

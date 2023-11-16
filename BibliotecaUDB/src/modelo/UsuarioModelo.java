@@ -74,7 +74,7 @@ public class UsuarioModelo {
         conn = conexionDB.getConnection();
         try {
             ArrayList<Usuario> todos_Usuarios = new ArrayList<>();
-            String sql = "SELECT id,nombre,correo, contrasena, tipo_usuario, mora FROM usuarios";
+            String sql = "SELECT id,nombre,correo,contrasena,tipo_usuario,mora FROM usuarios";
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {

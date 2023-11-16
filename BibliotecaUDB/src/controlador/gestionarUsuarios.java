@@ -5,9 +5,8 @@
  */
 package controlador;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
+//import java.awt.event.ActionEvent;
+//import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import modelo.Usuario;
@@ -21,24 +20,27 @@ import vista.vistaMenu;
  */
 public class gestionarUsuarios {
 
-    private vistaGUsuarios vistaGUsuario;
-    private UsuarioModelo modelo ;
+    private vistaGUsuarios vistaGsuario;
+    private UsuarioModelo modelo;
     private vistaMenu vistamenu;
 
     public gestionarUsuarios(vistaGUsuarios vistaGusuario, UsuarioModelo modelo, vistaMenu vistamenu) {
-        this.vistaGUsuario = vistaGusuario;
+        this.vistaGsuario = vistaGusuario;
         this.modelo = modelo;
         this.vistamenu = vistamenu;
-        this.vistaGUsuario.setControlador(this);
-    }
-    
-    public DefaultTableModel MostrarTodosLosUsuarios(){
-        ArrayList<Usuario> todosLosUsuarios = modelo.obtenerUsuarios();
-        DefaultTableModel tabla = new DefaultTableModel();
-        String titulo[] = {"id", "nombre", "correo", "contrasena", "tipo_usuario", "mora"};
-        tabla.setColumnIdentifiers(titulo);
-        
-        return tabla;
+        this.vistaGsuario.setControlador(this);
     }
 
+    public DefaultTableModel MostrarTodosLosUsuarios() {
+        ArrayList<Usuario> todosUsuarios = modelo.obtenerUsuarios();
+            String[] titulos = {"ID", "Nombre", "Correo", "Contrasena", "Mora"};
+        DefaultTableModel tableModel = new DefaultTableModel(titulos, 0);
+
+        for (Usuario usuario : todosUsuarios) {
+            Object[] fila = {usuario.getId(), usuario.getNombre(), usuario.getCorreo(), usuario.getContrasena(), usuario.getMora()};
+            tableModel.addRow(fila);
+        }
+
+        return tableModel;
+    }
 }

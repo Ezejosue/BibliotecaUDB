@@ -30,7 +30,7 @@ public class vistaGUsuarios extends javax.swing.JFrame {
         this.setControlador(controlador);
 
         // Ahora que el controlador está establecido, puedes cargar los datos
-        todosLosUsuarios();
+        todosUsuarios();
 
     }
 
@@ -163,7 +163,7 @@ public class vistaGUsuarios extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jAgregarActionPerformed
 
-    private void todosLosUsuarios() {
+    private void todosUsuarios() {
         tbUsuarios.setModel(controlador.MostrarTodosLosUsuarios());
 
     }

@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package vista;
 
 
@@ -19,6 +15,7 @@ import javax.swing.table.DefaultTableModel;
 public class vistaGenero extends javax.swing.JFrame {
    private GeneroControlador controlador;
    
+   
 
     /**
      * Creates new form vistaGenero
@@ -26,20 +23,31 @@ public class vistaGenero extends javax.swing.JFrame {
     public vistaGenero() {
         initComponents();
         
+        GeneroModelo generoModelo = new GeneroModelo(); 
+        GeneroControlador gControlador = new GeneroControlador(this, generoModelo, null);
+        
+        this.setControlador(controlador);
+        //tGeneros();
+  
     }
     public void Mostrarmensaje(String mensaje){
         JOptionPane.showMessageDialog(this, mensaje);
         
     }
-    private void AgregarGenero(){
-        GeneroModelo genero = new GeneroModelo();
-        genero.setGenero(txtGenero.getText());
+   // GeneroModelo modelo = new GeneroModelo();
+    // GeneroControlador Gcontrolador = new GeneroControlador(this, modelo, null);
+   private void AgregarGenero(){
+     GeneroModelo genero = new GeneroModelo();
+        genero.setNombre(txtGenero.getText());
         controlador.RegistrarModelo(genero);
+                
     }
-
-    public void setControlador(GeneroControlador controlador){
-        this.controlador = controlador;
-    }
+   
+    public void setControlador(GeneroControlador controlador) {
+      this.controlador = controlador; 
+              
+         }
+   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -54,7 +62,7 @@ public class vistaGenero extends javax.swing.JFrame {
         btnGuardar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         btnLimpiar = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        btnMostrar = new javax.swing.JButton();
         btnMenu = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -106,8 +114,13 @@ public class vistaGenero extends javax.swing.JFrame {
             }
         });
 
-        jButton5.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jButton5.setText("Mostrar");
+        btnMostrar.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        btnMostrar.setText("Mostrar");
+        btnMostrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMostrarActionPerformed(evt);
+            }
+        });
 
         btnMenu.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         btnMenu.setText("Menu");
@@ -150,7 +163,7 @@ public class vistaGenero extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(27, 27, 27)
-                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnMostrar, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(27, 27, 27)
                                 .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(30, 30, 30)
@@ -188,7 +201,7 @@ public class vistaGenero extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBuscar)
                     .addComponent(btnGuardar)
-                    .addComponent(jButton5)
+                    .addComponent(btnMostrar)
                     .addComponent(btnLimpiar)
                     .addComponent(btnEliminar))
                 .addGap(89, 89, 89)
@@ -201,6 +214,12 @@ public class vistaGenero extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void tGeneros(){
+        tblGenero.setModel(controlador.MostrarGeneros());
+    }
+            
+  
+    
     private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
        vistaMenu vistaMenu = new vistaMenu ();
        showpanel(vistaMenu);
@@ -218,10 +237,18 @@ public class vistaGenero extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-        txtGenero.setText("");
-        DefaultTableModel modeloTabla = (DefaultTableModel)tblGenero.getModel(); 
+       txtGenero.setText("");
+       //  DefaultTableModel modeloTabla = (DefaultTableModel)tblGenero.getModel() 
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
+    private void btnMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarActionPerformed
+        tGeneros();
+      ;
+        
+    }//GEN-LAST:event_btnMostrarActionPerformed
+      
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -263,8 +290,8 @@ public class vistaGenero extends javax.swing.JFrame {
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnMenu;
+    private javax.swing.JButton btnMostrar;
     private javax.swing.JButton btnSalir;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblGenero;

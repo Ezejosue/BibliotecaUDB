@@ -5,6 +5,9 @@
  */
 package controlador;
 
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import javax.xml.bind.annotation.XmlElement;
 import modelo.GeneroModelo;
 import vista.vistaGenero;
 import vista.vistaMenu;
@@ -19,6 +22,7 @@ public class GeneroControlador {
     private final GeneroModelo gModelo;
     private final vistaMenu vMenu;
 
+    //     contrucctor de la clase Genero
     public GeneroControlador(vistaGenero vGenero, GeneroModelo gModelo, vistaMenu vMenu) {
         this.vGenero = vGenero;
         this.gModelo = gModelo;
@@ -28,9 +32,9 @@ public class GeneroControlador {
 
     public void RegistrarModelo(GeneroModelo modelo) {
         if (modelo != null) {
-            if (!modelo.getGenero().equals("")) {
-                boolean Guardar = modelo.IngresoGenero(modelo);
-                if (Guardar) {
+            if (!modelo.getNombre().equals("")) {
+                boolean isGuardar = modelo.IngresoGenero(modelo);
+                if (isGuardar) {
                     vGenero.Mostrarmensaje("Genero Guardado correctamente");
                 } else {
                     vGenero.Mostrarmensaje("no se puede registrar el Genero");
@@ -38,10 +42,21 @@ public class GeneroControlador {
             } else {
                 vGenero.Mostrarmensaje("Ingrese el valor");
             }
-        }else{
-            
+        } else {
+            vGenero.Mostrarmensaje("Ingrese los valores");
         }
     }
-}
 
-    
+    public DefaultTableModel MostrarGeneros() {
+        ArrayList<GeneroModelo> generoModelos = gModelo.tablaGenero();
+        String[] titulos = {"Nombre"};
+        DefaultTableModel tableModel = new DefaultTableModel(titulos, 0);
+
+        for (GeneroModelo gModelo : generoModelos) {
+            Object[] fila = {gModelo.getNombre()};
+            tableModel.addRow(fila);
+        }
+        return tableModel;
+    }
+
+}

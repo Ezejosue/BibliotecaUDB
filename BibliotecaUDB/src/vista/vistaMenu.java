@@ -216,8 +216,9 @@ public class vistaMenu extends javax.swing.JFrame {
 
     private void btnBuscarGeneroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarGeneroActionPerformed
         vistaGenero vistaGenero = new vistaGenero();
+        GeneroModelo modelo = new GeneroModelo(); 
+        GeneroControlador controlador = new GeneroControlador(vistaGenero, modelo, this);
         vistaGenero.setVisible(true);
-        vistaGenero.setLocationRelativeTo(null);
         this.dispose();
         
     }//GEN-LAST:event_btnBuscarGeneroActionPerformed

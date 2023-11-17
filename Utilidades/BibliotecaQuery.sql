@@ -122,6 +122,7 @@ SELECT * FROM prestamos;
 SELECT * FROM ejemplares;	
 SELECT * FROM usuarios;	
 SELECT * FROM configuraciones;
+SELECT * FROM pagos;
 
 INSERT INTO configuraciones(clave, valor) VALUES ("Mora", "0.50");
 
@@ -186,3 +187,32 @@ END$$
 DELIMITER ;
 
 DROP TRIGGER IF EXISTS verificar_mora_despues_devolucion;
+
+
+DELIMITER $$
+
+CREATE TRIGGER actualizar_id_ejemplar_pago
+AFTER INSERT ON pagos
+FOR EACH ROW
+BEGIN
+    DECLARE ultima_devolucion_id_ejemplar VARCHAR(50);
+
+    -- Encontrar el id_ejemplar del último registro de devolución para el mismo usuario
+    SELECT d.id_ejemplar INTO ultima_devolucion_id_ejemplar
+    FROM devoluciones d
+    WHERE d.id_usuario = NEW.id_usuario
+    ORDER BY d.fecha_devolucion DESC, d.id DESC
+    LIMIT 1;
+
+    -- Actualizar el id_ejemplar en la tabla de pagos con el último id_ejemplar de la tabla de devoluciones
+    IF ultima_devolucion_id_ejemplar IS NOT NULL THEN
+        UPDATE pagos
+        SET id_ejemplar = ultima_devolucion_id_ejemplar
+        WHERE id = NEW.id;
+    END IF;
+END$$
+
+DELIMITER ;
+
+
+

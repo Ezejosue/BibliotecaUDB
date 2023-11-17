@@ -55,7 +55,7 @@ public class DevolucionControlador {
 
                 if (respuesta == JOptionPane.YES_OPTION) {
 
-                    devolucionModelo.registrarPago(idUsuario, multaTotal);
+                    devolucionModelo.registrarPago(idUsuario, multaTotal, idEjemplar);
 
                     JOptionPane.showMessageDialog(null, "Pago realizado con éxito. Deuda actualizada a cero.");
                 } else {

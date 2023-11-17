@@ -81,7 +81,7 @@ public class DevolucionModelo {
         return valorMulta;
     }
 
-    public void registrarPago(int idUsuario, BigDecimal monto) throws SQLException {
+    public void registrarPago(int idUsuario, BigDecimal monto, int idPrestamo) throws SQLException {
         Connection conexion = null;
         PreparedStatement ps = null;
 
@@ -90,11 +90,12 @@ public class DevolucionModelo {
             conexion.setAutoCommit(false); // Empezar transacción
 
             // Insertar el registro de pago
-            String sqlPago = "INSERT INTO pagos (id_usuario, monto, fecha_pago) VALUES (?, ?, ?)";
+            String sqlPago = "INSERT INTO pagos (id_usuario, monto, fecha_pago, id_prestamo) VALUES (?, ?, ?, ?)";
             ps = conexion.prepareStatement(sqlPago);
             ps.setInt(1, idUsuario);
             ps.setBigDecimal(2, monto);
             ps.setDate(3, new java.sql.Date(System.currentTimeMillis())); // Fecha actual
+            ps.setInt(4, idPrestamo);
             ps.executeUpdate();
 
             // Actualizar la morosidad del usuario
@@ -178,7 +179,5 @@ public class DevolucionModelo {
 
         return mora;
     }
-
-   
 
 }

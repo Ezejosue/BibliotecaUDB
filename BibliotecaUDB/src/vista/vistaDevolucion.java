@@ -343,11 +343,14 @@ public class vistaDevolucion extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             int idUsuario = Integer.parseInt(txtUsuario.getText());
+            Object selectedItem = cmbIDPrestamo.getSelectedItem();
+            String selectedText = selectedItem.toString();
+            int idPrestamo = Integer.parseInt(selectedText);
             DevolucionModelo modelo = new DevolucionModelo();
 
             BigDecimal mora = modelo.obtenerMoraUsuario(idUsuario);
             if (mora.compareTo(BigDecimal.ZERO) > 0) {
-                modelo.registrarPago(idUsuario, mora);
+                modelo.registrarPago(idUsuario, mora, idPrestamo);
                 JOptionPane.showMessageDialog(null, "Pago realizado con éxito. Deuda actualizada a cero.");
                 actualizarEstadoBoton(idUsuario); // Actualiza el estado del botón después del pago
             }

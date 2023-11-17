@@ -109,13 +109,16 @@ CREATE TABLE IF NOT EXISTS pagos (
     id_usuario INT,
     monto DECIMAL(10, 2) NOT NULL,
     fecha_pago DATE NOT NULL,
-    FOREIGN KEY (id_usuario) REFERENCES usuarios(id)
+    id_prestamo INT,
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id),
+    FOREIGN KEY (id_prestamo) REFERENCES prestamos(id)
 );
 	
 ALTER TABLE pagos
-ADD COLUMN id_ejemplar VARCHAR(50),
-ADD CONSTRAINT fk_ejemplares
-FOREIGN KEY (id_ejemplar) REFERENCES ejemplares(id);
+ADD COLUMN id_prestamo INT,
+ADD CONSTRAINT fk_prestamos
+FOREIGN KEY (id_prestamo) REFERENCES prestamos(id);
+
 
 SELECT * FROM devoluciones;	
 SELECT * FROM prestamos;
@@ -162,32 +165,6 @@ END$$
 DELIMITER ;
 
 
-DELIMITER $$
-
-CREATE TRIGGER verificar_mora_despues_devolucion
-AFTER INSERT ON devoluciones
-FOR EACH ROW
-BEGIN
-    DECLARE dias_prestamo INT;
-    
-    -- Calcular la cantidad de días entre la fecha de préstamo y la fecha de devolución
-    SELECT DATEDIFF(NEW.fecha_devolucion, prestamos.fecha_prestamo)
-    INTO dias_prestamo
-    FROM prestamos
-    WHERE prestamos.id = NEW.id_prestamo;
-
-    -- Si la cantidad de días es mayor a 7, se actualiza la mora
-    IF dias_prestamo > 7 THEN
-        UPDATE usuarios
-        SET mora = mora + 0.50
-        WHERE id = (SELECT id_usuario FROM prestamos WHERE id = NEW.id_prestamo);
-    END IF;
-END$$
-
-DELIMITER ;
-
-DROP TRIGGER IF EXISTS verificar_mora_despues_devolucion;
-
 
 DELIMITER $$
 
@@ -214,5 +191,7 @@ END$$
 
 DELIMITER ;
 
+
+DROP TRIGGER IF EXISTS actualizar_id_ejemplar_pago;
 
 

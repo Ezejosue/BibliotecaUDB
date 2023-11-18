@@ -6,13 +6,28 @@
 package vista;
 
 import javax.swing.JFrame;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import controlador.EditorialesControlador;
+import java.awt.Component;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableRowSorter;
+import modelo.EditorialModelo;
+
 
 /**
  *
- * @author Sofía
+ * @author Sofia y HP
  */
 public class vistaEditoriales extends javax.swing.JFrame {
-
+    private JTable jTable;
+    private DefaultTableModel tableModel;
+    private EditorialControlador controlador;
     /**
      * Creates new form vistaGenero
      */
@@ -41,7 +56,7 @@ public class vistaEditoriales extends javax.swing.JFrame {
         txtNombreEditorial = new javax.swing.JTextField();
         btnMostrar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblEditorial = new javax.swing.JTable();
+        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -110,8 +125,8 @@ public class vistaEditoriales extends javax.swing.JFrame {
             }
         });
 
-        tblEditorial.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        tblEditorial.setModel(new javax.swing.table.DefaultTableModel(
+        jTable1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {}
@@ -120,7 +135,7 @@ public class vistaEditoriales extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane2.setViewportView(tblEditorial);
+        jScrollPane2.setViewportView(jTable1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -186,8 +201,57 @@ public class vistaEditoriales extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void configurarTabla() {
+        EditorialModelo modelo = (EditorialModelo) jTable1.getModel();
+        jTable1.setModel(modelo);
+
+        TableRowSorter<EditorialModelo> sorter = new TableRowSorter<>(modelo);
+        jTable1.setRowSorter(sorter);
+
+    }
+
+    public void ajustarAnchoColumnas() {
+        jTable1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        int minWidth = 100; // Establece un ancho mínimo para las columnas
+
+        for (int column = 0; column < jTable1.getColumnCount(); column++) {
+            TableColumn tableColumn = jTable1.getColumnModel().getColumn(column);
+            int preferredWidth = tableColumn.getMinWidth();
+            int maxWidth = tableColumn.getMaxWidth();
+
+            for (int row = 0; row < jTable1.getRowCount(); row++) {
+                TableCellRenderer cellRenderer = jTable1.getCellRenderer(row, column);
+                Component c = jTable1.prepareRenderer(cellRenderer, row, column);
+                int width = c.getPreferredSize().width + jTable1.getIntercellSpacing().width;
+                preferredWidth = Math.max(preferredWidth, width);
+
+                if (preferredWidth >= maxWidth) {
+                    preferredWidth = maxWidth;
+                    break;
+                }
+            }
+
+            preferredWidth = Math.max(preferredWidth, minWidth);
+            tableColumn.setPreferredWidth(preferredWidth);
+        }
+    }
+    
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
+        String nombre = txtNombreEditorial.getText();
+        
+        EditorialesControlador controlador = new EditorialesControlador();
+        EditorialModelo modeloTabla = controlador.buscarEditoriales(nombre);
+        
+        if (controlador.esListaVacia(modeloTabla.getEditoriales())) {
+            JOptionPane.showMessageDialog(this, "No se encontraron editoriales", "Búsqueda", JOptionPane.INFORMATION_MESSAGE);
+            controlador.limpiarTabla(modeloTabla);
+        } else {
+            jTable1.setModel(modeloTabla);
+            ajustarAnchoColumnas();
+            configurarTabla();
+        }
+        //jTable1.setModel(modeloTabla);
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
@@ -202,15 +266,39 @@ public class vistaEditoriales extends javax.swing.JFrame {
 
     private void btnMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarActionPerformed
         // TODO add your handling code here:
+        EditorialesControlador controlador = new EditorialesControlador();
+        EditorialModelo modeloTabla = controlador.allEditoriales();
+        
+        if (controlador.esListaVacia(modeloTabla.allEditoriales())) {
+            JOptionPane.showMessageDialog(this, "No se encontraron editoriales", "Búsqueda", JOptionPane.INFORMATION_MESSAGE);
+            controlador.limpiarTabla(modeloTabla);
+        } else {
+            jTable1.setModel(modeloTabla);
+            ajustarAnchoColumnas();
+            configurarTabla();
+        }
     }//GEN-LAST:event_btnMostrarActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
-        
+         try {
+            EditorialModelo editorial = new EditorialModelo();
+            editorial.setNombre(txtNombreEditorial.getText());
+            if (controlador != null) {
+                controlador.editarUsuarios(editorial);
+                todosUsuarios();
+            }else {
+                System.out.println("Null");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         // TODO add your handling code here:
+        txtNombreEditorial.setText("");
+     
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void txtNombreEditorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreEditorialActionPerformed
@@ -264,10 +352,10 @@ public class vistaEditoriales extends javax.swing.JFrame {
     private javax.swing.JButton btnMostrar;
     private javax.swing.JButton btnSalir;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblEditorial;
     private javax.swing.JLabel lblGenero;
     private javax.swing.JLabel lblNombreEditorial;
-    private javax.swing.JTable tblEditorial;
     private javax.swing.JTextField txtNombreEditorial;
     // End of variables declaration//GEN-END:variables
 

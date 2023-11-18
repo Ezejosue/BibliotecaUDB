@@ -93,82 +93,108 @@ CREATE TABLE IF NOT EXISTS configuraciones (
     valor VARCHAR(255) NOT NULL
 );
 
--- Insertar configuraciones iniciales
-INSERT INTO configuraciones (clave, valor) VALUES ('mora_diaria', '0.50'), ('max_prestamos', '3');
 
--- Insertar registros en la tabla de usuarios
-INSERT INTO usuarios (nombre, correo, contrasena, tipo_usuario, mora)
-VALUES
-    ('Administrador 1', 'admin1@example.com', 'admin123', 'Administrador', 0),
-    ('Profesor 1', 'profesor1@example.com', 'prof123', 'Profesor', 0),
-    ('Alumno 1', 'alumno1@example.com', 'alum123', 'Alumno', 0);
-    
-    INSERT INTO generos (nombre) VALUES
-    ('Ficción'),
-    ('No ficción'),
-    ('Ciencia ficción'),
-    ('Romance'),
-    ('Misterio'),
-    ('Fantasía');
-    
-INSERT INTO editoriales (nombre) VALUES
-    ('Editorial A'),
-    ('Editorial B'),
-    ('Editorial C'),
-    ('Editorial D');
-    
-    INSERT INTO ejemplares (id, titulo, autor, tipo, ubicacion, cantidad, prestados) VALUES
-    ('1', 'Libro 1', 'Autor 1', 'Libro', 'Estantería 1', 5, 2),
-    ('2', 'Revista 1', 'Autor 2', 'Revista', 'Estantería 2', 10, 0),
-    ('3', 'CD 1', 'Artista 1', 'CD', 'Estantería 3', 15, 5),
-    ('4', 'Tesis 1', 'Autor 3', 'Tesis', 'Estantería 4', 3, 1);
-    
-    -- Insertar datos en la tabla de libros
-INSERT INTO libros (id_ejemplar, isbn, id_editorial, edicion) VALUES
-    ('1', 'ISBN123456', 1, 1),
-    ('2', 'ISBN789101', 2, 2);
+-- Crear la tabla de devoluciones
+CREATE TABLE IF NOT EXISTS devoluciones (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_prestamo INT,
+    fecha_devolucion DATE NOT NULL,
+    estado_devolucion ENUM('En tiempo', 'Atrasado') NOT NULL,
+    comentarios VARCHAR(255),
+    FOREIGN KEY (id_prestamo) REFERENCES prestamos(id)
+);
 
--- Insertar datos en la tabla de revistas
-INSERT INTO revistas (id_ejemplar, issn, numero, volumen) VALUES
-    ('2', 'ISSN12345', 3, 1);
-
--- Insertar datos en la tabla de CDs
-INSERT INTO cds (id_ejemplar, duracion, id_genero) VALUES
-    ('3', 60, 3);
-
--- Insertar datos en la tabla de tesis
-INSERT INTO tesis (id_ejemplar, universidad, anio) VALUES
-    ('4', 'Universidad X', 2020);
+CREATE TABLE IF NOT EXISTS pagos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT,
+    monto DECIMAL(10, 2) NOT NULL,
+    fecha_pago DATE NOT NULL,
+    id_prestamo INT,
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id),
+    FOREIGN KEY (id_prestamo) REFERENCES prestamos(id)
+);
+	
+ALTER TABLE pagos
+ADD COLUMN id_prestamo INT,
+ADD CONSTRAINT fk_prestamos
+FOREIGN KEY (id_prestamo) REFERENCES prestamos(id);
 
 
--- Insertar datos en la tabla de editoriales
-INSERT INTO editoriales (nombre) VALUES
-    ('Editorial XYZ'),
-    ('Editorial ABC'),
-    ('Editorial 123'),
-    ('Editorial de Ciencia'),
-    ('Editorial Romántica');
+SELECT * FROM devoluciones;	
+SELECT * FROM prestamos;
+SELECT * FROM ejemplares;	
+SELECT * FROM libros;	
+SELECT * FROM usuarios;	
+SELECT * FROM configuraciones;
+SELECT * FROM pagos;
+SELECT * FROM editoriales;
+SELECT e.id, e.titulo, e.autor, e.tipo, e.ubicacion, e.cantidad, e.prestados, l.isbn, l.id_editorial, l.edicion FROM ejemplares e INNER JOIN libros l ON e.id = l.id_ejemplar WHERE estado = "activo";
+INSERT INTO configuraciones(clave, valor) VALUES ("Mora", "0.50");
+ALTER TABLE ejemplares ADD COLUMN estado VARCHAR(8) DEFAULT 'activo';
 
--- Insertar datos en la tabla de ejemplares
-INSERT INTO ejemplares (id, titulo, autor, tipo, ubicacion, cantidad, prestados) VALUES
-    ('1001', 'Cien años de soledad', 'Gabriel García Márquez', 'Libro', 'Estantería A', 10, 3),
-    ('1002', 'National Geographic - Enero 2023', 'Varios autores', 'Revista', 'Estantería B', 20, 2),
-    ('1003', 'The Dark Side of the Moon', 'Pink Floyd', 'CD', 'Estantería C', 5, 1),
-    ('1004', 'Historia de la Antigua Roma', 'Mary Beard', 'Libro', 'Estantería D', 15, 5);
 
--- Insertar datos en la tabla de libros
-INSERT INTO libros (id_ejemplar, isbn, id_editorial, edicion) VALUES
-    ('1001', 'ISBN789107', 1, 1),
-    ('1004', 'ISBN789108', 2, 2);
 
--- Insertar datos en la tabla de revistas
-INSERT INTO revistas (id_ejemplar, issn, numero, volumen) VALUES
-    ('1002', '07474662', 1, 25);
+-- Trigger para aumentar en uno los prestamos de los ejemplares
+DELIMITER $$
 
--- Insertar datos en la tabla de CDs
-INSERT INTO cds (id_ejemplar, duracion, id_genero) VALUES
-    ('1003', 43, 6);
+CREATE TRIGGER incrementar_prestados
+AFTER INSERT ON prestamos
+FOR EACH ROW
+BEGIN
+    UPDATE ejemplares
+    SET prestados = prestados + 1
+    WHERE id = NEW.id_ejemplar;
+END$$
 
--- Insertar datos en la tabla de tesis
-INSERT INTO tesis (id_ejemplar, universidad, anio) VALUES
-    ('1004', 'Universidad de Roma', 2018);
+DELIMITER ;
+
+
+-- Trigger para decrementar en uno los prestamos de los ejemplares
+DELIMITER $$
+
+CREATE TRIGGER actualizar_prestados
+AFTER INSERT ON devoluciones
+FOR EACH ROW
+BEGIN
+    UPDATE prestamos
+    SET fecha_devolucion = NEW.fecha_devolucion
+    WHERE id = NEW.id_prestamo;
+
+    UPDATE ejemplares
+    SET prestados = prestados - 1
+    WHERE id = (SELECT id_ejemplar FROM prestamos WHERE id = NEW.id_prestamo);
+END$$
+
+DELIMITER ;
+
+
+
+DELIMITER $$
+
+CREATE TRIGGER actualizar_id_ejemplar_pago
+AFTER INSERT ON pagos
+FOR EACH ROW
+BEGIN
+    DECLARE ultima_devolucion_id_ejemplar VARCHAR(50);
+
+    -- Encontrar el id_ejemplar del último registro de devolución para el mismo usuario
+    SELECT d.id_ejemplar INTO ultima_devolucion_id_ejemplar
+    FROM devoluciones d
+    WHERE d.id_usuario = NEW.id_usuario
+    ORDER BY d.fecha_devolucion DESC, d.id DESC
+    LIMIT 1;
+
+    -- Actualizar el id_ejemplar en la tabla de pagos con el último id_ejemplar de la tabla de devoluciones
+    IF ultima_devolucion_id_ejemplar IS NOT NULL THEN
+        UPDATE pagos
+        SET id_ejemplar = ultima_devolucion_id_ejemplar
+        WHERE id = NEW.id;
+    END IF;
+END$$
+
+DELIMITER ;
+
+
+DROP TRIGGER IF EXISTS actualizar_id_ejemplar_pago;
+
+

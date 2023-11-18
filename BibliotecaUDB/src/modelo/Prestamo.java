@@ -16,12 +16,22 @@ public class Prestamo {
     private int id;
     private int idUsuario;
     private String idEjemplar;
+    private String Titulo;
     private Date fechaPrestamo;
     private Date fechaDevolucion;
 
     public Prestamo() {
     }
 
+    public Prestamo(int id, int idUsuario, String idEjemplar, Date fechaPrestamo) {
+        this.id = id;
+        this.idUsuario = idUsuario;
+        this.idEjemplar = idEjemplar;
+        this.fechaPrestamo = fechaPrestamo;
+    }
+
+    
+    
     public Prestamo(int id, int idUsuario, String idEjemplar, Date fechaPrestamo, Date fechaDevolucion) {
         this.id = id;
         this.idUsuario = idUsuario;
@@ -69,6 +79,16 @@ public class Prestamo {
     public void setFechaDevolucion(Date fechaDevolucion) {
         this.fechaDevolucion = fechaDevolucion;
     }
+
+    public String getTitulo() {
+        return Titulo;
+    }
+
+    public void setTitulo(String Titulo) {
+        this.Titulo = Titulo;
+    }
+    
+    
 
     @Override
     public String toString() {

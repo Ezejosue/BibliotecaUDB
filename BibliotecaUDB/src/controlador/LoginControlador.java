@@ -7,6 +7,7 @@ package controlador;
 
 import modelo.Usuario;
 import modelo.UsuarioModelo;
+import util.UsuarioActual;
 import vista.vistaLogin;
 import vista.vistaMenu;
 
@@ -32,6 +33,8 @@ public class LoginControlador {
         if (usuario != null) {
             //  vista.mostrarMensaje("Inicio de sesión exitoso");
             vistamenu.configurarMenuParaUsuario(usuario.getTipoUsuario());
+            UsuarioActual.getInstancia().setIdUsuario(usuario.getId());
+            UsuarioActual.getInstancia().setTipoUsuario(usuario.getTipoUsuario());
             vistamenu.setVisible(true);
             vista.setVisible(false);
 
@@ -39,5 +42,7 @@ public class LoginControlador {
             vista.mostrarMensaje("Correo o contraseña incorrectos");
         }
     }
+    
+    
 
 }

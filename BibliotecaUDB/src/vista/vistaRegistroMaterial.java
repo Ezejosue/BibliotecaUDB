@@ -5,8 +5,10 @@
  */
 package vista;
 
+import controlador.EjemplarControlador;
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
+import modelo.EjemplarModelo;
 
 /**
  *
@@ -17,12 +19,14 @@ public class vistaRegistroMaterial extends javax.swing.JFrame {
     /**
      * Creates new form RegistroMaterial
      */
+    private EjemplarControlador controlador;
+
     public vistaRegistroMaterial() {
         initComponents();
-        
-        panelLibro p1 = new panelLibro();
-       ShowPanel (p1);
-        
+    }
+
+    public void setControlador(EjemplarControlador controlador) {
+        this.controlador = controlador;
     }
 
     /**
@@ -41,8 +45,8 @@ public class vistaRegistroMaterial extends javax.swing.JFrame {
         btnTesis = new javax.swing.JButton();
         btnObras = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
-        lblBannerRegistro = new javax.swing.JLabel();
         contentMaterial = new javax.swing.JPanel();
+        lblBannerRegistro = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -153,20 +157,20 @@ public class vistaRegistroMaterial extends javax.swing.JFrame {
                     .addGap(312, 312, 312)))
         );
 
-        lblBannerRegistro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/banner1.png"))); // NOI18N
-
         contentMaterial.setBackground(new java.awt.Color(204, 204, 204));
 
         javax.swing.GroupLayout contentMaterialLayout = new javax.swing.GroupLayout(contentMaterial);
         contentMaterial.setLayout(contentMaterialLayout);
         contentMaterialLayout.setHorizontalGroup(
             contentMaterialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 1192, Short.MAX_VALUE)
         );
         contentMaterialLayout.setVerticalGroup(
             contentMaterialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 578, Short.MAX_VALUE)
         );
+
+        lblBannerRegistro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/banner1.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -174,16 +178,21 @@ public class vistaRegistroMaterial extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblBannerRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 878, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(contentMaterial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 0, 0))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(contentMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(26, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblBannerRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 1192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(lblBannerRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(contentMaterial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -193,59 +202,59 @@ public class vistaRegistroMaterial extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCdActionPerformed
-      panelCds panelCds = new panelCds();
-       ShowPanel (panelCds);
-       
+        panelCds panelCds = new panelCds();
+        ShowPanel(panelCds);
+
     }//GEN-LAST:event_btnCdActionPerformed
 
     private void btnObrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrasActionPerformed
-         panelObra panelObra = new panelObra();
-       ShowPanel (panelObra);
-       
+        panelObra panelObra = new panelObra();
+        ShowPanel(panelObra);
+
     }//GEN-LAST:event_btnObrasActionPerformed
 
     private void btnLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLibroActionPerformed
+        panelLibro panelLibro = new panelLibro();
+        panelLibro.setControlador(controlador);
+        ShowPanel(panelLibro);
 
-       panelLibro panelLibro = new panelLibro();
-       ShowPanel (panelLibro);
-        
     }//GEN-LAST:event_btnLibroActionPerformed
 
     private void btnRevistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRevistaActionPerformed
         // TODO add your handling code here:
-       panelRevista panelLibro = new panelRevista();
-       ShowPanel (panelLibro);
-        
-      
+        panelRevista panelLibro = new panelRevista();
+        ShowPanel(panelLibro);
+
+
     }//GEN-LAST:event_btnRevistaActionPerformed
 
     private void btnTesisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTesisActionPerformed
         panelTesis panelTesis = new panelTesis();
-       ShowPanel (panelTesis);
-       
-        
+        ShowPanel(panelTesis);
+
+
     }//GEN-LAST:event_btnTesisActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-      System.exit(0);
+        System.exit(0);
     }//GEN-LAST:event_btnSalirActionPerformed
 //metodo para 
-    private void ShowPanel(JPanel p){
-        
-        p.setSize(878,588);
-        p.setLocation(0,0);
-        
+
+    private void ShowPanel(JPanel p) {
+
+        p.setSize(1300, 588);
+        p.setLocation(0, 0);
+        if (p instanceof panelLibro) {
+            ((panelLibro) p).setControlador(controlador);
+
+        }
         contentMaterial.removeAll();
-        contentMaterial.add(p,BorderLayout.CENTER); 
+        contentMaterial.add(p, BorderLayout.CENTER);
         contentMaterial.revalidate();
         contentMaterial.repaint();
-        
-        
+
     }
-    
-      
-    
-    
+
     /**
      * @param args the command line arguments
      */
@@ -278,6 +287,10 @@ public class vistaRegistroMaterial extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new vistaRegistroMaterial().setVisible(true);
+                vistaRegistroMaterial vista = new vistaRegistroMaterial();
+                EjemplarModelo modelo = new EjemplarModelo();
+                EjemplarControlador controlador = new EjemplarControlador(modelo, vista);
+                vista.setControlador(controlador);
             }
         });
     }

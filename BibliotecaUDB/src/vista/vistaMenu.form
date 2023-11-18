@@ -62,7 +62,7 @@
                               <Component id="btnSalir" max="32767" attributes="0"/>
                               <Component id="btnRealizarPrestamo" pref="282" max="32767" attributes="0"/>
                               <Component id="btnBuscarLibro" max="32767" attributes="0"/>
-                              <Component id="btnRegistarUsuario" max="32767" attributes="0"/>
+                              <Component id="btnGestionarUsuarios" max="32767" attributes="0"/>
                               <Component id="btnRegistrarMaterial" max="32767" attributes="0"/>
                               <Component id="btnDevolucionEjemplar" pref="282" max="32767" attributes="0"/>
                           </Group>
@@ -84,7 +84,7 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="btnRegistrarMaterial" min="-2" pref="60" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
-                  <Component id="btnRegistarUsuario" min="-2" pref="60" max="-2" attributes="0"/>
+                  <Component id="btnGestionarUsuarios" min="-2" pref="60" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
                   <Component id="btnBuscarLibro" min="-2" pref="60" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
@@ -135,15 +135,15 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRegistrarMaterialActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnRegistarUsuario">
+        <Component class="javax.swing.JButton" name="btnGestionarUsuarios">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Times New Roman" size="18" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Registrar Usuario"/>
+            <Property name="text" type="java.lang.String" value="Gestionar Usuarios"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRegistarUsuarioActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGestionarUsuariosActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnBuscarLibro">

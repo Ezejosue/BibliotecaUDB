@@ -15,6 +15,8 @@ import util.conexionDB;
  *
  * @author Josue
  */
+import java.util.ArrayList;
+
 public class UsuarioModelo {
 
     private static Connection conn;
@@ -50,4 +52,78 @@ public class UsuarioModelo {
         }
     }
 
+    public boolean ingresarUsuario(Usuario usuario) {
+        conn = conexionDB.getConnection();
+        try {
+            String sql = "INSERT INTO `usuarios`  (`nombre`, `correo`, `contrasena`, `tipo_usuario`) VALUES (?, ?, ?, ?)";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, usuario.getNombre());
+            ps.setString(2, usuario.getCorreo());
+            ps.setString(3, usuario.getContrasena());
+            ps.setString(4, usuario.getTipoUsuario());
+            ps.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            return false;
+        } finally {
+            conexionDB.close(conn);
+        }
+    }
+
+    public ArrayList<Usuario> obtenerUsuarios() {
+        conn = conexionDB.getConnection();
+        try {
+            ArrayList<Usuario> todos_Usuarios = new ArrayList<>();
+            String sql = "SELECT id,nombre,correo,contrasena,tipo_usuario,mora FROM usuarios";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Usuario user = new Usuario();
+                user.setId(rs.getInt("id"));
+                user.setNombre(rs.getString("nombre"));
+                user.setCorreo(rs.getString("correo"));
+                user.setContrasena(rs.getString("contrasena"));
+                user.setMora(rs.getDouble("mora"));
+                todos_Usuarios.add(user);
+            }
+            return todos_Usuarios;
+        } catch (Exception e) {
+            return null;
+        } finally {
+            conexionDB.close(conn);
+        }
+    }
+
+    public void actualizarUsuarios(Usuario usuario) {
+        conn = conexionDB.getConnection();
+        try {
+            String sql = "Update usuarios set nombre = ?, correo = ?, contrasena = ?, mora = ? where id= ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, usuario.getNombre());
+            ps.setString(2, usuario.getCorreo());
+            ps.setString(3, usuario.getContrasena());
+            ps.setDouble(4, usuario.getMora());
+            ps.setInt(5, usuario.getId());
+            ps.executeUpdate();
+            System.out.println("Datos actualizados correctamente");
+        } catch (Exception e) {
+            System.out.println(e);
+        }finally{
+            conexionDB.close(conn);
+        }
+
+    }
+    
+    public  void EliminarUsuarios(Usuario usuario){
+        conn = conexionDB.getConnection();
+        try {
+            String sql = "Delete from usuarios where id=?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, usuario.getId());
+            ps.executeUpdate();
+            System.out.println("Datos eliminados correctamente");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
 }

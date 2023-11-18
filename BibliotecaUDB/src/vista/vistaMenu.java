@@ -12,6 +12,9 @@ import javax.swing.JOptionPane;
 import modelo.Devolucion;
 import modelo.EjemplarModelo;
 import util.UsuarioActual;
+import controlador.gestionarUsuarios;
+import controlador.usuarioControlador;
+import modelo.UsuarioModelo;
 
 /**
  *
@@ -39,7 +42,7 @@ public class vistaMenu extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         lblMenu = new javax.swing.JLabel();
         btnRegistrarMaterial = new javax.swing.JButton();
-        btnRegistarUsuario = new javax.swing.JButton();
+        btnGestionarUsuarios = new javax.swing.JButton();
         btnBuscarLibro = new javax.swing.JButton();
         btnRealizarPrestamo = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
@@ -69,11 +72,11 @@ public class vistaMenu extends javax.swing.JFrame {
             }
         });
 
-        btnRegistarUsuario.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        btnRegistarUsuario.setText("Registrar Usuario");
-        btnRegistarUsuario.addActionListener(new java.awt.event.ActionListener() {
+        btnGestionarUsuarios.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        btnGestionarUsuarios.setText("Gestionar Usuarios");
+        btnGestionarUsuarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegistarUsuarioActionPerformed(evt);
+                btnGestionarUsuariosActionPerformed(evt);
             }
         });
 
@@ -122,9 +125,9 @@ public class vistaMenu extends javax.swing.JFrame {
                             .addComponent(btnSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnRealizarPrestamo, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
                             .addComponent(btnBuscarLibro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnRegistarUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnRegistrarMaterial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnDevolucionEjemplar, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)))
+                            .addComponent(btnGestionarUsuarios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(244, 244, 244)
                         .addComponent(lblMenu)))
@@ -138,7 +141,7 @@ public class vistaMenu extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(btnRegistrarMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(48, 48, 48)
-                .addComponent(btnRegistarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnGestionarUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(49, 49, 49)
                 .addComponent(btnBuscarLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(52, 52, 52)
@@ -182,12 +185,15 @@ public class vistaMenu extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnRegistrarMaterialActionPerformed
 
-    private void btnRegistarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistarUsuarioActionPerformed
-        vistaRgistroUsuario vistaUsuario = new vistaRgistroUsuario();
-        vistaUsuario.setVisible(true);
+    private void btnGestionarUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestionarUsuariosActionPerformed
+        vistaGUsuarios vistaGusuario = new vistaGUsuarios();
+        UsuarioModelo modelo = new UsuarioModelo();
+        gestionarUsuarios controlador = new gestionarUsuarios(vistaGusuario, modelo, this);
+        vistaGusuario.setControlador(controlador);
+        vistaGusuario.setVisible(true);
         this.dispose();
 
-    }//GEN-LAST:event_btnRegistarUsuarioActionPerformed
+    }//GEN-LAST:event_btnGestionarUsuariosActionPerformed
 
     private void btnBuscarLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarLibroActionPerformed
         vistaBuscarLibro vistaUsuario = new vistaBuscarLibro();
@@ -229,17 +235,17 @@ public class vistaMenu extends javax.swing.JFrame {
     public void configurarMenuParaUsuario(String tipoUsuario) {
         if ("Administrador".equals(tipoUsuario)) {
             btnRegistrarMaterial.setVisible(true);
-            btnRegistarUsuario.setVisible(true);
+            btnGestionarUsuarios.setVisible(true);
             btnBuscarLibro.setVisible(true);
             btnRealizarPrestamo.setVisible(true);
         } else if ("Profesor".equals(tipoUsuario)) {
             btnRegistrarMaterial.setVisible(false);
-            btnRegistarUsuario.setVisible(false);
+            btnGestionarUsuarios.setVisible(false);
             btnBuscarLibro.setVisible(true);
             btnRealizarPrestamo.setVisible(true);
         } else if ("Alumno".equals(tipoUsuario)) {
             btnRegistrarMaterial.setVisible(false);
-            btnRegistarUsuario.setVisible(false);
+            btnGestionarUsuarios.setVisible(false);
             btnBuscarLibro.setVisible(true);
             btnRealizarPrestamo.setVisible(true);
         }
@@ -285,8 +291,8 @@ public class vistaMenu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscarLibro;
     private javax.swing.JButton btnDevolucionEjemplar;
+    private javax.swing.JButton btnGestionarUsuarios;
     private javax.swing.JButton btnRealizarPrestamo;
-    private javax.swing.JButton btnRegistarUsuario;
     private javax.swing.JButton btnRegistrarMaterial;
     private javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel1;

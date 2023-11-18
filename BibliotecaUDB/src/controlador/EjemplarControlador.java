@@ -52,4 +52,13 @@ public class EjemplarControlador {
 
     }
 
+    public void actualizarEjemplar(Libro libro) {
+        try {
+            modelo.actualizarLibro(libro);
+            JOptionPane.showMessageDialog(null, "Libro actualizado con éxito.");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al actualizar el libro: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
 }

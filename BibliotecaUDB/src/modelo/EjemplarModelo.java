@@ -88,4 +88,55 @@ public class EjemplarModelo {
         return null;
     }
 
+    public void actualizarLibro(Libro libro) {
+        String sqlEjemplar = "UPDATE ejemplares SET titulo = ?, autor = ?, tipo = ?, ubicacion = ?, cantidad = ?, prestados = ? WHERE id = ?";
+        String sqlLibro = "UPDATE libros SET isbn = ?, id_editorial = ?, edicion = ? WHERE id_ejemplar = ?";
+        Connection conexion = null;
+
+        try {
+            conexion = conexionDB.getConnection();
+            conexion.setAutoCommit(false);
+
+            try (PreparedStatement pstmtEjemplar = conexion.prepareStatement(sqlEjemplar)) {
+                pstmtEjemplar.setString(1, libro.getTitulo());
+                pstmtEjemplar.setString(2, libro.getAutor());
+                pstmtEjemplar.setString(3, libro.getTipo());
+                pstmtEjemplar.setString(4, libro.getUbicacion());
+                pstmtEjemplar.setInt(5, libro.getCantidad());
+                pstmtEjemplar.setInt(6, libro.getPrestados());
+                pstmtEjemplar.setString(7, libro.getId());
+                pstmtEjemplar.executeUpdate();
+            }
+
+            try (PreparedStatement pstmtLibro = conexion.prepareStatement(sqlLibro)) {
+                pstmtLibro.setString(1, libro.getIsbn());
+                pstmtLibro.setInt(2, libro.getIdEditorial());
+                pstmtLibro.setInt(3, libro.getEdicion());
+                pstmtLibro.setString(4, libro.getId());
+                pstmtLibro.executeUpdate();
+            }
+
+            conexion.commit();
+            System.out.println("Libro actualizado con éxito");
+        } catch (SQLException e) {
+            try {
+                if (conexion != null) {
+                    conexion.rollback();
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+            e.printStackTrace();
+        } finally {
+            try {
+                if (conexion != null) {
+                    conexion.setAutoCommit(true);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            conexionDB.close(conexion);
+        }
+    }
+
 }

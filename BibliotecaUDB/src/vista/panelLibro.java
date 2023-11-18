@@ -132,6 +132,7 @@ public class panelLibro extends javax.swing.JPanel {
         lblEditorial = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        btnActualizar = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(204, 204, 204));
         setMaximumSize(new java.awt.Dimension(878, 588));
@@ -247,7 +248,7 @@ public class panelLibro extends javax.swing.JPanel {
                 btnMenuActionPerformed(evt);
             }
         });
-        add(btnMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 450, 100, -1));
+        add(btnMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 450, 100, -1));
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "UDB Soyapango", "UDB Antiguo Cuscatlan" }));
         add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 260, 170, -1));
@@ -275,6 +276,16 @@ public class panelLibro extends javax.swing.JPanel {
         jScrollPane1.setViewportView(jTable1);
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 40, 620, -1));
+
+        btnActualizar.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        btnActualizar.setText("Actualizar");
+        btnActualizar.setToolTipText("");
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
+        add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(203, 453, 120, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtIsbnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIsbnActionPerformed
@@ -356,8 +367,39 @@ public class panelLibro extends javax.swing.JPanel {
         txtEdicion.setText(jTable1.getValueAt(fila, 9).toString());
     }//GEN-LAST:event_jTable1MouseClicked
 
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        // TODO add your handling code here:
+
+        try {
+            Libro libro = new Libro();
+            libro.setId(txtEjemplar.getText());
+            libro.setTitulo(txtTitulo.getText());
+            libro.setAutor(txtAutor.getText());
+            libro.setTipo("Libro");
+            Object selectedItem = jComboBox1.getSelectedItem();
+            String selectedText = selectedItem.toString();
+            libro.setUbicacion(selectedText);
+            libro.setCantidad(Integer.parseInt(txtCantidad.getText()));
+            libro.setPrestados(0);
+            libro.setIsbn(txtIsbn.getText());
+            libro.setIdEditorial(Integer.parseInt(txtEditorial.getText()));
+            libro.setEdicion(Integer.parseInt(txtEdicion.getText()));
+
+            if (controlador != null) {
+                controlador.actualizarEjemplar(libro);
+                cargarDatosEnTabla();
+            } else {
+                System.out.println("NULO");
+            };
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al procesar la petición: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+
+        }
+    }//GEN-LAST:event_btnActualizarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnMenu;
     private javax.swing.JButton btnSalir;

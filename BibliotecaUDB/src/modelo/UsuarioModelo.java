@@ -93,4 +93,37 @@ public class UsuarioModelo {
             conexionDB.close(conn);
         }
     }
+
+    public void actualizarUsuarios(Usuario usuario) {
+        conn = conexionDB.getConnection();
+        try {
+            String sql = "Update usuarios set nombre = ?, correo = ?, contrasena = ?, mora = ? where id= ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, usuario.getNombre());
+            ps.setString(2, usuario.getCorreo());
+            ps.setString(3, usuario.getContrasena());
+            ps.setDouble(4, usuario.getMora());
+            ps.setInt(5, usuario.getId());
+            ps.executeUpdate();
+            System.out.println("Datos actualizados correctamente");
+        } catch (Exception e) {
+            System.out.println(e);
+        }finally{
+            conexionDB.close(conn);
+        }
+
+    }
+    
+    public  void EliminarUsuarios(Usuario usuario){
+        conn = conexionDB.getConnection();
+        try {
+            String sql = "Delete from usuarios where id=?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, usuario.getId());
+            ps.executeUpdate();
+            System.out.println("Datos eliminados correctamente");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
 }

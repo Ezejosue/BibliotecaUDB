@@ -30,20 +30,24 @@ public class vistaRgistroUsuario extends javax.swing.JFrame {
     private void agregarUsuario() {
 
         Usuario usuario = new Usuario();
-        usuario.setNombre(txtNombre.getText());
-        usuario.setCorreo(txtCorreo.getText());
-        usuario.setContrasena(txtClave.getText());
-        if (rbtAdministrador.isSelected()) {
-            usuario.setTipoUsuario("Administrador");
-        } else if (rbtEstudiante.isSelected()) {
-            usuario.setTipoUsuario("Alumno");
-        } else if (rbtProfesor.isSelected()) {
-            usuario.setTipoUsuario("Profesor");
-        } else {
-            usuario.setTipoUsuario("Rol no seleccionado");
+        if (txtNombre.getText().isEmpty() &&  txtCorreo.getText().isEmpty() && txtClave.getText().isEmpty()) {
+            mostrarMensaje("Todos los campos deben estar llenos");
+        }else {
+            usuario.setNombre(txtNombre.getText());
+            usuario.setCorreo(txtCorreo.getText());
+            usuario.setContrasena(txtClave.getText());
+            if (rbtAdministrador.isSelected()) {
+                usuario.setTipoUsuario("Administrador");
+            } else if (rbtEstudiante.isSelected()) {
+                usuario.setTipoUsuario("Alumno");
+            } else if (rbtProfesor.isSelected()) {
+                usuario.setTipoUsuario("Profesor");
+            } else {
+                usuario.setTipoUsuario("Rol no seleccionado");
+            }
+            controlador.RegistrarUsuario(usuario);
         }
-
-        controlador.RegistrarUsuario(usuario);
+        
     }
 
     public void setControlador(usuarioControlador controlador) {
@@ -112,7 +116,7 @@ public class vistaRgistroUsuario extends javax.swing.JFrame {
         rbtEstudiante.setText("Estudiante");
 
         btnSalir.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        btnSalir.setText("Salir");
+        btnSalir.setText("Cancelar");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalirActionPerformed(evt);
@@ -217,12 +221,15 @@ public class vistaRgistroUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_rbtProfesorActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        System.exit(0);
+         vistaGUsuarios vistaGUsuarios = new vistaGUsuarios();
+        vistaGUsuarios.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
         vistaMenu vistaMenu = new vistaMenu();
         showpanel(vistaMenu);
+        vistaMenu.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnMenuActionPerformed
 
@@ -232,6 +239,7 @@ public class vistaRgistroUsuario extends javax.swing.JFrame {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         agregarUsuario();
+
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     /**
@@ -289,8 +297,12 @@ public class vistaRgistroUsuario extends javax.swing.JFrame {
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 
-    private void showpanel(vistaMenu vistaMenu) {
 
+    private void showpanel(vistaMenu vistaMenu) {
+        vistaMenu frame6 = new vistaMenu();
+        frame6.setSize(1100, 800);
+        frame6.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame6.setVisible(true);
         vistaMenu frame5 = new vistaMenu();
         frame5.setSize(1100, 800);
         frame5.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

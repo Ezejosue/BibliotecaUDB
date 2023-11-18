@@ -8,6 +8,8 @@ package vista;
 import controlador.gestionarUsuarios;
 import controlador.usuarioControlador;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import modelo.Usuario;
 import modelo.UsuarioModelo;
 
 /**
@@ -17,6 +19,7 @@ import modelo.UsuarioModelo;
 public class vistaGUsuarios extends javax.swing.JFrame {
 
     private gestionarUsuarios controlador;
+    private  int idUsuario;
 
     public vistaGUsuarios() {
 
@@ -39,7 +42,12 @@ public class vistaGUsuarios extends javax.swing.JFrame {
     
 
     private void EditarUuarios() {
-
+        try {
+            Usuario usuario = new Usuario();
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al procesar la peticion");
+        }
     }
 
     public void setControlador(gestionarUsuarios controlador) {
@@ -80,8 +88,18 @@ public class vistaGUsuarios extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tbUsuarios);
 
         jEditar.setText("EDITAR");
+        jEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jEditarActionPerformed(evt);
+            }
+        });
 
         jEliminar.setText("ELIMINAR");
+        jEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jEliminarActionPerformed(evt);
+            }
+        });
 
         jAgregar.setText("AGREGAR");
         jAgregar.addActionListener(new java.awt.event.ActionListener() {
@@ -151,7 +169,9 @@ public class vistaGUsuarios extends javax.swing.JFrame {
 
 
     private void tbUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbUsuariosMouseClicked
-        // TODO add your handling code here:
+        
+        int fila = tbUsuarios.getSelectedRow();
+        idUsuario = Integer.parseInt(tbUsuarios.getValueAt(fila, 0).toString());
     }//GEN-LAST:event_tbUsuariosMouseClicked
 
     private void jAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAgregarActionPerformed
@@ -167,10 +187,42 @@ public class vistaGUsuarios extends javax.swing.JFrame {
         tbUsuarios.setModel(controlador.MostrarTodosLosUsuarios());
 
     }
+    
+  
 
     private void jCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCancelarActionPerformed
-
+        vistaMenu vistaMenu = new vistaMenu();
+        showpanel(vistaMenu);
+        this.dispose();
     }//GEN-LAST:event_jCancelarActionPerformed
+
+    private void jEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEditarActionPerformed
+        vistaEditarUsuarios vistaUsuarios = new vistaEditarUsuarios();
+        UsuarioModelo modelo = new UsuarioModelo();
+        gestionarUsuarios controlador = new gestionarUsuarios(modelo, vistaUsuarios);
+        vistaUsuarios.setControlador(controlador);
+        vistaUsuarios.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jEditarActionPerformed
+
+    private void jEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEliminarActionPerformed
+            try {
+            Usuario usuario = new Usuario();
+            usuario.setId(idUsuario);
+            
+            int respuesta = JOptionPane.showConfirmDialog(null, "Desea eliminar el usuario? "+idUsuario, "Eliminar Usuario",  JOptionPane.YES_NO_OPTION);
+            if (respuesta == JOptionPane.YES_OPTION) {
+                controlador.eliminarUsuarios(usuario);
+                
+                todosUsuarios();
+            }else{
+                JOptionPane.showMessageDialog(null, "Usuario no eliminado");
+            }
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No se pudo eliminar");
+        }
+    }//GEN-LAST:event_jEliminarActionPerformed
 
     /**
      * @param args the command line arguments

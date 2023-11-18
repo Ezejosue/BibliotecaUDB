@@ -7,6 +7,7 @@ package vista;
 
 import com.toedter.calendar.JTextFieldDateEditor;
 import controlador.DevolucionControlador;
+import controlador.PrestamoControlador;
 import java.awt.Component;
 import java.math.BigDecimal;
 import java.sql.SQLException;
@@ -279,7 +280,6 @@ public class vistaDevolucion extends javax.swing.JFrame {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
-
         try {
             Devolucion devolucion = new Devolucion();
             Object selectedItem = cmbIDPrestamo.getSelectedItem();
@@ -289,7 +289,7 @@ public class vistaDevolucion extends javax.swing.JFrame {
             devolucion.setFechaDevolucion(jdtPrestamo.getDate());
             devolucion.setEstadoDevolucion(cmbEstado.getSelectedItem().toString());
             devolucion.setComentarios(txtaComentarios.getText());
-            
+
             PrestamoModelo prestamo = new PrestamoModelo();
             Prestamo prestamoFecha = prestamo.obtenerPrestamoPorId(idPrestamo);
             Date fechaPrestamo = prestamoFecha.getFechaPrestamo();
@@ -308,6 +308,7 @@ public class vistaDevolucion extends javax.swing.JFrame {
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         // TODO add your handling code here:
         System.exit(0);
+
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
@@ -323,6 +324,7 @@ public class vistaDevolucion extends javax.swing.JFrame {
         modelo.limpiarDatos();
         modelo.fireTableDataChanged();
         cmbIDPrestamo.removeAllItems();
+
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void jdtPrestamoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jdtPrestamoPropertyChange
@@ -340,20 +342,35 @@ public class vistaDevolucion extends javax.swing.JFrame {
 //        }
     }//GEN-LAST:event_jdtPrestamoPropertyChange
 
+    private void llenarComboBoxConUltimoPrestamo(int idUsuario) {
+
+        Prestamo prestamo = controlador.obtenerUltimoPrestamoConDevolucionPorUsuario(idUsuario);
+        if (prestamo != null) {
+            cmbIDPrestamo.addItem(String.valueOf(prestamo.getId()));
+        }
+    }
+
     private void btnPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagarActionPerformed
         // TODO add your handling code here:
+        cmbIDPrestamo.removeAllItems();
+
+        llenarComboBoxConUltimoPrestamo(Integer.parseInt(txtUsuario.getText()));
         try {
-            int idUsuario = Integer.parseInt(txtUsuario.getText());
             Object selectedItem = cmbIDPrestamo.getSelectedItem();
             String selectedText = selectedItem.toString();
-            int idPrestamo = Integer.parseInt(selectedText);
-            DevolucionModelo modelo = new DevolucionModelo();
+            if (selectedText != null) {
+                int idUsuario = Integer.parseInt(txtUsuario.getText());
 
-            BigDecimal mora = modelo.obtenerMoraUsuario(idUsuario);
-            if (mora.compareTo(BigDecimal.ZERO) > 0) {
-                modelo.registrarPago(idUsuario, mora, idPrestamo);
-                JOptionPane.showMessageDialog(null, "Pago realizado con éxito. Deuda actualizada a cero.");
-                actualizarEstadoBoton(idUsuario); // Actualiza el estado del botón después del pago
+                int idPrestamo = Integer.parseInt(selectedText);
+                DevolucionModelo modelo = new DevolucionModelo();
+
+                BigDecimal mora = modelo.obtenerMoraUsuario(idUsuario);
+                if (mora.compareTo(BigDecimal.ZERO) > 0) {
+                    modelo.registrarPago(idUsuario, mora, idPrestamo);
+                    JOptionPane.showMessageDialog(null, "Pago realizado con éxito. Deuda actualizada a cero.");
+                    actualizarEstadoBoton(idUsuario); // Actualiza el estado del botón después del pago
+                    cmbIDPrestamo.removeAllItems();
+                }
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al realizar el pago: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);

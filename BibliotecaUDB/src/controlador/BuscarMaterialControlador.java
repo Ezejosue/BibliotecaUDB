@@ -82,7 +82,7 @@ public class BuscarMaterialControlador {
 
         try {
             conexion = conexionDB.getConnection();
-            String sql = "SELECT * FROM ejemplares WHERE id LIKE ? AND titulo LIKE ? ";
+            String sql = "SELECT * FROM ejemplares WHERE id LIKE ? AND titulo LIKE ?  AND estado='activo'";
             ps = conexion.prepareStatement(sql);
             ps.setString(1, "%" + id + "%");
             ps.setString(2, "%" + titulo + "%");

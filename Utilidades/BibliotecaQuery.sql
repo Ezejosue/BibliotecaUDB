@@ -128,8 +128,9 @@ SELECT * FROM usuarios;
 SELECT * FROM configuraciones;
 SELECT * FROM pagos;
 SELECT * FROM editoriales;
-
+SELECT e.id, e.titulo, e.autor, e.tipo, e.ubicacion, e.cantidad, e.prestados, l.isbn, l.id_editorial, l.edicion FROM ejemplares e INNER JOIN libros l ON e.id = l.id_ejemplar WHERE estado = "activo";
 INSERT INTO configuraciones(clave, valor) VALUES ("Mora", "0.50");
+ALTER TABLE ejemplares ADD COLUMN estado VARCHAR(8) DEFAULT 'activo';
 
 
 

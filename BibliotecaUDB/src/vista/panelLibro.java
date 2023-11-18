@@ -81,7 +81,7 @@ public class panelLibro extends javax.swing.JPanel {
                 String id = rs.getString("id");
                 String titulo = rs.getString("titulo");
                 String autor = rs.getString("autor");
-                String tipo = rs.getString("tipo"); // Asumiendo que quieres mostrar el tipo también
+                String tipo = rs.getString("tipo"); 
                 String ubicacion = rs.getString("ubicacion");
                 int cantidad = rs.getInt("cantidad");
                 int prestados = rs.getInt("prestados");
@@ -133,6 +133,7 @@ public class panelLibro extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         btnActualizar = new javax.swing.JButton();
+        btnActualizar1 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(204, 204, 204));
         setMaximumSize(new java.awt.Dimension(878, 588));
@@ -190,7 +191,7 @@ public class panelLibro extends javax.swing.JPanel {
                 btnGuardarActionPerformed(evt);
             }
         });
-        add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 450, 100, -1));
+        add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, 100, -1));
 
         btnSalir.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         btnSalir.setText("Salir");
@@ -248,7 +249,7 @@ public class panelLibro extends javax.swing.JPanel {
                 btnMenuActionPerformed(evt);
             }
         });
-        add(btnMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 450, 100, -1));
+        add(btnMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 450, 100, -1));
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "UDB Soyapango", "UDB Antiguo Cuscatlan" }));
         add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 260, 170, -1));
@@ -285,7 +286,17 @@ public class panelLibro extends javax.swing.JPanel {
                 btnActualizarActionPerformed(evt);
             }
         });
-        add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(203, 453, 120, 30));
+        add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 450, 120, 30));
+
+        btnActualizar1.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        btnActualizar1.setText("Eliminar");
+        btnActualizar1.setToolTipText("");
+        btnActualizar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizar1ActionPerformed(evt);
+            }
+        });
+        add(btnActualizar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 450, 120, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtIsbnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIsbnActionPerformed
@@ -397,9 +408,23 @@ public class panelLibro extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnActualizarActionPerformed
 
+    private void btnActualizar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizar1ActionPerformed
+        // TODO add your handling code here:
+        int fila = jTable1.getSelectedRow();
+        if (fila >= 0) {
+            String idEjemplar = jTable1.getValueAt(fila, 0).toString();
+            controlador.eliminarEjemplar(idEjemplar);
+            // Actualizar la vista, por ejemplo, eliminando la fila de la tabla
+            ((DefaultTableModel) jTable1.getModel()).removeRow(fila);
+        } else {
+            JOptionPane.showMessageDialog(null, "Por favor, seleccione un libro para eliminar.");
+        }
+    }//GEN-LAST:event_btnActualizar1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
+    private javax.swing.JButton btnActualizar1;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnMenu;
     private javax.swing.JButton btnSalir;

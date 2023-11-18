@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 import util.conexionDB;
 
 /**
@@ -78,7 +79,7 @@ public class EjemplarModelo {
 
     public ResultSet obtenerLibrosCompletos() {
         Connection conexion = conexionDB.getConnection();
-        String sql = "SELECT e.id, e.titulo, e.autor, e.tipo, e.ubicacion, e.cantidad, e.prestados, l.isbn, l.id_editorial, l.edicion FROM ejemplares e INNER JOIN libros l ON e.id = l.id_ejemplar";
+        String sql = "SELECT e.id, e.titulo, e.autor, e.tipo, e.ubicacion, e.cantidad, e.prestados, l.isbn, l.id_editorial, l.edicion FROM ejemplares e INNER JOIN libros l ON e.id = l.id_ejemplar WHERE e.estado = 'activo'";
         try {
             PreparedStatement pstmt = conexion.prepareStatement(sql);
             return pstmt.executeQuery();
@@ -137,6 +138,21 @@ public class EjemplarModelo {
             }
             conexionDB.close(conexion);
         }
+    }
+
+    public void cambiarEstadoEjemplar(String idEjemplar, String estado) {
+        String sql = "UPDATE ejemplares SET estado = ? WHERE id = ?";
+        try (Connection conexion = conexionDB.getConnection();
+                PreparedStatement pstmt = conexion.prepareStatement(sql)) {
+            pstmt.setString(1, estado);
+            pstmt.setString(2, idEjemplar);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace(); // Para propósitos de depuración, imprime la traza de la excepción.
+            
+        }
+        // No es necesario cerrar explícitamente la conexión ni el PreparedStatement aquí,
+        // ya que se están utilizando en un bloque try-with-resources que los cierra automáticamente.
     }
 
 }

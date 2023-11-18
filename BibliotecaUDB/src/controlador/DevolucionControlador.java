@@ -126,6 +126,76 @@ public class DevolucionControlador {
         return prestamos;
     }
 
-   
+    public List<Prestamo> obtenerTodosLosPrestamosConDevolucion() {
+        List<Prestamo> listaPrestamos = new ArrayList<>();
+        try {
+            Connection conexion = conexionDB.getConnection();
+            String sql = "SELECT p.id AS id_prestamo, p.id_usuario, p.id_ejemplar, MAX(d.fecha_devolucion) AS ultima_fecha_devolucion "
+                    + "FROM prestamos p "
+                    + "LEFT JOIN devoluciones d ON p.id = d.id_prestamo "
+                    + "GROUP BY p.id, p.id_usuario, p.id_ejemplar "
+                    + "ORDER BY ultima_fecha_devolucion DESC";
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Prestamo prestamo = new Prestamo();
+                prestamo.setId(rs.getInt("id_prestamo"));
+                prestamo.setIdUsuario(rs.getInt("id_usuario"));
+                prestamo.setIdEjemplar(rs.getString("id_ejemplar"));
+                prestamo.setFechaDevolucion(rs.getDate("ultima_fecha_devolucion"));
+                listaPrestamos.add(prestamo);
+            }
+            // Asegúrate de cerrar los recursos abiertos
+        } catch (SQLException e) {
+            e.printStackTrace(); // Reemplaza con un manejo de error adecuado
+        }
+        return listaPrestamos;
+    }
+
+    public Prestamo obtenerUltimoPrestamoConDevolucionPorUsuario(int idUsuario) {
+        Connection conexion = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Prestamo prestamo = null;
+
+        try {
+            conexion = conexionDB.getConnection();
+            String sql = "SELECT p.id, d.fecha_devolucion "
+                    + "FROM prestamos p "
+                    + "LEFT JOIN devoluciones d ON p.id = d.id_prestamo "
+                    + "WHERE p.id_usuario = ? "
+                    + "ORDER BY d.fecha_devolucion DESC LIMIT 1";
+            ps = conexion.prepareStatement(sql);
+            ps.setInt(1, idUsuario);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                prestamo = new Prestamo();
+                prestamo.setId(rs.getInt("id"));
+                prestamo.setFechaDevolucion(rs.getDate("fecha_devolucion"));
+            }
+        } catch (SQLException e) {
+            // Manejar la excepción
+            e.printStackTrace();
+        } finally {
+            // Cerrar recursos
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (conexion != null) {
+                    conexion.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return prestamo;
+    }
 
 }

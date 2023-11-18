@@ -61,4 +61,12 @@ public class EjemplarControlador {
         }
     }
 
+    public void eliminarEjemplar(String idEjemplar) {
+        try {
+            modelo.cambiarEstadoEjemplar(idEjemplar, "inactivo");
+            JOptionPane.showMessageDialog(null, "Libro eliminado con éxito.");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al eliminar el libro: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 }

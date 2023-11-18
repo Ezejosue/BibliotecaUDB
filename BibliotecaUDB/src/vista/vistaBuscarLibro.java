@@ -285,7 +285,6 @@ public class vistaBuscarLibro extends javax.swing.JFrame {
         String titulo = txtTitulo.getText();
         String autor = txtAutor.getText();
         String tipoMaterial = cmbMaterial.getSelectedItem().toString();
-
         BuscarMaterialControlador controlador = new BuscarMaterialControlador();
         EjemplarTableModelo modeloTabla = controlador.buscarEjemplares(titulo, autor, tipoMaterial);
 
@@ -296,6 +295,7 @@ public class vistaBuscarLibro extends javax.swing.JFrame {
             jTable1.setModel(modeloTabla);
             ajustarAnchoColumnas();
             configurarTabla();
+            EjemplarTableModelo modelo = (EjemplarTableModelo) jTable1.getModel();
         }
 
     }//GEN-LAST:event_btnBuscarActionPerformed

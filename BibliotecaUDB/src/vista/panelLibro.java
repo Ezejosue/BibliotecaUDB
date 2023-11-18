@@ -32,6 +32,7 @@ public class panelLibro extends javax.swing.JPanel {
      */
     private EjemplarControlador controlador;
     private DefaultTableModel modeloTabla;
+    private String EjemplaresPrestados;
 
     public panelLibro() {
         initComponents();
@@ -81,7 +82,7 @@ public class panelLibro extends javax.swing.JPanel {
                 String id = rs.getString("id");
                 String titulo = rs.getString("titulo");
                 String autor = rs.getString("autor");
-                String tipo = rs.getString("tipo"); 
+                String tipo = rs.getString("tipo");
                 String ubicacion = rs.getString("ubicacion");
                 int cantidad = rs.getInt("cantidad");
                 int prestados = rs.getInt("prestados");
@@ -373,6 +374,7 @@ public class panelLibro extends javax.swing.JPanel {
         txtTitulo.setText(jTable1.getValueAt(fila, 1).toString());
         txtAutor.setText(jTable1.getValueAt(fila, 2).toString());
         txtCantidad.setText(jTable1.getValueAt(fila, 5).toString());
+        EjemplaresPrestados = jTable1.getValueAt(fila, 5).toString();
         txtIsbn.setText(jTable1.getValueAt(fila, 7).toString());
         txtEditorial.setText(jTable1.getValueAt(fila, 8).toString());
         txtEdicion.setText(jTable1.getValueAt(fila, 9).toString());
@@ -391,7 +393,7 @@ public class panelLibro extends javax.swing.JPanel {
             String selectedText = selectedItem.toString();
             libro.setUbicacion(selectedText);
             libro.setCantidad(Integer.parseInt(txtCantidad.getText()));
-            libro.setPrestados(0);
+            libro.setPrestados(Integer.parseInt(EjemplaresPrestados));
             libro.setIsbn(txtIsbn.getText());
             libro.setIdEditorial(Integer.parseInt(txtEditorial.getText()));
             libro.setEdicion(Integer.parseInt(txtEdicion.getText()));

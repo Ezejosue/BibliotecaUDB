@@ -15,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableRowSorter;
-import modelo.EjemplarModelo;
+import modelo.EjemplarTableModelo;
 import modelo.UsuarioModelo;
 import util.UsuarioActual;
 
@@ -223,10 +223,10 @@ public class vistaBuscarLibro extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void configurarTabla() {
-        EjemplarModelo modelo = (EjemplarModelo) jTable1.getModel();
+        EjemplarTableModelo modelo = (EjemplarTableModelo) jTable1.getModel();
         jTable1.setModel(modelo);
 
-        TableRowSorter<EjemplarModelo> sorter = new TableRowSorter<>(modelo);
+        TableRowSorter<EjemplarTableModelo> sorter = new TableRowSorter<>(modelo);
         jTable1.setRowSorter(sorter);
 
     }
@@ -287,7 +287,7 @@ public class vistaBuscarLibro extends javax.swing.JFrame {
         String tipoMaterial = cmbMaterial.getSelectedItem().toString();
 
         BuscarMaterialControlador controlador = new BuscarMaterialControlador();
-        EjemplarModelo modeloTabla = controlador.buscarEjemplares(titulo, autor, tipoMaterial);
+        EjemplarTableModelo modeloTabla = controlador.buscarEjemplares(titulo, autor, tipoMaterial);
 
         if (controlador.esListaVacia(modeloTabla.getEjemplares())) {
             JOptionPane.showMessageDialog(this, "No se encontraron ejemplares", "Búsqueda", JOptionPane.INFORMATION_MESSAGE);
@@ -302,7 +302,7 @@ public class vistaBuscarLibro extends javax.swing.JFrame {
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         // TODO add your handling code here:
-        EjemplarModelo modelo = (EjemplarModelo) jTable1.getModel();
+        EjemplarTableModelo modelo = (EjemplarTableModelo) jTable1.getModel();
         modelo.limpiarDatos();
         modelo.fireTableDataChanged();
     }//GEN-LAST:event_btnLimpiarActionPerformed

@@ -8,71 +8,84 @@ package modelo;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
-import javax.swing.table.AbstractTableModel;
+import java.sql.SQLException;
 import util.conexionDB;
 
 /**
  *
  * @author Josue
  */
-public class EjemplarModelo extends AbstractTableModel {
+public class EjemplarModelo {
 
-    private final List<Ejemplar> ejemplares;
-    private final String[] columnNames = {"ID", "Título", "Autor", "Ubicación", "Cantidad", "Prestados"};
+    public void agregarLibro(Libro libro) {
+        // Primero, insertamos el Ejemplar base
+        String sqlEjemplar = "INSERT INTO ejemplares (id, titulo, autor, tipo, ubicacion, cantidad, prestados) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sqlLibro = "INSERT INTO libros (id_ejemplar, isbn, id_editorial, edicion) VALUES (?, ?, ?, ?)";
+        Connection conexion = null;
+        try {
+            conexion = conexionDB.getConnection();
+            conexion.setAutoCommit(false);
 
-    public EjemplarModelo(List<Ejemplar> ejemplares) {
-        this.ejemplares = ejemplares;
-    }
+            try (PreparedStatement pstmtEjemplar = conexion.prepareStatement(sqlEjemplar)) {
+                pstmtEjemplar.setString(1, libro.getId());
+                pstmtEjemplar.setString(2, libro.getTitulo());
+                pstmtEjemplar.setString(3, libro.getAutor());
+                pstmtEjemplar.setString(4, libro.getTipo());
+                pstmtEjemplar.setString(5, libro.getUbicacion());
+                pstmtEjemplar.setInt(6, libro.getCantidad());
+                pstmtEjemplar.setInt(7, libro.getPrestados());
 
-    @Override
-    public int getRowCount() {
-        return ejemplares.size();
-    }
+                int ejemplarInsertado = pstmtEjemplar.executeUpdate();
 
-    @Override
-    public int getColumnCount() {
-        return columnNames.length;
-    }
+                // Si la inserción en ejemplares fue exitosa, procedemos con libros
+                if (ejemplarInsertado == 1) {
+                    try (PreparedStatement pstmtLibro = conexion.prepareStatement(sqlLibro)) {
+                        pstmtLibro.setString(1, libro.getId());
+                        pstmtLibro.setString(2, libro.getIsbn());
+                        pstmtLibro.setInt(3, libro.getIdEditorial());
+                        pstmtLibro.setInt(4, libro.getEdicion());
 
-    @Override
-    public Object getValueAt(int rowIndex, int columnIndex) {
-        Ejemplar ejemplar = ejemplares.get(rowIndex);
-        switch (columnIndex) {
-            case 0:
-                return ejemplar.getId();
-            case 1:
-                return ejemplar.getTitulo();
-            case 2:
-                return ejemplar.getAutor();
-            case 3:
-                return ejemplar.getUbicacion();
-            case 4:
-                return ejemplar.getCantidad();
-            case 5:
-                return ejemplar.getPrestados();
-            default:
-                return null;
+                        int libroInsertado = pstmtLibro.executeUpdate();
+
+                        // Si ambas inserciones fueron exitosas, confirmamos la transacción
+                        if (libroInsertado == 1) {
+                            conexion.commit();
+                        } else {
+                            conexion.rollback();
+                        }
+                    }
+                } else {
+                    conexion.rollback();
+                }
+            }
+        } catch (SQLException e) {
+            try {
+                // Si ocurre un error, revertimos la transacción
+                conexion.rollback();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+            e.printStackTrace();
+        } finally {
+            try {
+                // Restauramos el modo de auto commit
+                conexion.setAutoCommit(true);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 
-    @Override
-    public String getColumnName(int column) {
-        return columnNames[column];
-    }
-
-    public void limpiar() {
-        ejemplares.clear();
-        fireTableDataChanged();
-    }
-
-    public List<Ejemplar> getEjemplares() {
-        return ejemplares;
-    }
-
-    public void limpiarDatos() {
-        ejemplares.clear();
+    public ResultSet obtenerLibrosCompletos() {
+        Connection conexion = conexionDB.getConnection();
+        String sql = "SELECT e.id, e.titulo, e.autor, e.tipo, e.ubicacion, e.cantidad, e.prestados, l.isbn, l.id_editorial, l.edicion FROM ejemplares e INNER JOIN libros l ON e.id = l.id_ejemplar";
+        try {
+            PreparedStatement pstmt = conexion.prepareStatement(sql);
+            return pstmt.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }

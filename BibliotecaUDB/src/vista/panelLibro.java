@@ -5,10 +5,21 @@
  */
 package vista;
 
+import controlador.EjemplarControlador;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Window;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.SwingUtilities;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
+import modelo.EjemplarModelo;
+import modelo.Libro;
 
 /**
  *
@@ -19,13 +30,76 @@ public class panelLibro extends javax.swing.JPanel {
     /**
      * Creates new form Libro
      */
+    private EjemplarControlador controlador;
+    private DefaultTableModel modeloTabla;
+
     public panelLibro() {
         initComponents();
+        cargarDatosEnTabla();
     }
-   public static void main (String args []){
-       panelLibro panelLibro = new panelLibro();
-       panelLibro.setPreferredSize(new Dimension(878, 578)); 
-   }
+
+    public void setControlador(EjemplarControlador controlador) {
+        this.controlador = controlador;
+
+    }
+
+    public void ajustarAnchoColumnas() {
+        jTable1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        int minWidth = 100; // Establece un ancho mínimo para las columnas
+
+        for (int column = 0; column < jTable1.getColumnCount(); column++) {
+            TableColumn tableColumn = jTable1.getColumnModel().getColumn(column);
+            int preferredWidth = tableColumn.getMinWidth();
+            int maxWidth = tableColumn.getMaxWidth();
+
+            for (int row = 0; row < jTable1.getRowCount(); row++) {
+                TableCellRenderer cellRenderer = jTable1.getCellRenderer(row, column);
+                Component c = jTable1.prepareRenderer(cellRenderer, row, column);
+                int width = c.getPreferredSize().width + jTable1.getIntercellSpacing().width;
+                preferredWidth = Math.max(preferredWidth, width);
+
+                if (preferredWidth >= maxWidth) {
+                    preferredWidth = maxWidth;
+                    break;
+                }
+            }
+
+            preferredWidth = Math.max(preferredWidth, minWidth);
+            tableColumn.setPreferredWidth(preferredWidth);
+        }
+    }
+
+    public void cargarDatosEnTabla() {
+        modeloTabla = new DefaultTableModel(new Object[]{"ID", "Título", "Autor", "Tipo", "Ubicación", "Cantidad", "Prestados", "ISBN", "ID Editorial", "Edición"}, 0);
+        jTable1.setModel(modeloTabla);
+        ajustarAnchoColumnas();
+
+        EjemplarModelo modelo = new EjemplarModelo();
+        ResultSet rs = modelo.obtenerLibrosCompletos();
+        try {
+            while (rs.next()) {
+                String id = rs.getString("id");
+                String titulo = rs.getString("titulo");
+                String autor = rs.getString("autor");
+                String tipo = rs.getString("tipo"); // Asumiendo que quieres mostrar el tipo también
+                String ubicacion = rs.getString("ubicacion");
+                int cantidad = rs.getInt("cantidad");
+                int prestados = rs.getInt("prestados");
+                String isbn = rs.getString("isbn");
+                int idEditorial = rs.getInt("id_editorial");
+                int edicion = rs.getInt("edicion");
+                modeloTabla.addRow(new Object[]{id, titulo, autor, tipo, ubicacion, cantidad, prestados, isbn, idEditorial, edicion});
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String args[]) {
+        panelLibro panelLibro = new panelLibro();
+        panelLibro.setPreferredSize(new Dimension(878, 578));
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -56,6 +130,8 @@ public class panelLibro extends javax.swing.JPanel {
         btnMenu = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
         lblEditorial = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(204, 204, 204));
         setMaximumSize(new java.awt.Dimension(878, 588));
@@ -179,6 +255,26 @@ public class panelLibro extends javax.swing.JPanel {
         lblEditorial.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         lblEditorial.setText("ID Editorial");
         add(lblEditorial, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 380, -1, -1));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 40, 620, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtIsbnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIsbnActionPerformed
@@ -207,13 +303,37 @@ public class panelLibro extends javax.swing.JPanel {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
+        try {
+            Libro libro = new Libro();
+            libro.setId(txtEjemplar.getText());
+            libro.setTitulo(txtTitulo.getText());
+            libro.setAutor(txtAutor.getText());
+            libro.setTipo("Libro");
+            Object selectedItem = jComboBox1.getSelectedItem();
+            String selectedText = selectedItem.toString();
+            libro.setUbicacion(selectedText);
+            libro.setCantidad(Integer.parseInt(txtCantidad.getText()));
+            libro.setPrestados(0);
+            libro.setIsbn(txtIsbn.getText());
+            libro.setIdEditorial(Integer.parseInt(txtEditorial.getText()));
+            libro.setEdicion(Integer.parseInt(txtEdicion.getText()));
+
+            if (controlador != null) {
+                controlador.crearEjemplar(libro);
+            } else {
+                System.out.println("NULO");
+            };
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al procesar la petición: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+
+        }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
         vistaMenu vistaMenu = new vistaMenu();
         vistaMenu.setVisible(true);
         Window window = SwingUtilities.windowForComponent(this);
-        window.dispose();  
+        window.dispose();
     }//GEN-LAST:event_btnMenuActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
@@ -224,6 +344,18 @@ public class panelLibro extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtEditorialActionPerformed
 
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        int fila = jTable1.getSelectedRow();
+        txtEjemplar.setText(jTable1.getValueAt(fila, 0).toString());
+        txtTitulo.setText(jTable1.getValueAt(fila, 1).toString());
+        txtAutor.setText(jTable1.getValueAt(fila, 2).toString());
+        txtCantidad.setText(jTable1.getValueAt(fila, 5).toString());
+        txtIsbn.setText(jTable1.getValueAt(fila, 7).toString());
+        txtEditorial.setText(jTable1.getValueAt(fila, 8).toString());
+        txtEdicion.setText(jTable1.getValueAt(fila, 9).toString());
+    }//GEN-LAST:event_jTable1MouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;
@@ -231,6 +363,8 @@ public class panelLibro extends javax.swing.JPanel {
     private javax.swing.JButton btnSalir;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblAutor;
     private javax.swing.JLabel lblCantidad;
     private javax.swing.JLabel lblEdicion;
@@ -258,12 +392,12 @@ public class panelLibro extends javax.swing.JPanel {
     }
 
     private void showpanel(vistaMenu vistaMenu) {
-     
-      vistaMenu frame3 = new vistaMenu ();
-      
-      frame3.setTitle ("BUSCAR LIBRO");
-      frame3.setSize(1100,800);
-      frame3.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-      frame3.setVisible(true);
+
+        vistaMenu frame3 = new vistaMenu();
+
+        frame3.setTitle("BUSCAR LIBRO");
+        frame3.setSize(1100, 1100);
+        frame3.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame3.setVisible(true);
     }
 }

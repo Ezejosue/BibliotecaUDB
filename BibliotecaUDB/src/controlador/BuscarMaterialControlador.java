@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import modelo.Ejemplar;
-import modelo.EjemplarModelo;
+import modelo.EjemplarTableModelo;
 import modelo.Libro;
 import util.conexionDB;
 import vista.vistaBuscarLibro;
@@ -23,7 +23,7 @@ import vista.vistaBuscarLibro;
  */
 public class BuscarMaterialControlador {
 
-    public EjemplarModelo buscarEjemplares(String titulo, String autor, String tipoMaterial) {
+    public EjemplarTableModelo buscarEjemplares(String titulo, String autor, String tipoMaterial) {
         List<Ejemplar> resultados = new ArrayList<>();
         Connection conexion = null;
         PreparedStatement ps = null;
@@ -71,10 +71,10 @@ public class BuscarMaterialControlador {
             }
         }
 
-        return new EjemplarModelo(resultados);
+        return new EjemplarTableModelo(resultados);
     }
 
-    public EjemplarModelo mostrarEjemplares(String id, String titulo) {
+    public EjemplarTableModelo mostrarEjemplares(String id, String titulo) {
         List<Ejemplar> resultados = new ArrayList<>();
         Connection conexion = null;
         PreparedStatement ps = null;
@@ -121,10 +121,10 @@ public class BuscarMaterialControlador {
             }
         }
 
-        return new EjemplarModelo(resultados);
+        return new EjemplarTableModelo(resultados);
     }
 
-    public void limpiarTabla(EjemplarModelo modelo) {
+    public void limpiarTabla(EjemplarTableModelo modelo) {
         modelo.limpiar();
     }
 

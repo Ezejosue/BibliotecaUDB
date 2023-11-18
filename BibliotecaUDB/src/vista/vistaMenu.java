@@ -6,9 +6,11 @@
 package vista;
 
 import controlador.DevolucionControlador;
+import controlador.EjemplarControlador;
 import controlador.PrestamoControlador;
 import javax.swing.JOptionPane;
 import modelo.Devolucion;
+import modelo.EjemplarModelo;
 import util.UsuarioActual;
 
 /**
@@ -172,9 +174,11 @@ public class vistaMenu extends javax.swing.JFrame {
 
     private void btnRegistrarMaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarMaterialActionPerformed
         // TODO add your handling code here:
-
-        vistaRegistroMaterial vistRegistro = new vistaRegistroMaterial();
-        vistRegistro.setVisible(true);
+        EjemplarModelo modelo = new EjemplarModelo();
+        vistaRegistroMaterial vista = new vistaRegistroMaterial();
+        EjemplarControlador controlador = new EjemplarControlador(modelo, vista);
+        vista.setControlador(controlador);
+        vista.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnRegistrarMaterialActionPerformed
 
@@ -195,9 +199,8 @@ public class vistaMenu extends javax.swing.JFrame {
         System.exit(0);
 
     }//GEN-LAST:event_btnSalirActionPerformed
+    
 
-    
-    
     private void cerrar(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_cerrar
 
     }//GEN-LAST:event_cerrar
@@ -209,7 +212,7 @@ public class vistaMenu extends javax.swing.JFrame {
         vistaPrestamo vistaPrestamo = new vistaPrestamo(idUsuario, tipoUsuario);
         vistaPrestamo.setControlador(controlador);
         vistaPrestamo.setVisible(true);
-        this.dispose(); 
+        this.dispose();
     }//GEN-LAST:event_btnRealizarPrestamoActionPerformed
 
     private void btnDevolucionEjemplarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDevolucionEjemplarActionPerformed
@@ -222,7 +225,7 @@ public class vistaMenu extends javax.swing.JFrame {
         vista.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnDevolucionEjemplarActionPerformed
-
+    
     public void configurarMenuParaUsuario(String tipoUsuario) {
         if ("Administrador".equals(tipoUsuario)) {
             btnRegistrarMaterial.setVisible(true);
@@ -240,7 +243,7 @@ public class vistaMenu extends javax.swing.JFrame {
             btnBuscarLibro.setVisible(true);
             btnRealizarPrestamo.setVisible(true);
         }
-
+        
     }
 
     /**

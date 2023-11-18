@@ -289,6 +289,7 @@ public class vistaDevolucion extends javax.swing.JFrame {
             devolucion.setFechaDevolucion(jdtPrestamo.getDate());
             devolucion.setEstadoDevolucion(cmbEstado.getSelectedItem().toString());
             devolucion.setComentarios(txtaComentarios.getText());
+            
             PrestamoModelo prestamo = new PrestamoModelo();
             Prestamo prestamoFecha = prestamo.obtenerPrestamoPorId(idPrestamo);
             Date fechaPrestamo = prestamoFecha.getFechaPrestamo();

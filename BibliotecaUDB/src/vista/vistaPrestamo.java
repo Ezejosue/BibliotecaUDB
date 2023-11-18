@@ -16,7 +16,7 @@ import javax.swing.JTable;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableRowSorter;
-import modelo.EjemplarModelo;
+import modelo.EjemplarTableModelo;
 import modelo.Prestamo;
 
 /**
@@ -57,10 +57,10 @@ public class vistaPrestamo extends javax.swing.JFrame {
     }
 
     private void configurarTabla() {
-        EjemplarModelo modelo = (EjemplarModelo) jTable1.getModel();
+        EjemplarTableModelo modelo = (EjemplarTableModelo) jTable1.getModel();
         jTable1.setModel(modelo);
 
-        TableRowSorter<EjemplarModelo> sorter = new TableRowSorter<>(modelo);
+        TableRowSorter<EjemplarTableModelo> sorter = new TableRowSorter<>(modelo);
         jTable1.setRowSorter(sorter);
 
     }
@@ -315,7 +315,7 @@ public class vistaPrestamo extends javax.swing.JFrame {
         String idEjemplar = txtIdEjemplar.getText();
 
         BuscarMaterialControlador controlador = new BuscarMaterialControlador();
-        EjemplarModelo modeloTabla = controlador.mostrarEjemplares(idEjemplar, titulo);
+        EjemplarTableModelo modeloTabla = controlador.mostrarEjemplares(idEjemplar, titulo);
 
         if (controlador.esListaVacia(modeloTabla.getEjemplares())) {
             JOptionPane.showMessageDialog(this, "No se encontraron ejemplares", "Búsqueda", JOptionPane.INFORMATION_MESSAGE);
@@ -384,7 +384,7 @@ public class vistaPrestamo extends javax.swing.JFrame {
     }//GEN-LAST:event_jdtPrestamoPropertyChange
 
     private void limpiarTabla() {
-        EjemplarModelo modelo = (EjemplarModelo) jTable1.getModel();
+        EjemplarTableModelo modelo = (EjemplarTableModelo) jTable1.getModel();
         modelo.limpiarDatos();
         modelo.fireTableDataChanged();
     }

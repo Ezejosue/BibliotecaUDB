@@ -123,9 +123,11 @@ FOREIGN KEY (id_prestamo) REFERENCES prestamos(id);
 SELECT * FROM devoluciones;	
 SELECT * FROM prestamos;
 SELECT * FROM ejemplares;	
+SELECT * FROM libros;	
 SELECT * FROM usuarios;	
 SELECT * FROM configuraciones;
 SELECT * FROM pagos;
+SELECT * FROM editoriales;
 
 INSERT INTO configuraciones(clave, valor) VALUES ("Mora", "0.50");
 
